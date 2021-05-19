@@ -1,0 +1,100 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Lista de Usuarios</h4>
+                        <p class="card-category">Usuarios registrados en el sistema</p>
+
+                    </div>
+                    <br />
+
+                    <div>
+                        <a id="btn" class="btn btn-success" routerLink="/usuario/crear" style="margin-right:10px"> Añadir Nuevo</a>
+
+
+                        <label id="btn" class=" text-primary" style="margin-left:30px"> Ingrese la Cedula: </label>
+
+                        <!--   <input  type="text" id="name" name="name" required
+                               minlength="4" maxlength="10" size="22" placeholder="nombre/apellido/cedula/ruc">-->
+
+                        <input type="text" id="name" name="name" placeholder="Buscar Usuario" #txtSearch
+                            (keyup)="onSearchPokemon( txtSearch.value )" minlength="4" maxlength="10" size="22"
+                            placeholder="cedula">
+                    </div>
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        CEDULA
+                                    </th>
+                                    <th>
+                                        NOMBRE:
+                                    </th>
+                                    <th>
+                                        APELLIDO:
+                                    </th>
+                                    <th>
+                                        DIRECCION:
+                                    </th>
+                                    <th>
+                                        TELEFONO:
+                                    </th>
+                                    <th>
+                                        EMAIL:
+                                    </th>
+                                    <th>
+                                        ACCIONES:
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of UsuarioLista | filtroUsuarios:buscar">
+                                        <td>
+                                            {{ item.idUsuario}}
+                                        </td>
+                                        <td>
+                                            {{ item.cedula}}
+                                        </td>
+                                        <td>
+                                            {{ item.nombres}}
+                                        </td>
+                                        <td>
+                                            {{item.apellidos}}
+                                        </td>
+                                        <td>
+                                            {{item.direccion}}
+                                        </td>
+                                        <td>
+                                            {{item.telefono}}
+                                        </td>
+                                        <td>
+                                            {{item.correo}}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info">Garantias</button>
+                                        </td>
+                                        <td>
+                                            <button type="butto" class="btn btn-info"
+                                                routerLink='/usuario/crear'>Actualizar</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

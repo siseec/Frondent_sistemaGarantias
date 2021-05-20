@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { OrdenTrabajo } from './model/OrdenTrabajo';
+import { OrdenTrabajo } from '../model/OrdenTrabajo';
 
 @Pipe({
   name: 'filtroOrden'

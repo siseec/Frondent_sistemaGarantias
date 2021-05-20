@@ -19,14 +19,15 @@ import { MaterialModule } from '../material/material.module';
 import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';
 import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing';
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
-import { FiltroOrdenPipe } from './filtro-orden.pipe';
+import { FiltroOrdenPipe } from './filtroPipe/filtro-orden.pipe';
+
 
 
 @NgModule({
   declarations: [OrdenTrabajoComponent, ListTrabajoComponent, CrearOrdenComponent, DetalleOrdenComponent, ActualizarOrdenComponent, FiltroOrdenPipe],
   imports: [
     CommonModule,
-  // GarantiaRoutingModule,
+   GarantiaRoutingModule,
     LayoutModule,
     RouterModule,
     //modulos para los formularios reactivos

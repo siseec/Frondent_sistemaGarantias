@@ -6,6 +6,7 @@ import { FiltradoPipe } from './filtradoProveedor/filtrado.pipe';
 import { MaterialModule } from '../material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
+import { ProveedorRoutingModule } from './proveedor-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     LayoutModule,
     RouterModule,
+    ProveedorRoutingModule
   ]
 })
 export class ProveedoresModule { }

@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { FiltroUsuariosPipe } from './filtrosUsuarios/filtro-usuarios.pipe';
+import { UsuarioRoutingModule } from './usuario-routing.module';
 
 
 
@@ -20,7 +21,7 @@ import { FiltroUsuariosPipe } from './filtrosUsuarios/filtro-usuarios.pipe';
     LayoutModule,
     RouterModule,
     MaterialModule,
-    
+    UsuarioRoutingModule
 
   ]
 })

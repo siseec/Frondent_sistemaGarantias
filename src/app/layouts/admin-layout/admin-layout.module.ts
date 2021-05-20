@@ -37,7 +37,7 @@ import { ProveedoresModule } from '../../proveedores/proveedores.module';
     GarantiaModule,
     UsuariosModule,
     ProveedoresModule
-   // GarantiaRoutingModule
+
   ],
   declarations: [
 

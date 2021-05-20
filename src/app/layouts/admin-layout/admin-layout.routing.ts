@@ -14,6 +14,8 @@ import { DetalleOrdenComponent } from '../../garantia/detalle-orden/detalle-orde
 import { ListarComponent } from '../../usuarios/listar/listar.component';
 import { EditarUsuariosComponent } from '../../usuarios/editar-usuarios/editar-usuarios.component';
 import { UsuarioComponent } from 'app/usuarios/usuario/usuario.component';
+import { ProveedorComponent } from '../../proveedores/proveedor/proveedor.component';
+import { NuevoProveedorComponent } from '../../proveedores/nuevo-proveedor/nuevo-proveedor.component';
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -72,6 +74,7 @@ export const AdminLayoutRoutes: Routes = [
       { path: '**', redirectTo: 'listar' },
     ]
   },
+
   {
     path: 'usuario',
     children: [
@@ -82,7 +85,18 @@ export const AdminLayoutRoutes: Routes = [
       { path: '**', redirectTo: 'listar' },
     ]
   },
-  
+
+  {
+    path: 'proveedor',
+    children: [
+      //  { path: 'trabajo', component: OrdenTrabajoComponent },
+
+      { path: 'proveedores', component: ProveedorComponent },
+      { path: 'nuevoProveedor', component: NuevoProveedorComponent },
+      { path: '**', redirectTo: 'proveedores' },
+    ]
+  },
+
   { path: '**', redirectTo: 'orden' }
 
 ];

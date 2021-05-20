@@ -19,6 +19,7 @@ import { GarantiaModule } from '../../garantia/garantia.module';
 import { GarantiaRoutingModule } from '../../garantia/garantia-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { UsuariosModule } from '../../usuarios/usuarios.module';
+import { ProveedoresModule } from '../../proveedores/proveedores.module';
 
 @NgModule({
   imports: [
@@ -32,8 +33,10 @@ import { UsuariosModule } from '../../usuarios/usuarios.module';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    
     GarantiaModule,
-    UsuariosModule
+    UsuariosModule,
+    ProveedoresModule
    // GarantiaRoutingModule
   ],
   declarations: [

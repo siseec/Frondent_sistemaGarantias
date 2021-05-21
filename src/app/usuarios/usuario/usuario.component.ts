@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ServidorConexion } from 'environments/conexion';
 import { Usuario } from '../model/usuarioInterface';
 
 @Component({
@@ -36,7 +37,7 @@ export class UsuarioComponent implements OnInit {
         "contrasena":this.contrasena
     }
     console.log(usuarioEnvio)
-    this.http.post('http://192.168.0.100:8080/sistema_garantias/rest/usuario/guardarUsuario',usuarioEnvio, {
+    this.http.post(ServidorConexion.ip+'usuario/guardarUsuario',usuarioEnvio, {
       headers : {
           'Content-Type' : 'application/json; charset=UTF-8'
        }} ).subscribe(

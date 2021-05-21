@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../model/usuarioInterface';
+import { ServidorConexion } from 'environments/conexion';
 
 @Component({
   selector: 'app-listar',
@@ -21,7 +22,7 @@ public buscar: string = '';
 
  
   listarUsuarios(){
-this.http.get<Usuario[]>('http://192.168.0.100:8080/sistema_garantias/rest/usuario/listaUsuario').subscribe(
+this.http.get<Usuario[]>(ServidorConexion.ip+'usuario/listaUsuario').subscribe(
   data=>{
     console.log(data);
     this.UsuarioLista=data;

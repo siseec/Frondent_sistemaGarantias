@@ -4,6 +4,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
+import { ServidorConexion } from 'environments/conexion';
 
 @Component({
   selector: 'app-crear-orden',
@@ -170,7 +171,8 @@ export class CrearOrdenComponent implements OnInit {
       console.log('no se envio');
     } else {
 
-      this.http.post('http://192.168.0.107:8080/sistema_garantias/rest/orden/guardar',
+      //this.http.post('http://192.168.0.107:8080/sistema_garantias/rest/orden/guardar',
+      this.http.post(ServidorConexion.ip+'orden/guardar',
         userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'

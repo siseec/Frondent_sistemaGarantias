@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ServidorConexion } from 'environments/conexion';
 import { Proveedor } from '../model/proveedor-interface';
 
 
@@ -21,7 +22,7 @@ export class ProveedorComponent implements OnInit {
   }
 
   listarProveedor(){
-    this.http.get<Proveedor[]>('http://192.168.0.100:8080/sistema_garantias/rest/usuario/listaProveedor').subscribe(data =>{
+    this.http.get<Proveedor[]>(ServidorConexion.ip+'usuario/listaProveedor').subscribe(data =>{
       console.log(data);
       this.listaProveedores=data;
     })

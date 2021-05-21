@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { ServidorConexion } from 'environments/conexion';
 import { Proveedor } from '../model/proveedor-interface';
 
 @Component({
@@ -37,7 +38,7 @@ export class NuevoProveedorComponent implements OnInit {
 
     console.log(prove)
 
-    this.http.post('http://192.168.0.100:8080/sistema_garantias/rest/usuario/guardarProveedor',prove,{
+    this.http.post(ServidorConexion.ip+'usuario/guardarProveedor',prove,{
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

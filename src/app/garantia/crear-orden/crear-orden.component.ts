@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialog} from '@angular/material/dialog';
 
 
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
@@ -14,7 +14,7 @@ import { ServidorConexion } from 'environments/conexion';
 })
 export class CrearOrdenComponent implements OnInit {
 
-  selected = 'option2';
+
   // fechas: Date = new Date();
 
   orden: OrdenTrabajo;
@@ -33,7 +33,6 @@ export class CrearOrdenComponent implements OnInit {
   fechaFactura: Date;
 
   aniosGarantia: number = 1;
-  //idUsuario=1;
 
   cedula: string;
   nombres: string;
@@ -57,7 +56,7 @@ export class CrearOrdenComponent implements OnInit {
 
 
 
-
+ 
 
   addOrdenTrabajo() {
 
@@ -96,7 +95,7 @@ export class CrearOrdenComponent implements OnInit {
       }
     };
 
-    console.log("miki");
+    //console.log("miki");
 
     if (this.nombreEquipo == null &&
       this.cedula == null &&

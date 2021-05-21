@@ -13,7 +13,7 @@
                         <h4 class="card-title ">Ordenes de trabajo</h4>
                         <br>
                         <div>
-                          <!--  <p class="card-category"> <span>Ingrese la Cedula</span>:</p>
+                            <!--  <p class="card-category"> <span>Ingrese la Cedula</span>:</p>
                              <input type="text" id="name" name="name" required minlength="4" maxlength="10" size="22"
                                 placeholder="Nombre/Cedula/Ruc"> -->
                             <input type="text" class="form-control mb-2" placeholder="Buscar Orden" #txtSearch
@@ -79,20 +79,19 @@
                                             {{item.observacionesEquipo}}
                                         </td>
                                         <td>
-                                            Vacio
+                                            {{item.estado}}
                                         </td>
 
 
                                         <td>
-                                            <div class="example-button-row">
-                                                <button routerLink="/orden/detalle" mat-raised-button
-                                                    color="primary">Detalle</button>
-                                            </div>
-                                            <br>
-                                            <div class="example-button-row">
-                                                <button routerLink="/orden/actualizar" mat-raised-button
-                                                    color="primary">Actualizar</button>
-                                            </div>
+
+                                            <button routerLink="/orden/detalle" class="btn btn-info"
+                                                (click)="obtenerOrden(item)" color="primary">Detalle</button>
+                                        </td>
+                                        <td>
+                                            <button routerLink="/orden/actualizar" class="btn btn-info"
+                                                color="primary">Actualizar</button>
+
                                         </td>
                                     </tr>
                                 </tbody>

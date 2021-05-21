@@ -22,7 +22,9 @@ import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.co
 import { FiltroOrdenPipe } from './filtroPipe/filtro-orden.pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
+import { BrowserModule } from '@angular/platform-browser';
 
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -32,8 +34,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
    GarantiaRoutingModule,
     LayoutModule,
     RouterModule,
+   // BrowserModule,
     //modulos para los formularios reactivos
-  MaterialModule
+  MaterialModule,
+  MatCardModule,
   ],
   exports:[
     OrdenTrabajoComponent

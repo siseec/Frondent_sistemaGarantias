@@ -2,6 +2,8 @@ import { Component, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { ServidorConexion } from '../../../environments/conexion';
+import { OrdenTrabajoService } from 'app/service/orden-trabajo.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-list-trabajo',
@@ -13,7 +15,7 @@ export class ListTrabajoComponent implements OnInit {
   OrdenTrabajos:OrdenTrabajo[]=[];
   public search: string = '';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private ordeServicio:OrdenTrabajoService) { }
 
   ngOnInit(): void {
     
@@ -31,6 +33,10 @@ export class ListTrabajoComponent implements OnInit {
    // this.page = 0;
     this.search = search;
    // console.log(this.search)
+  }
+
+  obtenerOrden(orden:OrdenTrabajo){
+    this.ordeServicio.orden=orden;
   }
 
 }

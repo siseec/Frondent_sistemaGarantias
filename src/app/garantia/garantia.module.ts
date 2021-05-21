@@ -20,6 +20,8 @@ import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';
 import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing';
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
 import { FiltroOrdenPipe } from './filtroPipe/filtro-orden.pipe';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 

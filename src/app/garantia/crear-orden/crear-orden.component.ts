@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import {FormControl, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
 
-import { OrdenTrabajo } from '../model/OrdenTrabajo';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
+import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
 import { ServidorConexion } from 'environments/conexion';
 
 @Component({
@@ -14,9 +15,11 @@ import { ServidorConexion } from 'environments/conexion';
 export class CrearOrdenComponent implements OnInit {
 
   selected = 'option2';
-  fechas: Date = new Date();
+  // fechas: Date = new Date();
 
   orden: OrdenTrabajo;
+  cliente: Cliente;
+
   numeroOrden: string;
   nombreEquipo: string;
   numeroSerie: string;
@@ -25,11 +28,11 @@ export class CrearOrdenComponent implements OnInit {
   observacionesEquipo: string;
 
   numeroFactura: string;
-  fecha = this.fechas;
+  fecha: Date;
   montoFactura: string;
-  fechaFactura = this.fechas;
+  fechaFactura: Date;
 
-  aniosGarantia: number=1;
+  aniosGarantia: number = 1;
   //idUsuario=1;
 
   cedula: string;
@@ -53,44 +56,11 @@ export class CrearOrdenComponent implements OnInit {
   }
 
 
-  
-  
+
+
 
   addOrdenTrabajo() {
 
-    //  console.log(this.orden);
-    // const user: OrdenTrabajo =  {
-    //   "numeroOrden": "003934",
-    //   "nombreEquipo": "HP",
-    //   "numeroSerie": "IOE9380NN",
-    //   "marca": "Apple",
-    //   "modelo": "2018",
-    //   "observacionesEquipo": "SIN OBSERVACIONES",
-    //   "numeroFactura": "000-88982-22",
-    //   "fecha": this.fecha,
-    //   "montoFactura": 3002983.0,
-    //   "fechaFactura": this.fecha,
-    //   "aniosGarantia": 1,
-    //   "usuario": {
-    //     "idUsuario": 1
-    //   },
-    //   "cliente": {
-    //     "cedula": "0302603493",
-    //     "nombres": "wilmer",
-    //     "apellidos": "camas",
-    //     "telefono": "093939333",
-    //     "direccion": "Giron",
-    //     "correo": "xavier94xr8@gmail.com"
-    //   },
-    //   "proveedor": {
-    //     "cedula": "0105176127",
-    //     "nombres": "Apple",
-    //     "apellidos": "BFBV",
-    //     "telefono": "093939333",
-    //     "direccion": "Giron",
-    //     "correo": "093939333"
-    //   }
-    // };
 
     const userPrueba: OrdenTrabajo =
     {
@@ -128,33 +98,6 @@ export class CrearOrdenComponent implements OnInit {
 
     console.log("miki");
 
-    // const headers = new HttpHeaders({
-    //   'Access-Control-Allow-Origin': '*',
-    //   'Content-type': 'application/json',
-    //   'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
-    //   'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
-    // });
-    // let options = {
-    //   headers: headers,
-    //   body:user
-    // }
-
-    /* {headers: {
-      "Access-Control-Allow-Origin":"*",
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-    }}
-
-     {
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json', 
-        'Access-Control-Allow-Origin': '*'
-      },
-      method: 'POST',
-      mode: 'no-cors'
-    }
-    */
     if (this.nombreEquipo == null &&
       this.cedula == null &&
       this.nombres == null &&
@@ -172,7 +115,7 @@ export class CrearOrdenComponent implements OnInit {
     } else {
 
       //this.http.post('http://192.168.0.107:8080/sistema_garantias/rest/orden/guardar',
-      this.http.post(ServidorConexion.ip+'orden/guardar',
+      this.http.post(ServidorConexion.ip + 'orden/guardar',
         userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
@@ -185,10 +128,32 @@ export class CrearOrdenComponent implements OnInit {
       );
     }
 
-
-
-
   }
+
+  buscarCliente() {
+
+    this.http.get<Cliente>(ServidorConexion.ip + 'usuario/clienteCedula?cedula=' + this.cedula).subscribe(data => {
+      // this.cedula = data.cedula;
+      this.nombres = data.nombres;
+      this.apellidos = data.apellidos;
+      this.telefono = data.telefono;
+      this.direccion = data.direccion;
+      this.correo = data.correo;
+      console.log(data)
+    });
+  }
+
+  buscarProveedor() {
+    this.http.get<Proveedor>(ServidorConexion.ip + 'usuario/proveeedorcedula?cedula=' + this.pcedula).subscribe(data => {
+      //  this.pcedula = data.cedula;
+      this.pnombres = data.nombres;
+      this.papellidos = data.apellidos;
+      this.ptelefono = data.telefono;
+      this.pdireccion = data.direccion;
+      this.pcorreo = data.correo;
+    });
+  }
+
 
 }
 

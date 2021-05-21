@@ -15,7 +15,7 @@ export interface OrdenTrabajo {
     proveedor:           Proveedor;
 }
 
- interface Cliente {
+ export interface Cliente {
     cedula:      string;
     nombres:     string;
     apellidos:   string;
@@ -27,7 +27,7 @@ export interface OrdenTrabajo {
     idUsuario:  number;
    
 }
- interface Proveedor {
+ export interface Proveedor {
     cedula:      string;
     nombres:     string;
     apellidos:   string;

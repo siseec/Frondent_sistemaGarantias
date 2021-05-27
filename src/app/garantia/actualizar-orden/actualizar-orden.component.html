@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Actualizar Orden Trabajo</h4>
@@ -10,8 +10,6 @@
           </div>
 
           <div class="card-body">
-
-
             <div class="row">
               <div class="col-md-5">
                 <mat-form-field class="example-full-width">
@@ -22,109 +20,117 @@
 
 
             <div class="row">
-              <div class="col-md-12 col-lg-8">
-                <label>Cliente</label>
 
-                <div class="col-md-6">
+              <div class="col-md-6">
+                <label>Cliente</label>
+                <div>
                   <mat-form-field class="example-full-width">
                     <input matInput [(ngModel)]="cedula" placeholder="C.I/RUC">
                   </mat-form-field>
                 </div>
-
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput maxlength="20" [(ngModel)]="correo" placeholder="Correo Electronico" type="email">
-                  </mat-form-field>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="nombres" placeholder="Nombre" type="text">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-md-6">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="apellidos" placeholder="Apellido" type="text">
-                    </mat-form-field>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="direccion" placeholder="Direccion" type="text">
-                    </mat-form-field>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-4">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="telefono" placeholder="Telefono" type="text">
-                    </mat-form-field>
-                  </div>
-                </div>
-
-                <br>
-                <br>
-
-                <div class="row">
-
-                  <div class="col-md-12">
-                    <label>Equipo</label>
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="nombreEquipo" placeholder="Nombre Equipo" type="text">
-                    </mat-form-field>
-                  </div>
-
-                  <div class="col-md-12">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20"  [(ngModel)]="numeroSerie" placeholder="Num. Serie" type="text">
-                    </mat-form-field>
-                  </div>
-
-                  <div class="col-md-4">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20"  [(ngModel)]="modelo" placeholder="Modelo" type="text">
-                    </mat-form-field>
-                  </div>
-
-                  <div class="col-md-4">
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="20" [(ngModel)]="marca" placeholder="Marca" type="text">
-                    </mat-form-field>
-                  </div>
-
-                  <div class="col-md-4">
-                    <mat-label>Añios Garantia</mat-label>
-                    <mat-form-field class="example-full-width">
-                      <input matInput maxlength="2" [(ngModel)]="aniosGarantia" type="number">
-                    </mat-form-field>
-                  </div>
-
-                </div>
-
-
-
               </div>
+
+              <div class="col-md-6">
+                <label>Estado </label>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select</mat-label>
+                  <mat-select>
+                    <mat-option [(ngModel)]="estadomiki" value="one">First option</mat-option>
+                    <mat-option value="two">Second option</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="correo" placeholder="Correo Electronico" type="email">
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="nombres" placeholder="Nombre" type="text">
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="apellidos" placeholder="Apellido" type="text">
+                </mat-form-field>
+              </div>
+
+
+
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="direccion" placeholder="Direccion" type="text">
+                </mat-form-field>
+              </div>
+
+
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="telefono" placeholder="Telefono" type="text">
+                </mat-form-field>
+              </div>
+
+              <br>
+              <br>
+
+
             </div>
 
             <div class="row">
-              <div class="col-md-12 col-lg-8">
+
+              <div class="col-md-12">
+                <label>Equipo</label>
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="nombreEquipo" placeholder="Nombre Equipo" type="text">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="numeroSerie" placeholder="Num. Serie" type="text">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="modelo" placeholder="Modelo" type="text">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="marca" placeholder="Marca" type="text">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-label>Añios Garantia</mat-label>
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="2" [(ngModel)]="aniosGarantia" type="number">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12">
                 <label>Observaciones</label>
                 <mat-form-field class="example-full-width">
-                  <textarea matInput maxlength="20" [(ngModel)]="observacionesEquipo" matInput></textarea>
+                  <textarea matInput [(ngModel)]="observacionesEquipo" autocomplete="off" required
+                    maxlength="120"></textarea>
                 </mat-form-field>
-
               </div>
+              
             </div>
 
             <br>
             <br>
 
             <div class="row">
-              <div class="col-md-12 col-lg-8">
+              <div class="col-md-12">
                 <label>Facturacion</label>
 
                 <div class="row">
@@ -149,9 +155,9 @@
 
             <br>
             <br>
-            
+
             <div class="row">
-              <div class="col-md-12 col-lg-8">
+              <div class="col-md-12">
                 <label>Proveedor</label>
 
                 <div class="row">
@@ -192,7 +198,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <button mat-raised-button class="btn btn-danger pull-right" (click)="ActualizarOrdenTrabajo()">
+                <button mat-raised-button class="btn btn-danger pull-right" (click)="cajabox()">
                   Actualizar</button>
               </div>
             </div>

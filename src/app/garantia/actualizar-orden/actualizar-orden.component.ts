@@ -14,6 +14,7 @@ import { ServidorConexion } from 'environments/conexion';
 export class ActualizarOrdenComponent implements OnInit {
   ordenDetalle: OrdenTrabajo=null;
   fechas: Date = new Date();
+  estadomiki:string;
 
   idOrdenTrabajo?:number;
   numeroOrden?: string;
@@ -159,5 +160,9 @@ export class ActualizarOrdenComponent implements OnInit {
 
   }
 
+
+  cajabox(){
+    console.log(this.estadomiki)
+  }
 
 }

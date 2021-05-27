@@ -16,8 +16,8 @@ export class FiltroOrdenPipe implements PipeTransform {
     // const filteredPokemons = ordenes.filter( orden => orden.numeroSerie.includes( search ));
     //return filteredPokemons;
     for (const ord of ordenes) {
-
-      if (ord.numeroSerie == search || ord.cliente.nombres.toLowerCase() == search||ord.nombreEquipo.toLowerCase() == search) {
+      
+      if (ord.numeroSerie.toLowerCase() == search || ord.cliente.nombres.toLowerCase() == search||ord.nombreEquipo.toLowerCase() == search) {
         this.resultadoOrdenTrabajos.push(ord);
       }
     };

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActualizarOrdenComponent } from './actualizar-orden.component';
+import { CrearDialogoComponent } from './crear-dialogo.component';
 
-describe('ActualizarOrdenComponent', () => {
-  let component: ActualizarOrdenComponent;
-  let fixture: ComponentFixture<ActualizarOrdenComponent>;
+describe('CrearDialogoComponent', () => {
+  let component: CrearDialogoComponent;
+  let fixture: ComponentFixture<CrearDialogoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ActualizarOrdenComponent ]
+      declarations: [ CrearDialogoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActualizarOrdenComponent);
+    fixture = TestBed.createComponent(CrearDialogoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

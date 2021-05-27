@@ -7,7 +7,7 @@ import { OrdenTrabajo } from '../garantia/model/OrdenTrabajo';
 })
 export class OrdenTrabajoService {
 
-  orden:OrdenTrabajo;
+  orden:OrdenTrabajo=null;
 
   constructor(private http:HttpClient) { }
 

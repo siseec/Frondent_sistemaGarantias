@@ -21,14 +21,16 @@ import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
 import { FiltroOrdenPipe } from './filtroPipe/filtro-orden.pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { BrowserModule } from '@angular/platform-browser';
 
 import {MatCardModule} from '@angular/material/card';
+import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
 
 
 @NgModule({
-  declarations: [OrdenTrabajoComponent, ListTrabajoComponent, CrearOrdenComponent, DetalleOrdenComponent, ActualizarOrdenComponent, FiltroOrdenPipe],
+  declarations: [OrdenTrabajoComponent, ListTrabajoComponent, CrearOrdenComponent, DetalleOrdenComponent, ActualizarOrdenComponent, FiltroOrdenPipe, CrearDialogoComponent],
   imports: [
     CommonModule,
    GarantiaRoutingModule,
@@ -38,6 +40,7 @@ import {MatCardModule} from '@angular/material/card';
     //modulos para los formularios reactivos
   MaterialModule,
   MatCardModule,
+  MatDialogModule,
   ],
   exports:[
     OrdenTrabajoComponent

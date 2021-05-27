@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
 import { ServidorConexion } from 'environments/conexion';
+import { CrearDialogoComponent } from '../vista/crear-dialogo/crear-dialogo.component';
 
 @Component({
   selector: 'app-crear-orden',
@@ -29,7 +30,7 @@ export class CrearOrdenComponent implements OnInit {
 
   numeroFactura: string;
   fecha: Date;
-  montoFactura: string;
+  montoFactura: number;
   fechaFactura: Date;
 
   aniosGarantia: number = 1;
@@ -48,14 +49,25 @@ export class CrearOrdenComponent implements OnInit {
   pdireccion: string;
   pcorreo: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              public dialog: MatDialog
+              ) { }
 
 
   ngOnInit(): void {
   }
 
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CrearDialogoComponent, {
+      width: '250px',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     
+    });
+  }
  
 
   addOrdenTrabajo() {
@@ -71,9 +83,9 @@ export class CrearOrdenComponent implements OnInit {
       "observacionesEquipo": this.observacionesEquipo,
       "numeroFactura": this.numeroFactura,
       "fecha": this.fecha,
-      "montoFactura": 3002983.0,
+      "montoFactura": this.montoFactura,
       "fechaFactura": this.fecha,
-      "aniosGarantia": 1,
+      "aniosGarantia": this.aniosGarantia,
       "usuario": {
         "idUsuario": 1
       },

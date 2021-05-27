@@ -58,28 +58,28 @@
                                 <tbody>
                                     <tr *ngFor="let item of OrdenTrabajos | filtroOrden:search">
                                         <td>
-                                            {{item.idOrdenTrabajo}}
+                                            {{item?.idOrdenTrabajo}}
 
                                         </td>
 
                                         <td>
-                                            {{item.numeroSerie}}
+                                            {{item?.numeroSerie}}
 
                                         </td>
                                         <td>
-                                            {{item.fecha | date:'shortDate'}}
+                                            {{item?.fecha | date:'shortDate'}}
                                         </td>
                                         <td>
-                                            {{item.nombreEquipo}}
+                                            {{item?.nombreEquipo}}
                                         </td>
                                         <td>
-                                            {{item.cliente.nombres}}
+                                            {{item.cliente?.nombres}}
                                         </td>
                                         <td>
-                                            {{item.observacionesEquipo}}
+                                            {{item?.observacionesEquipo}}
                                         </td>
                                         <td>
-                                            {{item.estado}}
+                                            {{item?.estado}}
                                         </td>
 
 
@@ -90,7 +90,7 @@
                                         </td>
                                         <td>
                                             <button routerLink="/orden/actualizar" class="btn btn-info"
-                                                color="primary">Actualizar</button>
+                                            (click)="obtenerOrden(item)"  color="primary">Actualizar</button>
 
                                         </td>
                                     </tr>

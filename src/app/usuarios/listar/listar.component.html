@@ -10,7 +10,7 @@
                     </div>
                     <br />
 
-                    <div>
+                    <div class="col-md-12">
                         <a id="btn" class="btn btn-success" routerLink="/usuario/crear" style="margin-right:10px">
                             Añadir Nuevo</a>
 
@@ -21,7 +21,7 @@
                                minlength="4" maxlength="10" size="22" placeholder="nombre/apellido/cedula/ruc">-->
 
                         <input type="text" id="name" name="name" placeholder="Buscar Usuario" #txtSearch
-                            (keyup)="onSearchPokemon( txtSearch.value )" minlength="4" maxlength="10" size="22"
+                        (keyup.enter)="ObetnerParametroPipe()" autocomplete="off" minlength="4" maxlength="10" size="22"
                             placeholder="cedula">
                     </div>
 

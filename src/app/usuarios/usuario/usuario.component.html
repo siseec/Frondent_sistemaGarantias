@@ -14,42 +14,42 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="cedula" placeholder="CI/Ruc:">
+                                    <input matInput autocomplete="off" minlength="10" maxlength="10" [(ngModel)]="cedula"  placeholder="CI/Ruc:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="nombres" placeholder="Nombre:">
+                                    <input matInput autocomplete="off" [(ngModel)]="nombres" placeholder="Nombre:">
                                 </mat-form-field>
                             </div>
                             
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="apellidos" placeholder="Apellido:">
+                                    <input matInput autocomplete="off" [(ngModel)]="apellidos" placeholder="Apellido:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="direccion" placeholder="Direccion:">
+                                    <input matInput autocomplete="off" [(ngModel)]="direccion" placeholder="Direccion:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="telefono" placeholder="Telefono:">
+                                    <input matInput autocomplete="off" [(ngModel)]="telefono" placeholder="Telefono:">
                                 </mat-form-field>
                             </div>
                             
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="correo" placeholder="Email:" type="email">
+                                    <input matInput autocomplete="off" [(ngModel)]="correo" placeholder="Email:" type="email">
                                 </mat-form-field>
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput [(ngModel)]="contrasena" placeholder="Contraseña:" type="password">
+                                    <input matInput autocomplete="off" [(ngModel)]="contrasena" placeholder="Contraseña:" type="password">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         </div>
 
 
-                        <div class="center">
+                        <div class="row">
                             <!-- <button mat-raised-button type="submit" class="btn btn-sucess">GUARDAR</button>-->
 
 
@@ -72,8 +72,7 @@
 
                             <br />
                             <br />
-                            <br />
-                            <br />
+                          
                             <button mat-raised-button class="btn btn-danger pull-right"
                                 style="margin-left:30px">Cancelar</button>
 

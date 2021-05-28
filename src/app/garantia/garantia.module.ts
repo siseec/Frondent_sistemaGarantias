@@ -20,12 +20,9 @@ import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';
 import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing';
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
 import { FiltroOrdenPipe } from './filtroPipe/filtro-orden.pipe';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatDialogModule} from '@angular/material/dialog';
-
-import { BrowserModule } from '@angular/platform-browser';
-
-import {MatCardModule} from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
 
 
@@ -33,16 +30,16 @@ import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.compo
   declarations: [OrdenTrabajoComponent, ListTrabajoComponent, CrearOrdenComponent, DetalleOrdenComponent, ActualizarOrdenComponent, FiltroOrdenPipe, CrearDialogoComponent],
   imports: [
     CommonModule,
-   GarantiaRoutingModule,
+    GarantiaRoutingModule,
     LayoutModule,
     RouterModule,
-   // BrowserModule,
+    // BrowserModule,
     //modulos para los formularios reactivos
-  MaterialModule,
-  MatCardModule,
-  MatDialogModule,
+    MaterialModule,
+    MatCardModule,
+    MatDialogModule,
   ],
-  exports:[
+  exports: [
     OrdenTrabajoComponent
   ]
 })

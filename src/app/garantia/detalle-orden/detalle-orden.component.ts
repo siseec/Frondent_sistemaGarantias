@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdenTrabajoService } from '../service/orden-trabajo.service';
-import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+//import { Ordenes, Detalle } from '../model/DetalleOrden-interface';
+import { OrdenTrabajoService } from '../service/orden-trabajo.service';
+import { OrdenTrabajo, Detalle, Ordenes, Cliente } from '../model/OrdenTrabajo';
+import { ServidorConexion } from '../../../environments/conexion';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-detalle-orden',
@@ -10,24 +15,33 @@ import { Router } from '@angular/router';
 })
 export class DetalleOrdenComponent implements OnInit {
 
-  ordenDetalle: OrdenTrabajo=null;
+  ordenDetalle: OrdenTrabajo;
+  detalles: Detalle[] = [];
+  cliente:Cliente;
+  id: number;
+  myimage: Observable<any>;
 
-  estadoDetalle: boolean = false;
-  //listaOrdenTrabajos:OrdenTrabajo[];
-  constructor(private route:Router,private ordeServicio: OrdenTrabajoService) { }
+  constructor(private route: Router,
+    private ordeServicio: OrdenTrabajoService,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
 
-    if (this.ordeServicio.orden !== null || this.ordeServicio.orden !==  undefined || this.ordeServicio.orden.cliente !==  undefined ) {
-      this.ordenDetalle = this.ordeServicio.orden;
-      this.estadoDetalle = true;
-   
-    } else {
-      this.estadoDetalle = false;
-      this.route.navigateByUrl['/orden/listar'];
+    if (this.ordeServicio.orden !== null || this.ordeServicio.orden !== undefined) {
+      this.id = this.ordeServicio.orden.idOrdenTrabajo;
     }
-    // this.listaOrdenTrabajos.push(this.ordeServicio.orden);
-    console.log(this.ordenDetalle);
+
+    this.listarDetalles();
+  }
+
+  listarDetalles() {
+    this.http.get<Ordenes>(ServidorConexion.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
+      // console.log(data);
+      this.ordenDetalle = data.orden;
+      this.cliente=data.orden.cliente;
+      this.detalles = data.detalles;
+    //  this.myimage=data.detalles
+    });
   }
 
 

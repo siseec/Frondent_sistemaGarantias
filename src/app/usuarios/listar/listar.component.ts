@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../model/usuarioInterface';
 import { ServidorConexion } from 'environments/conexion';
@@ -10,32 +10,39 @@ import { ServidorConexion } from 'environments/conexion';
 })
 export class ListarComponent implements OnInit {
 
-UsuarioLista:Usuario[]=[];
+  UsuarioLista: Usuario[] = [];
 
-public buscar: string = '';
+  public buscar: string = '';
+  @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.listarUsuarios();
   }
 
- 
-  listarUsuarios(){
-this.http.get<Usuario[]>(ServidorConexion.ip+'usuario/listaUsuario').subscribe(
-  data=>{
-    console.log(data);
-    this.UsuarioLista=data;
-  }
-);
+
+  listarUsuarios() {
+    this.http.get<Usuario[]>(ServidorConexion.ip + 'usuario/listaUsuario').subscribe(
+      data => {
+        console.log(data);
+        this.UsuarioLista = data;
+      }
+    );
   }
 
 
-  onSearchPokemon( search: string ) {
-    // this.page = 0;
-     this.buscar = search;
-     console.log(this.buscar)
-   }
+
+
+  ObetnerParametroPipe() {
+
+    const valor = this.txtSearch.nativeElement.value;
+    this.buscar = valor;
+    if (valor.trim().length === 0) {
+      return;
+    }
+    this.txtSearch.nativeElement.value = '';
+  }
 
 
 

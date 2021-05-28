@@ -1,3 +1,16 @@
+export interface Ordenes {
+    orden:    OrdenTrabajo;
+    detalles: Detalle[];
+}
+
+export interface Detalle {
+    idEstado:    number;
+    fecha:       number;
+    nombre:      string;
+    descripcion: string;
+    imagen:      string;
+}
+
 export interface OrdenTrabajo {
     idOrdenTrabajo?:number;
     numeroOrden?:         string;
@@ -12,9 +25,9 @@ export interface OrdenTrabajo {
     numeroFactura?:       string;
     fechaFactura?:        Date;
     montoFactura?:        number;
-    usuario:             Usuario;
-    cliente:             Cliente;
-    proveedor:           Proveedor;
+    usuario?:             Usuario;
+    cliente?:             Cliente;
+    proveedor?:           Proveedor;
 }
 
  export interface Cliente {

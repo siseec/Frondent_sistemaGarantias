@@ -18,29 +18,29 @@
                   <p>SISEEC</p>
                 </mat-card>
               </div>
-             
-                <div class="col-md-4">
-                  <button mat-raised-button routerLink='/orden/' class="btn btn-danger pull-right">
-                    Regresar</button>
-                
+
+              <div class="col-md-4">
+                <button mat-raised-button routerLink='/orden/' class="btn btn-danger pull-right">
+                  Regresar</button>
+
               </div>
             </div>
 
 
             <div class="row">
               <div class="col-md-12">
-                <label>CLiente</label>
+                <label> CLiente</label>
 
                 <div class="col-md-6">
                   <mat-card>
-                    <p>{{ordenDetalle.cliente.cedula}}</p>
+                    <p>{{cliente?.cedula}}</p>
                   </mat-card>
                 </div>
 
                 <div class="col-md-6">
                   <label>Correo</label>
                   <mat-card>
-                    <p>{{ordenDetalle.cliente.correo}}</p>
+                    <p>{{cliente?.correo}}</p>
                   </mat-card>
                 </div>
 
@@ -48,13 +48,13 @@
                   <div class="col-md-6">
                     <label>Nombre</label>
                     <mat-card>
-                      <p>{{ordenDetalle.cliente.nombres}}</p>
+                      <p>{{cliente?.nombres}}</p>
                     </mat-card>
                   </div>
                   <div class="col-md-6">
                     <label>Apellido</label>
                     <mat-card>
-                      <p>{{ordenDetalle.cliente.apellidos}}</p>
+                      <p>{{cliente?.apellidos}}</p>
                     </mat-card>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
                   <div class="col-md-12">
                     <label>Direccion</label>
                     <mat-card>
-                      <p>{{ordenDetalle.cliente.direccion}}</p>
+                      <p>{{cliente?.direccion}}</p>
                     </mat-card>
                   </div>
                 </div>
@@ -72,65 +72,65 @@
                   <div class="col-md-4">
                     <label>Telefono</label>
                     <mat-card>
-                      <p>{{ordenDetalle.cliente.telefono}}</p>
+                      <p>{{cliente?.telefono}}</p>
                     </mat-card>
                   </div>
-               </div>   
-                  <br>
-                  <br>
+                </div>
+                <br>
+                <br>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <label>Nombre Equipo</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.nombreEquipo}}</p>
-                      </mat-card>
-                    </div>
-
-                    <div class="col-md-12">
-                      <label>Numero Serie</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.numeroSerie}}</p>
-                      </mat-card>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label>Modelo</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.modelo}}</p>
-                      </mat-card>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label>Marca</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.marca}}</p>
-                      </mat-card>
-                    </div>
-
-                    <div class="col-md-4">
-
-                      <label>Año Garantia</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.aniosGarantia}}</p>
-                      </mat-card>
-                    </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Nombre Equipo</label>
+                    <mat-card>
+                      <p>{{ordenDetalle?.nombreEquipo}}</p>
+                    </mat-card>
                   </div>
 
+                  <div class="col-md-12">
+                    <label>Numero Serie</label>
+                    <mat-card>
+                      <p>{{ordenDetalle?.numeroSerie}}</p>
+                    </mat-card>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label>Modelo</label>
+                    <mat-card>
+                      <p>{{ordenDetalle?.modelo}}</p>
+                    </mat-card>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label>Marca</label>
+                    <mat-card>
+                      <p>{{ordenDetalle?.marca}}</p>
+                    </mat-card>
+                  </div>
+
+                  <div class="col-md-4">
+
+                    <label>Año Garantia</label>
+                    <mat-card>
+                      <p>{{ordenDetalle?.aniosGarantia}}</p>
+                    </mat-card>
+                  </div>
                 </div>
 
-              
+              </div>
+
+
             </div>
 
             <div class="row">
               <div class="col-md-12">
                 <label>Observaciones</label>
 
-               <mat-card> 
-                <mat-card-content>
-                  <p>{{ordenDetalle.observacionesEquipo}}</p>
-                </mat-card-content>
-                
+                <mat-card>
+                  <mat-card-content>
+                    <p>{{ordenDetalle?.observacionesEquipo}}</p>
+                  </mat-card-content>
+
                 </mat-card>
 
               </div>
@@ -147,21 +147,21 @@
                   <div class="col-md-4">
                     <label>Numero Factura</label>
                     <mat-card>
-                      <p>{{ordenDetalle.numeroFactura}}</p>
+                      <p>{{ordenDetalle?.numeroFactura}}</p>
                     </mat-card>
                   </div>
 
                   <div class="col-md-4">
                     <label>Fecha Factura</label>
                     <mat-card>
-                      <p>{{ordenDetalle.fechaFactura}}</p>
+                      <p>{{ordenDetalle?.fechaFactura}}</p>
                     </mat-card>
                   </div>
                   <div class="col-md-4">
                     <label>Monto Factura</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.montoFactura}}</p>
-                      </mat-card>
+                    <mat-card>
+                      <p>{{ordenDetalle?.montoFactura}}</p>
+                    </mat-card>
                   </div>
                 </div>
               </div>
@@ -176,41 +176,41 @@
                 <div class="row">
                   <div class="col-md-4">
                     <label>Cedula/Ruc</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.proveedor.cedula}}</p>
-                      </mat-card>
+                    <mat-card>
+                      <p>{{ordenDetalle?.proveedor.cedula}}</p>
+                    </mat-card>
                   </div>
                   <div class="col-md-4">
                     <label>Nombre</label>
                     <mat-card>
-                      <p>{{ordenDetalle.proveedor.nombres}}</p>
+                      <p>{{ordenDetalle?.proveedor.nombres}}</p>
                     </mat-card>
                   </div>
-                  
+
                   <div class="col-md-4">
                     <label>Apellido</label>
-                      <mat-card>
-                        <p>{{ordenDetalle.proveedor.apellidos}}</p>
-                      </mat-card>
+                    <mat-card>
+                      <p>{{ordenDetalle?.proveedor.apellidos}}</p>
+                    </mat-card>
                   </div>
-                 
+
                   <div class="col-md-4">
                     <label>Telefono</label>
                     <mat-card>
-                      <p>{{ordenDetalle.proveedor.telefono}}</p>
+                      <p>{{ordenDetalle?.proveedor.telefono}}</p>
                     </mat-card>
                   </div>
-                  
+
                   <div class="col-md-4">
                     <label>Direccion</label>
                     <mat-card>
-                      <p>{{ordenDetalle.proveedor.direccion}}</p>
+                      <p>{{ordenDetalle?.proveedor.direccion}}</p>
                     </mat-card>
                   </div>
                   <div class="col-md-4">
                     <label>Correo</label>
                     <mat-card>
-                      <p>{{ordenDetalle.proveedor.correo}}</p>
+                      <p>{{ordenDetalle?.proveedor.correo}}</p>
                     </mat-card>
                   </div>
 
@@ -218,16 +218,73 @@
               </div>
             </div>
 
-            
+
 
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Detalles de trabajo</h4>
+
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    ID
+                  </th>
+
+                  <th>
+                    Fecha
+                  </th>
+                  <th>
+                    Nombre
+                  </th>
+                  <th>
+                    Descripcion
+                  </th>
 
 
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of detalles;index as i ">
+                    <td>
+                      {{i}}
+                    </td>
+                    <td>
+                      {{item?.fecha | date:'shortDate'}}
 
+                    </td>
 
+                    <td>
+                      {{item?.nombre}}
 
+                    </td>
+
+                    <td>
+                      {{item?.descripcion}}
+                    </td>
+                    <td >
+                      
+                        <!-- <img [src]="item?.imagen | async" width="200px" height="200px" alt="" /> -->
+                      
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

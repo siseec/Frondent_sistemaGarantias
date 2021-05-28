@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrdenTrabajo } from '../garantia/model/OrdenTrabajo';
+import { OrdenTrabajo } from '../model/OrdenTrabajo';
+
 
 @Injectable({
   providedIn: 'root'

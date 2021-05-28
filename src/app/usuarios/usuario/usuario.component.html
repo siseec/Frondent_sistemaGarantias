@@ -1,109 +1,87 @@
-
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
+                    
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Ingresar Usuarios</h4>
-                        <p class="card-category"></p>
+                        <p class="card-category">Complete la informacion a continuacion</p>
                     </div>
+                    
                     <div class="card-body">
-                        
-                            <div class="row">
-                                <div class="col-md-5">
-                                  
-                                      <input matInput [(ngModel)]="cedula" placeholder="CI/Ruc:"> 
-                                  
-  
-                                </div>
-                                <div class="col-md-3">
-                                    
-                                     <input matInput [(ngModel)]="nombres"placeholder="Nombre:">
-                                   
-                                </div>
-                                <div class="col-md-3">
-                                   
-                                      <input matInput [(ngModel)]="apellidos"placeholder="Apellido:">
-                                  
-                                </div>
-                                <div class="col-md-3">
-                                    
-                                      <input matInput [(ngModel)]="direccion" placeholder="Direccion:">
-                                   
-                                </div>
-                                <div class="col-md-3">
-                                   
-                                      <input matInput [(ngModel)]="telefono" placeholder="Telefono:">
-                                    
-                                </div>
-                                <div class="col-md-4">
-                                 
-                                      <input matInput [(ngModel)]="correo" placeholder="Email:" type="email">
-                                   
-                                </div>
-                                <div class="col-md-3">
-                                 
-                                      <input matInput  [(ngModel)]="contrasena" placeholder="Contraseña:" type="password">
-                                   
-                                </div>
-                            </div>
-                            <div class="row">
-   
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="cedula" placeholder="CI/Ruc:">
+                                </mat-form-field>
                             </div>
 
-
-                            <div class="center">
-                          <!-- <button mat-raised-button type="submit" class="btn btn-sucess">GUARDAR</button>-->
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="nombres" placeholder="Nombre:">
+                                </mat-form-field>
+                            </div>
                             
-                          
-
-                           <button mat-raised-button (click)="agregarusuario()"   class="btn btn-danger pull-right"   onclick="return confirm('Estas seguro de Guardar el registro?');" style="margin-left:30px" >GUARDAR</button>
-
-
-                          
-
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                            <button  mat-raised-button class="btn btn-danger pull-right"   style="margin-left:30px" >Cancelar</button>
-
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="apellidos" placeholder="Apellido:">
+                                </mat-form-field>
                             </div>
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="direccion" placeholder="Direccion:">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="telefono" placeholder="Telefono:">
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="correo" placeholder="Email:" type="email">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="contrasena" placeholder="Contraseña:" type="password">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+
+
+                        <div class="center">
+                            <!-- <button mat-raised-button type="submit" class="btn btn-sucess">GUARDAR</button>-->
+
+
+
+                            <button mat-raised-button (click)="agregarusuario()" class="btn btn-danger pull-right"
+                                onclick="return confirm('Estas seguro de Guardar el registro?');"
+                                style="margin-left:30px">GUARDAR</button>
+
+
+
+
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <button mat-raised-button class="btn btn-danger pull-right"
+                                style="margin-left:30px">Cancelar</button>
+
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <a href="javascript:void(0)">
-                            <img class="img" src="./assets/img/faces/marc5.png" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-category text-gray"></h6>
-                        <h4 class="card-title"></h4>
-                        <p class="card-description">
-                          
-                        </p>
-                      
-                    </div> 
-                </div>
-            </div>
+
         </div>
-    </div> 
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
+</div>

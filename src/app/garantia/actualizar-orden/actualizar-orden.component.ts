@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
-import { OrdenTrabajoService } from '../../service/orden-trabajo.service';
+import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { ServidorConexion } from 'environments/conexion';
 
 @Component({

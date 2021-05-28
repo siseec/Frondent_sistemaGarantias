@@ -4,7 +4,7 @@
 
         <!-- inicio del menu -->
 
-        <app-orden-trabajo></app-orden-trabajo>
+        <!-- <app-orden-trabajo></app-orden-trabajo> -->
         <!-- fin del menu -->
 
         <div class="row">
@@ -13,19 +13,16 @@
 
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Ordenes de trabajo</h4>
-                        <!-- <br>
-                        <div>
-                            <!--  <p class="card-category"> <span>Ingrese la Cedula</span>:</p>
-                             <input type="text" id="name" name="name" required minlength="4" maxlength="10" size="22"
-                                placeholder="Nombre/Cedula/Ruc"> 
-                            <input type="text" class="form-control mb-2" placeholder="Buscar Orden" #txtSearch
-                                (keyup)="onSearchPokemon( txtSearch.value )" />
-                        </div> -->
+                       
                     </div>
 
-                    <br>
+                   
                     <br>
                     <div class="container">
+                        <a class="btn btn-success" routerLink="/orden/crear" style="margin-right:10px">
+                            Añadir
+                            Nueva Orden</a>
+                            <br>
                         <input type="text" class="form-control mb-2" placeholder="Buscar Orden" 
                         #txtSearch
                         (keyup.enter)="ObetnerParametroPipe()" />

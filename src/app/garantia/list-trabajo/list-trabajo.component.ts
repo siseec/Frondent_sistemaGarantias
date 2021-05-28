@@ -2,7 +2,8 @@ import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { ServidorConexion } from '../../../environments/conexion';
-import { OrdenTrabajoService } from 'app/service/orden-trabajo.service';
+import { OrdenTrabajoService } from '../service/orden-trabajo.service';
+
 
 
 @Component({

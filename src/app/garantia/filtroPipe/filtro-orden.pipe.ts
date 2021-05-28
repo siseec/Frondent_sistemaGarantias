@@ -22,7 +22,7 @@ export class FiltroOrdenPipe implements PipeTransform {
       }
     };
     return this.resultadoOrdenTrabajos;
-
+    
   }
 
 }

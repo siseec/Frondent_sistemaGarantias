@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
@@ -16,6 +16,32 @@ import { CrearDialogoComponent } from '../vista/crear-dialogo/crear-dialogo.comp
 export class CrearOrdenComponent implements OnInit {
 
 
+  // @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtnumeroOrden') txtnumeroOrden!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtnombreEquipo') txtnombreEquipo!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtnumeroSerie') txtnumeroSerie!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtmarca') txtmarca!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtmodelo') txtmodelo!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtobservaciones') txtobservaciones!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('txtnumeroFactura') txtnumeroFactura!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtfecha') txtfecha!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtmontoFactura') txtmontoFactura!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtfechaFactura') txtfechaFactura!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('txtcedula') txtcedula!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtnombres') txtnombres!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtapellidos') txtapellidos!: ElementRef<HTMLInputElement>;
+  @ViewChild('txttelefono') txttelefono!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtdireccion') txtdireccion!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtcorreo') txtcorreo!: ElementRef<HTMLInputElement>;
+
+  @ViewChild('txtpcedula') txtpcedula!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtpnombres') txtpnombres!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtpapellidos') txtpapellidos!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtptelefono') txtptelefono!: ElementRef<HTMLInputElement>;
+  @ViewChild('txtpdireccion') txtpdireccion!: ElementRef<HTMLInputElement>;;
+  @ViewChild('txtpcorreo') txtpcorreo!: ElementRef<HTMLInputElement>;
   // fechas: Date = new Date();
 
   orden: OrdenTrabajo;
@@ -50,8 +76,8 @@ export class CrearOrdenComponent implements OnInit {
   pcorreo: string;
 
   constructor(private http: HttpClient,
-              public dialog: MatDialog
-              ) { }
+    public dialog: MatDialog
+  ) { }
 
 
   ngOnInit(): void {
@@ -65,10 +91,10 @@ export class CrearOrdenComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-     
+
     });
   }
- 
+
 
   addOrdenTrabajo() {
 
@@ -106,7 +132,7 @@ export class CrearOrdenComponent implements OnInit {
         "correo": this.pcorreo
       }
     };
-
+    
     //console.log("miki");
 
     if (this.nombreEquipo == null &&
@@ -121,7 +147,22 @@ export class CrearOrdenComponent implements OnInit {
       this.papellidos == null &&
       this.ptelefono == null &&
       this.pdireccion == null &&
-      this.pcorreo == null) {
+      this.pcorreo == null ||
+
+      this.nombreEquipo == '' ||
+      this.cedula == '' ||
+      this.nombres == '' ||
+      this.apellidos == '' ||
+      this.telefono == '' ||
+      this.direccion == '' ||
+      this.correo == '' ||
+      this.pcedula == '' ||
+      this.pnombres == '' ||
+      this.papellidos == '' ||
+      this.ptelefono == '' ||
+      this.pdireccion == '' ||
+      this.pcorreo == ''
+      ) {
       console.log('no se envio');
     } else {
 
@@ -138,6 +179,7 @@ export class CrearOrdenComponent implements OnInit {
 
       );
     }
+    this.limpiarCampos();
 
   }
 
@@ -165,6 +207,43 @@ export class CrearOrdenComponent implements OnInit {
     });
   }
 
+  limpiarCampos() {
+    //this.txtSearch.nativeElement.value = '';
+
+    this.txtnumeroOrden.nativeElement.value = '';
+    this.txtnumeroOrden.nativeElement.value = '';
+    this.txtnombreEquipo.nativeElement.value = '';
+    this.txtnombreEquipo.nativeElement.value = '';
+    this. txtnumeroSerie.nativeElement.value = '';
+    this. txtnumeroSerie.nativeElement.value = '';
+    this. txtmarca.nativeElement.value = '';
+    this. txtmodelo.nativeElement.value = '';
+    this. txtobservaciones.nativeElement.value = '';
+    this. txtobservaciones.nativeElement.value = '';
+    this. txtnumeroFactura.nativeElement.value = '';
+    this.  txtnumeroFactura.nativeElement.value = '';
+  //  this. txtfecha.nativeElement.value = '';
+    this. txtmontoFactura.nativeElement.value = '';
+    this. txtmontoFactura.nativeElement.value = '';
+ //   this. txtfechaFactura.nativeElement.value = '';
+   // this.  txtfechaFactura.nativeElement.value = '';
+    this.  txtcedula.nativeElement.value = '';
+    this.  txtnombres.nativeElement.value = '';
+    this.  txtapellidos.nativeElement.value = '';
+    this.  txttelefono.nativeElement.value = '';
+    this.  txtdireccion.nativeElement.value = '';
+    this.  txtcorreo.nativeElement.value = '';
+    this.  txtpcedula.nativeElement.value = '';
+    this.  txtpnombres.nativeElement.value = '';
+    this.  txtpapellidos.nativeElement.value = '';
+    this.  txtpapellidos.nativeElement.value = '';
+    this.  txtptelefono.nativeElement.value = '';
+    this.   txtpdireccion.nativeElement.value = '';
+    this.   txtpdireccion.nativeElement.value = '';
+    this.   txtpcorreo.nativeElement.value = '';
+ 
+
+  }
 
 }
 

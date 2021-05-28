@@ -22,13 +22,14 @@
                                 (keyup)="onSearchPokemon( txtSearch.value )" />
                         </div> -->
                     </div>
-                    
+
                     <br>
                     <br>
-                  <div class="container">
-                    <input type="text" class="form-control mb-2" placeholder="Buscar Orden" #txtSearch
-                    (keyup)="onSearchPokemon( txtSearch.value )" />
-                  </div>
+                    <div class="container">
+                        <input type="text" class="form-control mb-2" placeholder="Buscar Orden" 
+                        #txtSearch
+                        (keyup.enter)="ObetnerParametroPipe()" />
+                    </div>
 
                     <div class="card-body">
                         <div class="table-responsive">

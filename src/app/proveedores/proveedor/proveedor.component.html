@@ -77,8 +77,8 @@
                                             {{proveedor.correo}}
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-info"
-                                                onclick="location.href='http://localhost:4200/#/usuario'">Actualizar</button>
+                                            <button type="button" class="btn btn-info" (click)="getProveedor(proveedor)"
+                                            routerLink="/proveedor/actualizar" >Actualizar</button>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-info">Eliminar</button>

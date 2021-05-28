@@ -37,15 +37,17 @@
                 <label>CLiente</label>
                 <div>
                   <mat-form-field class="example-full-width">
-                    <input matInput [(ngModel)]="cedula" placeholder="C.I/RUC" autocomplete="off" required
+                    <input matInput [(ngModel)]="cedula" place 
+                    #txtcedula holder="C.I/RUC" autocomplete="off" required
                       maxlength="10" minlength="10">
                   </mat-form-field>
                 </div>
               </div>
-              
+
               <div class="col-md-7">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="correo" id="correo" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="correo"
+                  #txtcorreo autocomplete="off" required maxlength="20"
                     placeholder="Correo Electronico" type="email">
                 </mat-form-field>
               </div>
@@ -53,14 +55,16 @@
 
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="nombres" autocomplete="off" required maxlength="20" placeholder="Nombre"
+                  <input matInput [(ngModel)]="nombres" auto 
+                  #txtnombres complete="off" required maxlength="20" placeholder="Nombre"
                     type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="apellidos" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="apellidos" au 
+                  #txtapellidos tocomplete="off" required maxlength="20"
                     placeholder="Apellido" type="text">
                 </mat-form-field>
               </div>
@@ -70,7 +74,8 @@
 
               <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="direccion" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="direccion" au 
+                  #txtdireccion tocomplete="off" required maxlength="20"
                     placeholder="Direccion" type="text">
                 </mat-form-field>
               </div>
@@ -78,7 +83,8 @@
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="telefono" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="telefono" aut 
+                  #txttelefono ocomplete="off" required maxlength="20"
                     placeholder="Telefono" type="text">
                 </mat-form-field>
               </div>
@@ -89,33 +95,52 @@
 
             </div>
 
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <label>Numero Orden</label>
+                <mat-form-field class="example-full-width">
+                  <input matInput [(ngModel)]="numeroOrden"  
+                  #txtnumeroOrden autocomplete="off" required maxlength="20"
+                    placeholder="Nombre numeroOrden" type="text">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <br>
+            <br>
             <div class="row">
 
               <div class="col-md-12">
                 <label>Equipo</label>
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="nombreEquipo" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="nombreEquipo" 
+                  #txtnombreEquipo  autocomplete="off" required maxlength="20"
                     placeholder="Nombre Equipo" type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="numeroSerie" autocomplete="off" required maxlength="20"
+                  <input matInput [(ngModel)]="numeroSerie"  
+                  #txtnumeroSerie autocomplete="off" required maxlength="20"
                     placeholder="Num. Serie" type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="modelo" autocomplete="off" required maxlength="20" placeholder="Modelo"
+                  <input matInput [(ngModel)]="modelo"  
+                  #txtmodelo autocomplete="off" required maxlength="20" placeholder="Modelo"
                     type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="marca" autocomplete="off" required maxlength="20" placeholder="Marca"
+                  <input matInput [(ngModel)]="marca"  
+                  #txtmarca autocomplete="off" required maxlength="20" placeholder="Marca"
                     type="text">
                 </mat-form-field>
               </div>
@@ -123,7 +148,8 @@
               <div class="col-md-4">
                 <mat-label>Añios Garantia</mat-label>
                 <mat-form-field class="example-full-width">
-                  <input matInput [(ngModel)]="aniosGarantia" required maxlength="2" type="number">
+                  <input matInput [(ngModel)]="aniosGarantia"
+                   required maxlength="2" type="number">
                 </mat-form-field>
               </div>
 
@@ -131,7 +157,8 @@
               <div class="col-md-12">
                 <label>Observaciones</label>
                 <mat-form-field class="example-full-width">
-                  <textarea matInput [(ngModel)]="observacionesEquipo" autocomplete="off" required maxlength="120"
+                  <textarea matInput [(ngModel)]="observacionesEquipo" 
+                  #txtobservaciones  autocomplete="off" required maxlength="120"
                     matInput></textarea>
                 </mat-form-field>
 
@@ -150,33 +177,36 @@
 
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="numeroFactura" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="numeroFactura"
+                      #txtnumeroFactura autocomplete="off" required maxlength="20"
                         placeholder="#. Factura" type="text">
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="fecha" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="fecha" autoco 
+                      #txtfecha mplete="off" required maxlength="20"
                         placeholder="Fecha Factura" type="text">
                     </mat-form-field>
                   </div>
 
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="montoFactura" autocomplete="off" required maxlength="10"
+                      <input matInput [(ngModel)]="montoFactura" 
+                      #txtmontoFactura  autocomplete="off" required maxlength="10"
                         placeholder="Monto Factura" type="text">
                     </mat-form-field>
                   </div>
                 </div>
               </div>
             </div>
-           
+
             <br>
             <br>
 
             <div class="row">
-             
+
               <div class="col-md-12">
                 <label>Proveedor</label>
 
@@ -190,37 +220,43 @@
                 <div class="row">
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="pcedula" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="pcedula" auto 
+                      #txtpcedula complete="off" required maxlength="20"
                         placeholder="C.I/RUC" type="text">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="pnombres" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="pnombres" aut 
+                      #txtpnombres ocomplete="off" required maxlength="20"
                         placeholder="Nombre" type="text">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="papellidos" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="papellidos" 
+                      #txtpapellidos autocomplete="off" required maxlength="20"
                         placeholder="Apellido" type="text">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="ptelefono" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="ptelefono"  
+                      #txtptelefono autocomplete="off" required maxlength="20"
                         placeholder="Telefono" type="text">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="pdireccion" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="pdireccion" 
+                      #txtpdireccion autocomplete="off" required maxlength="20"
                         placeholder="Direccion" type="text">
                     </mat-form-field>
                   </div>
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput [(ngModel)]="pcorreo" autocomplete="off" required maxlength="20"
+                      <input matInput [(ngModel)]="pcorreo" 
+                      #txtpcorreo autocomplete="off" required maxlength="20"
                         placeholder="Correo" type="text">
                     </mat-form-field>
                   </div>

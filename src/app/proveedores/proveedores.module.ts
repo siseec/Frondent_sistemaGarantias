@@ -7,11 +7,12 @@ import { MaterialModule } from '../material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { ProveedorRoutingModule } from './proveedor-routing.module';
+import { ActualizarProveedorComponent } from './actualizar-proveedor/actualizar-proveedor.component';
 
 
 
 @NgModule({
-  declarations: [NuevoProveedorComponent,ProveedorComponent,FiltradoPipe],
+  declarations: [NuevoProveedorComponent,ProveedorComponent,FiltradoPipe, ActualizarProveedorComponent],
   imports: [
     CommonModule,
     MaterialModule,

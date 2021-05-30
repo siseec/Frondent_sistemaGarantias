@@ -6,6 +6,6 @@ import { Proveedor } from '../model/proveedor-interface';
 })
 export class ProveedorService {
 
-  prov:Proveedor;
+  prov:Proveedor=null;
   constructor() { }
 }

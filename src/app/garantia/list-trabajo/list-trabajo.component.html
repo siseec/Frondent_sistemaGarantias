@@ -18,17 +18,21 @@
 
                    
                     <br>
-                    <div class="container">
-                        <a class="btn btn-success" routerLink="/orden/crear" style="margin-right:10px">
-                            Añadir
-                            Nueva Orden</a>
-                            <br>
-                        <input type="text" class="form-control mb-2" placeholder="Buscar Orden" 
-                        #txtSearch
-                        (keyup.enter)="ObetnerParametroPipe()" />
-                    </div>
+                    
 
                     <div class="card-body">
+
+
+                        <div >
+                            <a class="btn btn-success" routerLink="/orden/crear" style="margin-right:10px">
+                                Añadir
+                                Nueva Orden</a>
+                                <br>
+                            <input type="text" class="form-control mb-2" placeholder="Buscar Orden" 
+                            #txtSearch
+                            (keyup.enter)="ObetnerParametroPipe()" />
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">

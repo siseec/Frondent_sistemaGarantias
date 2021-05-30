@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../model/usuarioInterface';
 import { ServidorConexion } from 'environments/conexion';
+import { UsuarioService } from '../service/usuario.service';
 
 @Component({
   selector: 'app-listar',
@@ -15,7 +16,8 @@ export class ListarComponent implements OnInit {
   public buscar: string = '';
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userservice:UsuarioService) { }
 
   ngOnInit(): void {
     this.listarUsuarios();
@@ -44,6 +46,9 @@ export class ListarComponent implements OnInit {
     this.txtSearch.nativeElement.value = '';
   }
 
+  obtenerOrden(user:Usuario){
+    this.userservice.user=user;
+  }
 
 
 }

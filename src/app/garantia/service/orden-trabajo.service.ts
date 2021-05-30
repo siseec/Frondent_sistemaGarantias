@@ -10,7 +10,7 @@ export class OrdenTrabajoService {
 
   orden:OrdenTrabajo=null;
 
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   
   

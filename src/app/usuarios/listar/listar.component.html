@@ -13,16 +13,15 @@
                     <div class="col-md-12">
                         <a id="btn" class="btn btn-success" routerLink="/usuario/crear" style="margin-right:10px">
                             Añadir Nuevo</a>
+                    </div>
+                   
+                    <br>
+                    <div class="col-md-6">
+                    
 
-
-                        <label id="btn" class=" text-primary" style="margin-left:30px"> Ingrese la Cedula: </label>
-
-                        <!--   <input  type="text" id="name" name="name" required
-                               minlength="4" maxlength="10" size="22" placeholder="nombre/apellido/cedula/ruc">-->
-
-                        <input type="text" id="name" name="name" placeholder="Buscar Usuario" #txtSearch
+                        <input type="text" class="form-control mb-2"  placeholder="Buscar Usuario" #txtSearch
                         (keyup.enter)="ObetnerParametroPipe()" autocomplete="off" minlength="4" maxlength="10" size="22"
-                            placeholder="cedula">
+                            placeholder="Buscar por Cedula">
                     </div>
 
 
@@ -81,10 +80,13 @@
                                         
                                         <td>
                                             <button type="butto" class="btn btn-info"
+                                                class="btn btn-info"
+                                                (click)="obtenerOrden(item)"
                                                 routerLink="/usuario/actualizar">Actualizar</button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-info">Eliminar</button>
+                                            <button type="button" 
+                                            class="btn btn-info">Eliminar</button>
                                         </td>
                                     </tr>
                                 </tbody>

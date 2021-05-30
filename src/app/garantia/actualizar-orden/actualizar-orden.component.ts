@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+import Swal from 'sweetalert2';
+
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { ServidorConexion } from 'environments/conexion';
@@ -53,7 +55,8 @@ export class ActualizarOrdenComponent implements OnInit {
     private http: HttpClient) { }
 
   ngOnInit(): void {
-    if (this.ordeServicio.orden !== null || this.ordeServicio.orden !== undefined || this.ordeServicio.orden.cliente !== undefined) {
+    //if (this.ordeServicio.orden !== null || this.ordeServicio.orden !== undefined || this.ordeServicio.orden.cliente !== undefined) {
+    if (this.ordeServicio.orden != null) {
       this.ordenDetalle = this.ordeServicio.orden;
 
       this.idOrdenTrabajo = this.ordenDetalle.idOrdenTrabajo;
@@ -87,82 +90,88 @@ export class ActualizarOrdenComponent implements OnInit {
       this.ptelefono = this.ordenDetalle.proveedor.telefono;
       this.pdireccion = this.ordenDetalle.proveedor.direccion;
       this.pcorreo = this.ordenDetalle.proveedor.correo;
-
     } else {
-      // this.estadoDetalle = false;
-      this.route.navigateByUrl['/orden/listar'];
+      console.log(this.ordenDetalle);
     }
-    // this.listaOrdenTrabajos.push(this.ordeServicio.orden);
-    console.log("miki")
-    console.log(this.ordenDetalle);
-  }
 
+
+  }
 
 
 
   ActualizarOrdenTrabajo() {
 
+    if (this.idOrdenTrabajo == undefined) {
+      Swal.fire('Error', 'miki error', 'error');
+    } else {
 
-    const userPrueba: OrdenTrabajo =
-    {
-      "idOrdenTrabajo": this.idOrdenTrabajo,
-      "numeroOrden": this.numeroOrden,
-      "nombreEquipo": this.nombreEquipo,
-      "numeroSerie": this.numeroSerie,
-      "marca": this.marca,
-      "modelo": this.modelo,
-      "observacionesEquipo": this.observacionesEquipo,
+      const userPrueba: OrdenTrabajo =
+      {
+        "idOrdenTrabajo": this.idOrdenTrabajo,
+        "numeroOrden": this.numeroOrden,
+        "nombreEquipo": this.nombreEquipo,
+        "numeroSerie": this.numeroSerie,
+        "marca": this.marca,
+        "modelo": this.modelo,
+        "observacionesEquipo": this.observacionesEquipo,
 
-      "fecha": this.fechas,
-      "aniosGarantia": this.aniosGarantia,
-      "numeroFactura": this.numeroFactura,
-      "fechaFactura": this.fechas,
-      "montoFactura": 1590843615000,
-      "estado": "Proceso finalizado",
-      "usuario": {
-        "idUsuario": this.ordenDetalle.usuario.idUsuario
-      },
-      "cliente": {
-        'idCliente': this.idCliente,
-        "cedula": this.cedula,
-        "nombres": this.nombres,
-        "apellidos": this.apellidos,
-        "telefono": this.telefono,
-        "direccion": this.direccion,
-        "correo": this.correo
-      },
-      "proveedor": {
-        "id": this.id,
-        "cedula": this.pcedula,
-        "nombres": this.pnombres,
-        "apellidos": this.papellidos,
-        "telefono": this.ptelefono,
-        "direccion": this.pdireccion,
-        "correo": this.pcorreo
-      }
+        "fecha": this.fechas,
+        "aniosGarantia": this.aniosGarantia,
+        "numeroFactura": this.numeroFactura,
+        "fechaFactura": this.fechas,
+        "montoFactura": this.montoFactura,
+        "estado": "Proceso finalizado",
+        "usuario": {
+          "idUsuario": this.ordenDetalle.usuario.idUsuario
+        },
+        "cliente": {
+          'idCliente': this.idCliente,
+          "cedula": this.cedula,
+          "nombres": this.nombres,
+          "apellidos": this.apellidos,
+          "telefono": this.telefono,
+          "direccion": this.direccion,
+          "correo": this.correo
+        },
+        "proveedor": {
+          "id": this.id,
+          "cedula": this.pcedula,
+          "nombres": this.pnombres,
+          "apellidos": this.papellidos,
+          "telefono": this.ptelefono,
+          "direccion": this.pdireccion,
+          "correo": this.pcorreo
+        }
 
-    };
+      };
 
 
-    this.http.put(ServidorConexion.ip + 'orden/actualizarOrden',
-      userPrueba, {
-             headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
+      this.http.put<any>(ServidorConexion.ip + 'orden/actualizarOrden',
+        userPrueba, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
         }
       }).subscribe(
         data => {
           console.log(data);
-          this.route.navigateByUrl['/orden'];
+          if (data.codigo == 1) {
+            Swal.fire('Actualizacion Completa', data.mensaje, 'success')
+              .then(result => {
+                if (result.value) {
+                  this.route.navigate(['/orden/listar']);
+                }
+              });
+
+          } else {
+            Swal.fire('Error', data.mensaje, 'error');
+          }
+
         }
 
       );
 
-
+    }
   }
 
-
-  cajabox() {
-    console.log(this.estadomiki)
-  }
 
 }

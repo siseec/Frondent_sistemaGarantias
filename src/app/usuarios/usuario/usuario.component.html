@@ -3,78 +3,89 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    
+
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Ingresar Usuarios</h4>
                         <p class="card-category">Complete la informacion a continuacion</p>
                     </div>
-                    
+
                     <div class="card-body">
 
                         <div class="row">
                             <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" minlength="10" maxlength="10" [(ngModel)]="cedula"  placeholder="CI/Ruc:">
+                                    <input matInput 
+                                    autocomplete="off" minlength="10" maxlength="10"
+                                    [(ngModel)]="cedula" #txtcedula
+                                    placeholder="CI/Ruc:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="nombres" placeholder="Nombre:">
-                                </mat-form-field>
-                            </div>
-                            
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="apellidos" placeholder="Apellido:">
+                                    <input matInput 
+                                    autocomplete="off" 
+                                    [(ngModel)]="nombres" #txtnombres
+                                    placeholder="Nombre:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="direccion" placeholder="Direccion:">
+                                    <input matInput autocomplete="off" 
+                                    [(ngModel)]="apellidos" #txtapellidos
+                                    placeholder="Apellido:">
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="telefono" placeholder="Telefono:">
+                                    <input matInput autocomplete="off" 
+                                    [(ngModel)]="direccion" #txtdireccion
+                                    placeholder="Direccion:">
                                 </mat-form-field>
                             </div>
-                            
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput autocomplete="off" 
+                                    [(ngModel)]="telefono" #txttelefono
+                                    placeholder="Telefono:">
+                                </mat-form-field>
+                            </div>
+
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="correo" placeholder="Email:" type="email">
+                                    <input matInput 
+                                    autocomplete="off" 
+                                    [(ngModel)]="correo"  #txtcorreo
+                                    placeholder="Email:"
+                                        type="email">
                                 </mat-form-field>
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" [(ngModel)]="contrasena" placeholder="Contraseña:" type="password">
+                                    <input matInput autocomplete="off" 
+                                    [(ngModel)]="contrasena" #txtcontrasena
+                                    placeholder="Contraseña:" 
+                                    type="password">
                                 </mat-form-field>
                             </div>
                         </div>
+                     <br>
                         <div class="row">
-
-                        </div>
-
-
-                        <div class="row">
-                            <!-- <button mat-raised-button type="submit" class="btn btn-sucess">GUARDAR</button>-->
-
-
-
+                            <div class="col-md-4">
                             <button mat-raised-button (click)="agregarusuario()" class="btn btn-danger pull-right"
-                                onclick="return confirm('Estas seguro de Guardar el registro?');"
-                                style="margin-left:30px">GUARDAR</button>
-
-
-
-
+                               >GUARDAR</button>
+                            </div>
+                                <!-- onclick="return confirm('Estas seguro de Guardar el registro?');" -->
                             <br />
                             <br />
-                          
-                            <button mat-raised-button class="btn btn-danger pull-right"
-                                style="margin-left:30px">Cancelar</button>
+
+                            <div class="col-md-4">
+                                <button mat-raised-button (click)="cancelar()" class="btn btn-primary pull-right">
+                                  Cancelar</button>
+                              </div>
 
                         </div>
                     </div>

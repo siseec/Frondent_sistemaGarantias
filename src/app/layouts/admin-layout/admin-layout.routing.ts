@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+//import { LoginComponent } from 'app/auth/pages/login/login.component';
 
 export const AdminLayoutRoutes: Routes = [
   
@@ -34,6 +35,10 @@ export const AdminLayoutRoutes: Routes = [
   //     { path: 'nuevoProveedor', component: NuevoProveedorComponent },
   //     { path: '**', redirectTo: 'proveedores' },
   //   ]
+  // },
+  // {
+  //   path: 'auth',
+  //   component:LoginComponent 
   // },
 
   { path: '**', redirectTo: 'orden' }

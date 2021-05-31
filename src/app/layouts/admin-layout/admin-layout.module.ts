@@ -14,6 +14,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { GarantiaModule } from '../../garantia/garantia.module';
 import { UsuariosModule } from '../../usuarios/usuarios.module';
 import { ProveedoresModule } from '../../proveedores/proveedores.module';
+import { AuthModule } from '../../auth/auth.module';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ProveedoresModule } from '../../proveedores/proveedores.module';
     
     GarantiaModule,
     UsuariosModule,
-    ProveedoresModule
+    ProveedoresModule,
+    AuthModule
 
   ],
   declarations: [

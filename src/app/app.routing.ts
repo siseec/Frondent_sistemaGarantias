@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 //import { LoginComponent } from './login/login.component';
 import { LoginComponent } from './auth/pages/login/login.component';
+import { ValidarTokenGuard } from './auth/guards/validar-token.guard';
 
 const routes: Routes =[
   // {
@@ -15,7 +16,6 @@ const routes: Routes =[
   // }, 
   {
     path: 'auth',
-    //component:LoginComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: '**', redirectTo: 'login' },
@@ -27,7 +27,9 @@ const routes: Routes =[
     children: [{
       path: '',
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-    }]
+    }],
+    canActivate:[ValidarTokenGuard],
+    canLoad:[ValidarTokenGuard]
   },
  
   {

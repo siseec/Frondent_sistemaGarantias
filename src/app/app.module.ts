@@ -22,6 +22,8 @@ import { GarantiaModule } from './garantia/garantia.module';
 
 
 import { BrowserModule } from '@angular/platform-browser';
+//import { LoginComponent } from './login/login.component';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -36,12 +38,13 @@ import { BrowserModule } from '@angular/platform-browser';
    // GarantiaModule,
    
     AppRoutingModule,
-
+    
   ],
   declarations: [
     AppComponent,
     
     AdminLayoutComponent,
+         
   ],
   providers: [],
   bootstrap: [AppComponent]

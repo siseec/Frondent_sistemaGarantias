@@ -10,35 +10,32 @@ import { ProveedorService } from '../service/proveedor.service';
   selector: 'app-proveedor',
   templateUrl: './proveedor.component.html',
   styleUrls: ['./proveedor.component.css']
-  
+
 })
 export class ProveedorComponent implements OnInit {
 
-  listaProveedores:Proveedor[]=[];
+  listaProveedores: Proveedor[] = [];
   public search: string = '';
 
-  constructor(private http:HttpClient,private serviceProveedor:ProveedorService) { }
+  constructor(private http: HttpClient, private serviceProveedor: ProveedorService) { }
 
   ngOnInit(): void {
     this.listarProveedor();
   }
 
-  listarProveedor(){
-    this.http.get<Proveedor[]>(ServidorConexion.ip+'usuario/listaProveedor').subscribe(data =>{
-      console.log(data);
-      this.listaProveedores=data;
-    })
+  listarProveedor() {
+    this.http.get<Proveedor[]>(ServidorConexion.ip + 'usuario/listaProveedor').subscribe(data => {
+      this.listaProveedores = data;
+    });
   }
 
-  onSearchPokemon( search: string ) {
-    // this.page = 0;
-     this.search = search;
-     console.log(this.search)
-   }
+  filtroProveedor(search: string) {
+    this.search = search;
+  }
 
-   getProveedor( proveedorRecuperado:Proveedor ) {
-   this.serviceProveedor.prov=proveedorRecuperado;
-   }
+  getProveedor(proveedorRecuperado: Proveedor) {
+    this.serviceProveedor.prov = proveedorRecuperado;
+  }
 
 
 }

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './nuevo-proveedor.component.html',
   styleUrls: ['./nuevo-proveedor.component.css']
 })
-export class NuevoProveedorComponent implements OnInit {
+export class NuevoProveedorComponent {
 
   @ViewChild('txtpcedula') txtpcedula!: ElementRef<HTMLInputElement>;
   @ViewChild('txtpnombres') txtpnombres!: ElementRef<HTMLInputElement>;
@@ -28,53 +28,50 @@ export class NuevoProveedorComponent implements OnInit {
   direccion: string;
   correo: string;
 
-  constructor(private http:HttpClient,
-              private router:Router) { }
+  constructor(private http: HttpClient,
+    private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   guardarProveedor() {
     const validacion = this.validarCampos();
     if (validacion) {
       
-    
-    const prove: Proveedor = {
-      "cedula":this.cedula,
-      "nombres":this.nombres,
-      "apellidos": this.apellidos,
-      "telefono": this.telefono,
-      "direccion": this.direccion,
-      "correo": this.correo
-    };
+      const prove: Proveedor = {
+        "cedula": this.cedula,
+        "nombres": this.nombres,
+        "apellidos": this.apellidos,
+        "telefono": this.telefono,
+        "direccion": this.direccion,
+        "correo": this.correo
+      };
 
-    console.log(prove)
+      console.log(prove)
 
-    this.http.post<any>(ServidorConexion.ip+'usuario/guardarProveedor',prove,{
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    }).subscribe(data => {
-      console.log(data);
-      if (data.codigo == 1) {
-        this.limpiarProveedor();
-        Swal.fire('Creacion Correcta', data.mensaje, 'success').
-        then(result => {
-          if (result.value) {
-            this.router.navigate(['/proveedor/proveedores']);
-          }
-        });
-      } else {
-        Swal.fire('Error en la Creacion', data.mensaje, 'warning')
-      }
-  });
+      this.http.post<any>(ServidorConexion.ip + 'usuario/guardarProveedor', prove, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      }).subscribe(data => {
+        console.log(data);
+        if (data.codigo == 1) {
+          this.limpiarProveedor();
+          Swal.fire('Creacion Correcta', data.mensaje, 'success').
+            then(result => {
+              if (result.value) {
+                this.router.navigate(['/proveedor/proveedores']);
+              }
+            });
+        } else {
+          Swal.fire('Error en la Creacion', data.mensaje, 'warning')
+        }
+      });
 
-  } else {
-    Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
+    } else {
+      Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
+    }
   }
-}
 
-  
+
 
   validarCampos() {
     if (

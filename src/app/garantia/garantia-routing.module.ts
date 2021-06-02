@@ -11,15 +11,14 @@ const routes: Routes = [
   {
     path: 'orden',
     children: [
-      //  { path: 'trabajo', component: OrdenTrabajoComponent },
       { path: 'listar', component: ListTrabajoComponent },
       { path: 'crear', component: CrearOrdenComponent },
       { path: 'actualizar', component: ActualizarOrdenComponent },
       { path: 'detalle', component: DetalleOrdenComponent },
       { path: '**', redirectTo: 'listar' },
     ],
-    canActivate:[ValidarTokenGuard],
-    canLoad:[ValidarTokenGuard]
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard]
   },
 ];
 

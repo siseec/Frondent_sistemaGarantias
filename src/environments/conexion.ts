@@ -1,4 +1,4 @@
 export const ServidorConexion = {
-    ip: 'http://localhost:8080/sistema_garantias/rest/'
+    ip: 'http://192.168.0.105:8080/sistema_garantias/rest/'
   };
   

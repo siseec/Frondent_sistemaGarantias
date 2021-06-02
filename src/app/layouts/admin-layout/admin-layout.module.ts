@@ -10,11 +10,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 
-import { AdminLayoutRoutes } from './admin-layout.routing';
 import { GarantiaModule } from '../../garantia/garantia.module';
 import { UsuariosModule } from '../../usuarios/usuarios.module';
 import { ProveedoresModule } from '../../proveedores/proveedores.module';
 import { AuthModule } from '../../auth/auth.module';
+import { ClienteModule } from '../../clientes/cliente.module';
 
 @NgModule({
   imports: [
@@ -33,16 +33,11 @@ import { AuthModule } from '../../auth/auth.module';
     GarantiaModule,
     UsuariosModule,
     ProveedoresModule,
-    AuthModule
+    AuthModule,
+    ClienteModule
 
   ],
-  declarations: [
-  
-    //IconsComponent,
-    
-  //  NotificationsComponent,
-
-  ],
+  declarations: [],
   exports:[
     FormsModule,
     ReactiveFormsModule,

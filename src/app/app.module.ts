@@ -7,23 +7,10 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-
 import { AppComponent } from './app.component';
-
-//import { UserProfileComponent } from './user-profile/user-profile.component';
-//import { TableListComponent } from './table-list/table-list.component';
-//import { TypographyComponent } from './typography/typography.component';
-//import { IconsComponent } from './icons/icons.component';
-//import { NotificationsComponent } from './notifications/notifications.component';
 //import {  AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { GarantiaModule } from './garantia/garantia.module';
-
-
-
 import { BrowserModule } from '@angular/platform-browser';
-//import { LoginComponent } from './login/login.component';
-import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -35,16 +22,11 @@ import { AuthModule } from './auth/auth.module';
     ComponentsModule,
     RouterModule,
     BrowserModule,
-   // GarantiaModule,
-   
-    AppRoutingModule,
-    
+    AppRoutingModule,    
   ],
   declarations: [
-    AppComponent,
-    
-    AdminLayoutComponent,
-         
+    AppComponent,    
+    AdminLayoutComponent,         
   ],
   providers: [],
   bootstrap: [AppComponent]

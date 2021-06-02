@@ -17,7 +17,7 @@ export class ListarComponent implements OnInit {
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
 
   constructor(private http: HttpClient,
-              private userservice:UsuarioService) { }
+    private userservice: UsuarioService) { }
 
   ngOnInit(): void {
     this.listarUsuarios();
@@ -27,7 +27,6 @@ export class ListarComponent implements OnInit {
   listarUsuarios() {
     this.http.get<Usuario[]>(ServidorConexion.ip + 'usuario/listaUsuario').subscribe(
       data => {
-        console.log(data);
         this.UsuarioLista = data;
       }
     );
@@ -46,8 +45,8 @@ export class ListarComponent implements OnInit {
     this.txtSearch.nativeElement.value = '';
   }
 
-  obtenerOrden(user:Usuario){
-    this.userservice.user=user;
+  obtenerOrden(user: Usuario) {
+    this.userservice.user = user;
   }
 
 

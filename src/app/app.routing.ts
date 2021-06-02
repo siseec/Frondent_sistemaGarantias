@@ -8,7 +8,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './auth/pages/login/login.component';
 import { ValidarTokenGuard } from './auth/guards/validar-token.guard';
 
-const routes: Routes =[
+const routes: Routes = [
   // {
   //   path: '',
   //   redirectTo: 'orden',
@@ -28,10 +28,10 @@ const routes: Routes =[
       path: '',
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
     }],
-    canActivate:[ValidarTokenGuard],
-    canLoad:[ValidarTokenGuard]
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard]
   },
- 
+
   {
     path: '**',
     redirectTo: 'orden'
@@ -41,8 +41,8 @@ const routes: Routes =[
 
 @NgModule({
   imports: [
-  //  CommonModule,
-   // BrowserModule,
+    //  CommonModule,
+    // BrowserModule,
     RouterModule.forRoot(routes)
     // { relativeLinkResolution: 'legacy' }
   ],

@@ -8,20 +8,22 @@ export class FiltradoPipe implements PipeTransform {
 
   Proveedores: Proveedor[] = [];
 
-  transform(lista1: Proveedor[], search: string): Proveedor[] {
-    if (search.length === 0) {
- return lista1;
-    }
-   
-
-    for (const prov of lista1) {
-
-      if(prov.cedula ==search){
-        this.Proveedores.push(prov);
-      }
-
+  transform(listaProveedor: Proveedor[], buscar: string): Proveedor[] {
+    if (buscar.length === 0) {
+      return listaProveedor;
     }
 
-    return this.Proveedores;
+
+    const filteredUsuario = listaProveedor.filter(proveedor => proveedor.cedula.trim().toLowerCase().includes(buscar.trim().toLocaleLowerCase()));
+    return filteredUsuario;
+    // for (const prov of lista1) {
+
+    //   if (prov.cedula == search) {
+    //     this.Proveedores.push(prov);
+    //   }
+
+    // }
+
+    // return this.Proveedores;
   }
 }

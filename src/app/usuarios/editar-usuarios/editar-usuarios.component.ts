@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../model/usuarioInterface';
 import { UsuarioService } from '../service/usuario.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-usuarios',
@@ -18,10 +19,11 @@ export class EditarUsuariosComponent implements OnInit {
   correo: string;
   contrasena: string;
   
-
   usuarionuevo:Usuario=null;
 
-  constructor(private userservice: UsuarioService) { }
+  constructor(private userservice: UsuarioService,
+              private actualizarService:UsuarioService,
+              private router:Router) { }
 
   ngOnInit(): void {
    
@@ -53,10 +55,24 @@ export class EditarUsuariosComponent implements OnInit {
         "direccion": this.direccion,
         "correo": this.correo,
         "contrasena": this.contrasena
-      }
-      console.log(usuario);
+      };
 
+      this.actualizarService.actualizarUsuario(usuario).subscribe(
+        data =>{
+          if (data.codigo == 1) {
+            Swal.fire('Actualizacion Completa', data.mensaje, 'success')
+              .then(result => {
+                if (result.value) {
+                  this.router.navigate(['/usuario/listar']);
+                }
+              });
+
+          } else {
+            Swal.fire('Error', data.mensaje, 'error');
+          }
+        });
     }
+    
   }
 
 

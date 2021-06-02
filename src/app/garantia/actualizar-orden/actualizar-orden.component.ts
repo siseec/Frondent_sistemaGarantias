@@ -102,7 +102,7 @@ export class ActualizarOrdenComponent implements OnInit {
   ActualizarOrdenTrabajo() {
 
     if (this.idOrdenTrabajo == undefined) {
-      Swal.fire('Error', 'miki error', 'error');
+      Swal.fire('Error', 'Sin Valores', 'error');
     } else {
 
       const userPrueba: OrdenTrabajo =

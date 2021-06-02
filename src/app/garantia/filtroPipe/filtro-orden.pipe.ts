@@ -19,18 +19,6 @@ export class FiltroOrdenPipe implements PipeTransform {
                                             );
     return filteredOrdenes;
 
-    // for (const ord of ordenes) {
-      
-    //   if (ord.numeroSerie.trim().toLowerCase() == search.trim().toLowerCase() || 
-    //       ord.cliente.nombres.trim().toLowerCase() == search.trim().toLowerCase()||
-    //       ord.nombreEquipo.trim().toLowerCase() == search.trim().toLowerCase()) {
-    //     this.resultadoOrdenTrabajos.unshift(ord);
-    //   }
-    // };
-   
-  // return [...this.resultadoOrdenTrabajos];
-   // this.resultadoOrdenTrabajos= [];
-    
   }
 
 }

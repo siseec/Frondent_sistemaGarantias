@@ -1,41 +1,42 @@
 <div class="main-content">
+
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Tabla Proveedores</h4>
-                        <p class="card-category"> Aqui tiene disponible la informacion de los proveedores </p>
+                        <h4 class="card-title ">Clientes</h4>
 
                     </div>
 
                     <div class="card-body">
-                        <h1 class="h1"></h1>
-
                         <div>
+                            <a class="btn btn-success" routerLink="/cliente/nuevo" style="margin-right:10px">
 
-                            <a class="btn btn-success" routerLink="/proveedor/nuevoProveedor" style="margin-right:10px">
-                                Añadir
-                                Nuevo</a>
+                                Nuevo Cliente</a>
                             <br>
-                            <br>
-
-                            <input type="text" class="form-control mb-2" placeholder="Buscar por cedula" #txtSearch
-                                (keyup)="filtroProveedor(txtSearch.value)" />
+                            <input type="text" class="form-control mb-2" placeholder="Buscar por Cedula"
+                                (keyup.enter)="ObetnerParametroPipe()" #txtSearch />
 
                         </div>
 
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
+
                                     <th>
-                                        ID/RUC
+                                        Cedula
                                     </th>
                                     <th>
-                                        Nombre
+                                        Nombres
                                     </th>
                                     <th>
-                                        Apellido
+                                        Apellidos
+                                    </th>
+                                    <th>
+                                        Correo
                                     </th>
                                     <th>
                                         Direccion
@@ -44,56 +45,49 @@
                                         Telefono
                                     </th>
 
+                                    <th>
+                                        Accion
+                                    </th>
 
-                                    <th>
-                                        Email
-                                    </th>
-                                    <th>
-                                        Acciones
-                                    </th>
                                 </thead>
+                                <!-- filtroOrden:search -->
                                 <tbody>
-                                    <tr *ngFor="let proveedor of listaProveedores |filtrado:search">
+                                    <tr *ngFor="let item of Clientes | filtroCliente :buscar">
                                         <td>
-                                            {{proveedor.cedula}}
-                                        </td>
-                                        <td>
-                                            {{proveedor.nombres}}
-                                        </td>
-                                        <td>
-                                            {{proveedor.apellidos}}
-                                        </td>
-                                        <td>
-                                            {{proveedor.direccion}}
-                                        </td>
-                                        <td class="text-primary">
-                                            {{proveedor.telefono}}
-                                        </td>
-
-                                        <td>
-                                            {{proveedor.correo}}
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info" (click)="getProveedor(proveedor)"
-                                                routerLink="/proveedor/actualizar">Actualizar</button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-info">Eliminar</button>
-
+                                            {{item.cedula}}
 
                                         </td>
 
+                                        <td>
+                                            {{item?.nombres}}
+
+                                        </td>
+                                        <td>
+                                            {{item?.apellidos}}
+                                        </td>
+                                        <td>
+                                            {{item?.correo}}
+                                        </td>
+                                        <td>
+                                            {{item.direccion}}
+                                        </td>
+                                        <td>
+                                            {{item?.telefono}}
+                                        </td>
+
+                                        <td>
+                                            <button routerLink="/cliente/actualizar" class="btn btn-info"
+                                                (click)="obtenerCliente(item)" color="primary">Actualizar</button>
+
+                                        </td>
                                     </tr>
-
-
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 </div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-//import { Ordenes, Detalle } from '../model/DetalleOrden-interface';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { OrdenTrabajo, Detalle, Ordenes, Cliente } from '../model/OrdenTrabajo';
 import { ServidorConexion } from '../../../environments/conexion';
@@ -17,7 +16,7 @@ export class DetalleOrdenComponent implements OnInit {
 
   ordenDetalle: OrdenTrabajo;
   detalles: Detalle[] = [];
-  cliente:Cliente;
+  cliente: Cliente;
   id: number;
   myimage: Observable<any>;
 
@@ -36,11 +35,11 @@ export class DetalleOrdenComponent implements OnInit {
 
   listarDetalles() {
     this.http.get<any>(ServidorConexion.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
-       console.log(data);
+      console.log(data);
       this.ordenDetalle = data.orden;
-      this.cliente=data.orden.cliente;
+      this.cliente = data.orden.cliente;
       this.detalles = data.detalles;
-    //  this.myimage=data.detalles
+      //  this.myimage=data.detalles
     });
   }
 

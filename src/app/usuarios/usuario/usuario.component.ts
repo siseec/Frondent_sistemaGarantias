@@ -30,55 +30,50 @@ export class UsuarioComponent {
   @ViewChild('txtcontrasena') txtcontrasena!: ElementRef<HTMLInputElement>;
 
   constructor(private http: HttpClient,
-              private router:Router) { }
+    private router: Router) { }
 
 
 
   agregarusuario() {
     const validacion = this.validarCamposCliente();
-  //  console.log(validacion);
-    if ( validacion ) {
-      
-    
-    const usuarioEnvio: Usuario = {
-      "cedula": this.cedula,
-      "nombres": this.nombres,
-      "apellidos": this.apellidos,
-      "telefono": this.telefono,
-      "direccion": this.direccion,
-      "correo": this.correo,
-      "contrasena": this.contrasena
+    if (validacion) {
+
+      const usuarioEnvio: Usuario = {
+        "cedula": this.cedula,
+        "nombres": this.nombres,
+        "apellidos": this.apellidos,
+        "telefono": this.telefono,
+        "direccion": this.direccion,
+        "correo": this.correo,
+        "contrasena": this.contrasena
+      };
+
+      this.http.post<any>(ServidorConexion.ip + 'usuario/guardarUsuario', usuarioEnvio, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      }).subscribe(data => {
+        if (data.codigo == 1) {
+
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Creacion Correcta',
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          this.router.navigate(['/usuario/listar']);
+
+        } else {
+          Swal.fire('Error en la Creacion', data.mensaje, 'warning');
+          this.limpiarCliente();
+        }
+      });
+
+    } else {
+      Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
     }
-
-    this.http.post<any>(ServidorConexion.ip + 'usuario/guardarUsuario', usuarioEnvio, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    }).subscribe(data => {
-      if (data.codigo == 1) {
-        console.log(data);
-        // Swal.fire('Creacion Correcta', data.mensaje , 'success');
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Creacion Correcta',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.router.navigate(['/usuario/listar']);
-        
-
-      } else {
-       // console.log(data);
-        Swal.fire('Error en la Creacion', data.mensaje , 'warning');
-        this.limpiarCliente();
-      }
-    });
-
-  } else {
-    Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
-  }
-
 
   }
 
@@ -91,29 +86,28 @@ export class UsuarioComponent {
     this.txtdireccion.nativeElement.value = '';
     this.txtcorreo.nativeElement.value = '';
     this.txtcontrasena.nativeElement.value = '';
-     
+
   }
 
   validarCamposCliente() {
-    if (this.txtcedula.nativeElement.value     == ''||
-        this.txtcedula.nativeElement.value     == undefined||
-        this.txtnombres.nativeElement.value    == ''||
-        this.txtnombres.nativeElement.value    == undefined||
-        this.txtapellidos.nativeElement.value  == ''||
-        this.txtapellidos.nativeElement.value  == undefined||
-        this.txttelefono.nativeElement.value   ==''||
-        this.txttelefono.nativeElement.value   ==undefined||
-        this.txtdireccion.nativeElement.value  == ''||
-        this.txtdireccion.nativeElement.value  == undefined||
-        this.txtcorreo.nativeElement.value     == ''||
-        this.txtcorreo.nativeElement.value     == undefined||
-        this.txtcontrasena.nativeElement.value == ''||
-        this.txtcontrasena.nativeElement.value == undefined) 
-        {
-          return false;
-        } else {
-          return true;
-      } 
+    if (this.txtcedula.nativeElement.value == '' ||
+      this.txtcedula.nativeElement.value == undefined ||
+      this.txtnombres.nativeElement.value == '' ||
+      this.txtnombres.nativeElement.value == undefined ||
+      this.txtapellidos.nativeElement.value == '' ||
+      this.txtapellidos.nativeElement.value == undefined ||
+      this.txttelefono.nativeElement.value == '' ||
+      this.txttelefono.nativeElement.value == undefined ||
+      this.txtdireccion.nativeElement.value == '' ||
+      this.txtdireccion.nativeElement.value == undefined ||
+      this.txtcorreo.nativeElement.value == '' ||
+      this.txtcorreo.nativeElement.value == undefined ||
+      this.txtcontrasena.nativeElement.value == '' ||
+      this.txtcontrasena.nativeElement.value == undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   cancelar() {

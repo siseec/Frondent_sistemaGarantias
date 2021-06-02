@@ -29,7 +29,7 @@ export class ActualizarProveedorComponent implements OnInit {
     private service: ProveedorService) { }
 
   ngOnInit(): void {
-    if (this.service.prov !=null) {
+    if (this.service.prov != null) {
       this.id = this.service.prov.id;
       this.cedula = this.service.prov.cedula;
       this.nombres = this.service.prov.nombres;
@@ -38,51 +38,51 @@ export class ActualizarProveedorComponent implements OnInit {
       this.direccion = this.service.prov.direccion;
       this.correo = this.service.prov.correo;
     } else {
-      console.log(this.id)
+      
     }
-   
 
-   
+
+
   }
 
   actualizarProveedor() {
-     if (this.id==undefined) {
-      Swal.fire('Error', 'miki error', 'error');
+    if (this.id == undefined) {
+      Swal.fire('Error', 'No se pudo Actualizar', 'error');
     } else {
-      
-   
-    const prove: Proveedor = {
-      "id": this.id,
-      "cedula": this.cedula,
-      "nombres": this.nombres,
-      "apellidos": this.apellidos,
-      "telefono": this.telefono,
-      "direccion": this.direccion,
-      "correo": this.correo
-    };
 
-    this.http.put<any>(ServidorConexion.ip + 'usuario/actualizarProveedor',
-      prove,
-      {
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8'
-        }
-      }).subscribe(
-        data => {
-          console.log(data);
-          if (data.codigo==1) {   
-             Swal.fire('Actualizacion Completa', data.mensaje, 'success')
-             .then(result => {
-               if (result.value) {
-                 this.route.navigate(['/proveedor/proveedores']);
-               }
-             });
 
-          }else{
-            Swal.fire('Error', data.mensaje, 'error');
+      const prove: Proveedor = {
+        "id": this.id,
+        "cedula": this.cedula,
+        "nombres": this.nombres,
+        "apellidos": this.apellidos,
+        "telefono": this.telefono,
+        "direccion": this.direccion,
+        "correo": this.correo
+      };
+
+      this.http.put<any>(ServidorConexion.ip + 'usuario/actualizarProveedor',
+        prove,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
           }
-         
-        });
+        }).subscribe(
+          data => {
+            
+            if (data.codigo == 1) {
+              Swal.fire('Actualizacion Completa', data.mensaje, 'success')
+                .then(result => {
+                  if (result.value) {
+                    this.route.navigate(['/proveedor/proveedores']);
+                  }
+                });
+
+            } else {
+              Swal.fire('Error', data.mensaje, 'error');
+            }
+
+          });
     }
   }
 

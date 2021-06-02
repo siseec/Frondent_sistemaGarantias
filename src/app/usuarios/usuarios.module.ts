@@ -21,16 +21,14 @@ import { MatCardModule } from '@angular/material/card';
   declarations: [UsuarioComponent,ListarComponent,
     EditarUsuariosComponent,FiltroUsuariosPipe],
   imports: [
-    CommonModule,
-   LayoutModule,
-   RouterModule,
+  CommonModule,
+  LayoutModule,
+  RouterModule,
 
-   MaterialModule,
-   MatCardModule,
-   MatDialogModule,
-
-    UsuarioRoutingModule
-
+  MaterialModule,
+  MatCardModule,
+  MatDialogModule,
+  UsuarioRoutingModule
   ]
 })
 export class UsuariosModule { }

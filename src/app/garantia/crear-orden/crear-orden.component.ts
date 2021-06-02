@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { MatDialog } from '@angular/material/dialog';
-
-
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
 import { ServidorConexion } from 'environments/conexion';
+
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -70,7 +68,7 @@ export class CrearOrdenComponent {
   pcorreo: string;
 
   constructor(private http: HttpClient,
-              private router: Router) { }
+    private router: Router) { }
 
 
 
@@ -121,13 +119,12 @@ export class CrearOrdenComponent {
         }
       }).subscribe(
         data => {
-          console.log(data);
           if (data.codigo == 1) {
             Swal.fire('Creacion Correcta', 'Su Orden fue Ingresada', 'success')
           } else {
             Swal.fire('Error en la Creacion', 'Su Orden no fue Ingresada', 'warning')
           }
-      });
+        });
     }
     this.limpiarCampos();
 
@@ -139,17 +136,17 @@ export class CrearOrdenComponent {
     if (valor != null || valor.trim() != '') {
       this.http.get<Cliente>(ServidorConexion.ip + 'usuario/clienteCedula?cedula=' + valor).subscribe(data => {
         if (data != null) {
-        // this.cedula = data.cedula;
-        this.nombres = data.nombres;
-        this.apellidos = data.apellidos;
-        this.telefono = data.telefono;
-        this.direccion = data.direccion;
-        this.correo = data.correo;
-        }else{
+          // this.cedula = data.cedula;
+          this.nombres = data.nombres;
+          this.apellidos = data.apellidos;
+          this.telefono = data.telefono;
+          this.direccion = data.direccion;
+          this.correo = data.correo;
+        } else {
           Swal.fire('No existe el Cliente');
-          this.limpiarCliente(); 
+          this.limpiarCliente();
         }
-        
+
       });
     } else {
       console.log('no hay valor')

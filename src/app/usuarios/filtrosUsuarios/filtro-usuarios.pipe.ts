@@ -11,20 +11,11 @@ export class FiltroUsuariosPipe implements PipeTransform {
   transform(ArregloUsuario: Usuario[], buscar: string = ''): Usuario[] {
     if (buscar.length === 0) {
       return ArregloUsuario;
-
     }
 
-    // for (const usr of ArregloUsuario) {
-
-    //   if (usr.cedula == buscar) {
-    //     this.ListaUsuario.push(usr);
-
-    //   }
-    // }
-    // return this.ListaUsuario;
     const filteredUsuario = ArregloUsuario.filter(usuario => usuario.cedula.trim().toLowerCase().includes(buscar.trim().toLocaleLowerCase()));
     return filteredUsuario;
-
+    
   }
 
 }

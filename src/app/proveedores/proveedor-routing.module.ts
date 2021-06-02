@@ -11,15 +11,13 @@ const routes: Routes = [
     {
         path: 'proveedor',
         children: [
-            //  { path: 'trabajo', component: OrdenTrabajoComponent },
-
             { path: 'proveedores', component: ProveedorComponent },
             { path: 'nuevoProveedor', component: NuevoProveedorComponent },
             { path: 'actualizar', component: ActualizarProveedorComponent },
             { path: '**', redirectTo: 'proveedores' },
         ],
-        canActivate:[ValidarTokenGuard],
-        canLoad:[ValidarTokenGuard]
+        canActivate: [ValidarTokenGuard],
+        canLoad: [ValidarTokenGuard]
     },
 
 ];

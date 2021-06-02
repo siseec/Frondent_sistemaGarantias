@@ -5,6 +5,7 @@ import { ListTrabajoComponent } from './list-trabajo/list-trabajo.component';
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
 import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';
 import { CrearOrdenComponent } from './crear-orden/crear-orden.component';
+import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +17,9 @@ const routes: Routes = [
       { path: 'actualizar', component: ActualizarOrdenComponent },
       { path: 'detalle', component: DetalleOrdenComponent },
       { path: '**', redirectTo: 'listar' },
-    ]
+    ],
+    canActivate:[ValidarTokenGuard],
+    canLoad:[ValidarTokenGuard]
   },
 ];
 

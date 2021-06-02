@@ -19,7 +19,7 @@ import { AuthModule } from '../../auth/auth.module';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+  //  RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -29,7 +29,7 @@ import { AuthModule } from '../../auth/auth.module';
     MatSelectModule,
     MatTooltipModule,
     
-    
+    RouterModule,
     GarantiaModule,
     UsuariosModule,
     ProveedoresModule,

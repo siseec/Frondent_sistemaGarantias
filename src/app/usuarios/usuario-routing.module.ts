@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditarUsuariosComponent } from './editar-usuarios/editar-usuarios.component';
 import { ListarComponent } from './listar/listar.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
 
 
 
@@ -16,7 +17,9 @@ const routes: Routes = [
           { path: 'crear', component: UsuarioComponent },
           { path: 'actualizar', component: EditarUsuariosComponent },
           { path: '**', redirectTo: 'listar' },
-        ]
+        ],
+        canActivate:[ValidarTokenGuard],
+        canLoad:[ValidarTokenGuard]
       },
 ];
 

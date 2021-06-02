@@ -30,7 +30,7 @@ export class LoginComponent {
     const pass = this.txtpassword.nativeElement.value;
     this.auth.login(correos, pass).subscribe(
       ok => {
-        console.log(ok);
+        //console.log(ok);
         if (ok === true) {
 
           this.router.navigate(['/orden/listar']);

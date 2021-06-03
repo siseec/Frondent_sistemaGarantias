@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OrdenTrabajoComponent } from './orden-trabajo/orden-trabajo.component';
+//import { OrdenTrabajoComponent } from './orden-trabajo/orden-trabajo.component';
 import { ListTrabajoComponent } from './list-trabajo/list-trabajo.component';
 import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.component';
 import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';

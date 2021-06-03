@@ -1,0 +1,87 @@
+<!-- <form [formGroup]="newPostForm" >
+
+  <mat-form-field>
+    <mat-label m-r-195>Descripcion</mat-label>
+    <input matInput mat-flat-button placeholder="Descripcion" formControlName="titlePost">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ubicacion</mat-label>
+    <input matInput mat-flat-button placeholder="Ubicacion" formControlName="contentPost">
+  </mat-form-field>
+
+  <br>
+
+  <div>
+    <label class="custom-file">
+      <input type="file" formControlName="imagePost" />
+      <br>
+      <mat-icon>cloud_upload</mat-icon><span style="text-align: justify;">CHOOSE IMAGE</span>
+    </label>
+  </div>
+
+  <br>
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <button mat-button mat-flat-button color="accent" style="display: block; width: 100%;"
+        (click)="addNewPost()">ok</button>
+    </div>
+
+    <div class="col">
+      <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;" 
+      (click)="cancelar()"
+      >No
+        Thanks</button>
+    </div>
+  </div>
+
+</form> -->
+
+
+<form [formGroup]="newPostForm" >
+  <mat-form-field>
+    <mat-label m-r-195>Descripcion</mat-label>
+    <input matInput mat-flat-button autocomplete="off" placeholder="Descripcion" formControlName="Descripcion">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ubicacion</mat-label>
+    <input matInput mat-flat-button autocomplete="off" placeholder="Ubicacion" formControlName="Ubicacion">
+  </mat-form-field>
+  <hr>
+
+  <div class="row" >
+    <div class="col">
+      <h3>Elejir Imagen</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <input class="input-file" (change)="capturarFile($event)" type="file">
+    </div>
+    </div>
+    <div class="row">
+    <div class="preview-img" *ngIf="previsualizacion">
+      <!-- <button class="clear-image" type="button" (click)="clearImage()">Clear</button> -->
+      <img style="height: '400px';
+      width: '400px'," [src]="previsualizacion" alt="">
+    </div>
+  </div>
+  
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <button mat-button mat-flat-button color="accent" style="display: block; width: 100%;"
+        (click)="guardarDetalle()">Guardar</button>
+    </div>
+
+    <div class="col">
+      <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;" 
+      (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+
+</form>

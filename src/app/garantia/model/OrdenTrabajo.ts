@@ -4,11 +4,12 @@ export interface Ordenes {
 }
 
 export interface Detalle {
-    idEstado:    number;
-    fecha:       number;
-    nombre:      string;
-    descripcion: string;
-    imagen:      string;
+    idEstado?:    number;
+    fecha?:       number;
+    ubicacion?:      string;
+    descripcion?: string;
+    imagen?:      string;
+    idOrdenTrabajo?: string
 }
 
 export interface OrdenTrabajo {

@@ -285,5 +285,8 @@ export class CrearOrdenComponent {
     this.txtpdireccion.nativeElement.value = '';
     this.txtpcorreo.nativeElement.value = '';
   }
+
+
+  
 }
 

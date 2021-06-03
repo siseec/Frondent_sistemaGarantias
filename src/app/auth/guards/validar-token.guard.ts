@@ -14,27 +14,28 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
     private router: Router) { }
 
   canActivate(): Observable<boolean> | boolean {
-   // console.log('canActivate');
-    return this.auth.validarToken()
-      .pipe(
-        tap(valido => {
-        // console.log(valido);
-          if (!valido) {
+    return true;
+    // return this.auth.validarToken()
+    //   .pipe(
+    //     tap(valido => {
+    //     // console.log(valido);
+    //       if (!valido) {
             
-            this.router.navigateByUrl('/auth/login');
-          }
-        })
-      );
+    //         this.router.navigateByUrl('/auth/login');
+    //       }
+    //     })
+    //   );
   }
   canLoad(): Observable<boolean> | boolean {
-   // console.log('canLoad');
-    return this.auth.validarToken()
-      .pipe(
-        tap(valido => {
-          if (!valido) {
-            this.router.navigateByUrl('/auth/login');
-          }
-        })
-      );;
+   
+    return true;
+    // return this.auth.validarToken()
+    //   .pipe(
+    //     tap(valido => {
+    //       if (!valido) {
+    //         this.router.navigateByUrl('/auth/login');
+    //       }
+    //     })
+    //   );
   }
 }

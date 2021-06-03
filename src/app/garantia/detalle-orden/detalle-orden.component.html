@@ -20,7 +20,7 @@
               </div>
 
               <div class="col-md-4">
-                <button mat-raised-button routerLink='/orden/' class="btn btn-danger pull-right">
+                <button mat-raised-button (click)="openDialog()" class="btn btn-danger pull-right">
                   Regresar</button>
 
               </div>
@@ -246,18 +246,24 @@
                     Fecha
                   </th>
                   <th>
-                    Nombre
+                    Descripcion
                   </th>
                   <th>
-                    Descripcion
+                    Ubicacion
+                  </th>
+                  <th>
+                    Imagen
+                  </th>
+                  <th>
+                    Accion
                   </th>
 
 
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of detalles;index as i ">
+                  <tr *ngFor="let item of detalles">
                     <td>
-                      {{i}}
+                      {{item.idEstado}}
                     </td>
                     <td>
                       {{item?.fecha | date:'shortDate'}}
@@ -265,22 +271,30 @@
                     </td>
 
                     <td>
-                      {{item?.nombre}}
+                      {{item?.descripcion}}
 
                     </td>
 
                     <td>
-                      {{item?.descripcion}}
+                      {{item?.ubicacion}}
                     </td>
                     <td >
-                      
-                        <!-- <img [src]="item?.imagen | async" width="200px" height="200px" alt="" /> -->
+
+                      <img [src]="item.imagen" width="200px" height="200px" alt="" />
+                     
+                    </td>
+                    <td>
+
+                      <button (click)="openDialog()" mat-fab color="primary">
+                        <mat-icon>note_add</mat-icon>
+                      </button>
                       
                     </td>
 
                   </tr>
                 </tbody>
               </table>
+              <!-- <img  [src]="previsualizacion" alt=""> -->
             </div>
           </div>
         </div>

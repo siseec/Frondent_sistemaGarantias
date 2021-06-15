@@ -42,6 +42,7 @@ export class ListTrabajoComponent implements OnInit {
 
   obtenerOrden(orden: OrdenTrabajo) {
     this.ordeServicio.orden = orden;
+    this.ordeServicio.IDorden=orden.idOrdenTrabajo;
   }
 
 }

@@ -18,6 +18,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NuevoDetalleComponent } from './vista/nuevo-detalle/nuevo-detalle.component';
+import { MenuSISEECComponent } from './menu-siseec/menu-siseec.component';
+import {MatIconModule} from '@angular/material/icon';
+import { CambioProductoComponent } from './cambio-producto/cambio-producto.component';
+
 
 //import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
 
@@ -31,12 +35,13 @@ import { NuevoDetalleComponent } from './vista/nuevo-detalle/nuevo-detalle.compo
     ActualizarOrdenComponent, 
     FiltroOrdenPipe, 
    // CrearDialogoComponent,
-    DetalleOrdenComponent, NuevoDetalleComponent],
+    DetalleOrdenComponent, NuevoDetalleComponent, MenuSISEECComponent, CambioProductoComponent],
   imports: [
     CommonModule,
     GarantiaRoutingModule,
     LayoutModule,
     RouterModule,
+    MatIconModule,
 
     MatDatepickerModule,
     MatNativeDateModule,

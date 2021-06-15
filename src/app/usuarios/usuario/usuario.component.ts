@@ -1,10 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { ServidorConexion } from 'environments/conexion';
-import { Usuario } from '../model/usuarioInterface';
 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { nombreApellidoPattern } from '../../../app/validator/Validaciones';
+import { emailPattern, validarPassword } from '../../validator/Validaciones';
+import { ValidacionesService } from '../../validator/validaciones.service';
+import { Usuario } from '../model/usuarioInterface';
+import { HttpClient } from '@angular/common/http';
+import { ServidorConexion } from '../../../environments/conexion';
+//import { ServidorConexion } from 'src/environments/conexion';
 
 @Component({
   selector: 'app-usuario',
@@ -13,39 +18,43 @@ import { Router } from '@angular/router';
 })
 export class UsuarioComponent {
 
-  cedula: string;
-  nombres: string;
-  apellidos: string;
-  telefono: string;
-  direccion: string;
-  correo: string;
-  contrasena: string;
 
-  @ViewChild('txtcedula') txtcedula!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtnombres') txtnombres!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtapellidos') txtapellidos!: ElementRef<HTMLInputElement>;
-  @ViewChild('txttelefono') txttelefono!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtdireccion') txtdireccion!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtcorreo') txtcorreo!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtcontrasena') txtcontrasena!: ElementRef<HTMLInputElement>;
+  formularioUsuario: FormGroup = this.fb.group({
+    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula] ],
+    nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15), Validators.required]],
+    direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    correo: ['', [Validators.required, Validators.pattern(emailPattern)]],
+    password: ['', [Validators.required, Validators.pattern(validarPassword)]],
+    password2: ['', [Validators.required]],},
+    {validators: [this.validadiionesService.camposIguales('password', 'password2')]});
 
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private fb: FormBuilder,
+    private validadiionesService: ValidacionesService) { }
 
 
 
   agregarusuario() {
-    const validacion = this.validarCamposCliente();
-    if (validacion) {
+    if (this.formularioUsuario.invalid) {
+      Swal.fire('Error en la Creacion', "Campos Vacios", 'error');
+    } else {
+     // console.log(this.formularioUsuario.value);
+
+      //   const validacion = this.validarCamposCliente();
+      //   if (validacion) {
+      const { cedula, nombres, apellidos, telefono, direccion, correo, password } = this.formularioUsuario.value;
 
       const usuarioEnvio: Usuario = {
-        "cedula": this.cedula,
-        "nombres": this.nombres,
-        "apellidos": this.apellidos,
-        "telefono": this.telefono,
-        "direccion": this.direccion,
-        "correo": this.correo,
-        "contrasena": this.contrasena
+        "cedula": cedula,
+        "nombres": nombres,
+        "apellidos": apellidos,
+        "telefono": telefono,
+        "direccion": direccion,
+        "correo": correo,
+        "contrasena": password
       };
 
       this.http.post<any>(ServidorConexion.ip + 'usuario/guardarUsuario', usuarioEnvio, {
@@ -67,52 +76,72 @@ export class UsuarioComponent {
 
         } else {
           Swal.fire('Error en la Creacion', data.mensaje, 'warning');
-          this.limpiarCliente();
+          //this.formularioUsuario.reset();
         }
       });
-
-    } else {
-      Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
     }
 
-  }
-
-
-  limpiarCliente() {
-    this.txtcedula.nativeElement.value = '';
-    this.txtnombres.nativeElement.value = '';
-    this.txtapellidos.nativeElement.value = '';
-    this.txttelefono.nativeElement.value = '';
-    this.txtdireccion.nativeElement.value = '';
-    this.txtcorreo.nativeElement.value = '';
-    this.txtcontrasena.nativeElement.value = '';
+    // } else {
+    //   Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
+    // }
 
   }
 
-  validarCamposCliente() {
-    if (this.txtcedula.nativeElement.value == '' ||
-      this.txtcedula.nativeElement.value == undefined ||
-      this.txtnombres.nativeElement.value == '' ||
-      this.txtnombres.nativeElement.value == undefined ||
-      this.txtapellidos.nativeElement.value == '' ||
-      this.txtapellidos.nativeElement.value == undefined ||
-      this.txttelefono.nativeElement.value == '' ||
-      this.txttelefono.nativeElement.value == undefined ||
-      this.txtdireccion.nativeElement.value == '' ||
-      this.txtdireccion.nativeElement.value == undefined ||
-      this.txtcorreo.nativeElement.value == '' ||
-      this.txtcorreo.nativeElement.value == undefined ||
-      this.txtcontrasena.nativeElement.value == '' ||
-      this.txtcontrasena.nativeElement.value == undefined) {
-      return false;
-    } else {
-      return true;
-    }
+  campoNoValido(campo: string) {
+    return this.formularioUsuario.get(campo)?.invalid
+      && this.formularioUsuario.get(campo)?.touched;
   }
+
+  validarCedula(campo: string) {
+    return this.formularioUsuario.controls[campo].errors
+      && this.formularioUsuario.controls[campo].touched;
+  }
+
+
 
   cancelar() {
-    this.limpiarCliente();
+    //this.formularioUsuario.reset();
     this.router.navigate(['/usuario/listar']);
+  }
+
+
+  verificarCedula(control: FormControl) {
+    const valor: string = control.value?.trim().toLowerCase();
+    if (valor.length == 10) {
+      let tercerDigito = parseInt(valor.substring(2, 3));
+      if (tercerDigito < 6) {
+        // El ultimo digito se lo considera dígito verificador
+        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        let verificador = parseInt(valor.substring(9, 10));
+        let suma: number = 0;
+        let digito: number = 0;
+        for (let i = 0; i < (valor.length - 1); i++) {
+          digito = parseInt(valor.substring(i, i + 1)) * coefValCedula[i];
+          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
+        }
+        suma = Math.round(suma);
+        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
+          return null;
+
+        } else if ((10 - (Math.round(suma % 10))) == verificador) {
+          return null;
+        } else {
+          return {
+            cedula: false
+          }
+        }
+      } else {
+        return {
+          cedula: false
+        }
+      }
+    } else {
+      return {
+        cedula: false
+      }
+    }
+
+    // return null;
   }
 
 }

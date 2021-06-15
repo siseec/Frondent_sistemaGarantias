@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 //import {  AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { GarantiaModule } from './garantia/garantia.module';
 
 
 @NgModule({
@@ -22,11 +23,14 @@ import { BrowserModule } from '@angular/platform-browser';
     ComponentsModule,
     RouterModule,
     BrowserModule,
-    AppRoutingModule,    
+    AppRoutingModule, 
+    
+   // GarantiaModule
   ],
   declarations: [
     AppComponent,    
-    AdminLayoutComponent,         
+    AdminLayoutComponent,   
+
   ],
   providers: [],
   bootstrap: [AppComponent]

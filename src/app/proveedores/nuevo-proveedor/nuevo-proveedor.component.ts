@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { ServidorConexion } from 'environments/conexion';
+//import { ServidorConexion } from 'environments/conexion';
 import { Proveedor } from '../model/proveedor-interface';
 import Swal from 'sweetalert2';
+import { ServidorConexion } from '../../../environments/conexion';
 
 
 @Component({

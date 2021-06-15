@@ -10,68 +10,125 @@
                     </div>
 
                     <div class="card-body">
-
+                    <form [formGroup]="formularioUsuario" autocomplete="off">
+                        
                         <div class="row">
                             <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
                                     <input matInput 
-                                    autocomplete="off" minlength="10" maxlength="10"
-                                    [(ngModel)]="cedula" #txtcedula
-                                    placeholder="CI/Ruc:">
+                                    minlength="10" maxlength="13"
+                                    placeholder="CI/Ruc:"
+                                    formControlName="cedula"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                 *ngIf="validarCedula('cedula')">
+                                    La Cedula es Invalida.
+                                </span>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
                                     <input matInput 
-                                    autocomplete="off" 
-                                    [(ngModel)]="nombres" #txtnombres
-                                    placeholder="Nombre:">
+                                    placeholder="Nombre:"
+                                    formControlName="nombres"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                 *ngIf="campoNoValido('nombres')">
+                                Formato de Incorrecto                                 
+                                </span>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" 
-                                    [(ngModel)]="apellidos" #txtapellidos
-                                    placeholder="Apellido:">
+                                    <input matInput 
+                                    placeholder="Apellido:"
+                                    formControlName="apellidos"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                *ngIf="campoNoValido('apellidos')">
+                               Formato de Incorrecto
+                               </span>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" 
-                                    [(ngModel)]="direccion" #txtdireccion
-                                    placeholder="Direccion:">
+                                    <input matInput
+                                    placeholder="Direccion:"
+                                    maxlength="50"
+                                    formControlName="direccion"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                *ngIf="campoNoValido('direccion')">
+                                  Campos Insuficientes
+                               </span>
                             </div>
 
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" 
-                                    [(ngModel)]="telefono" #txttelefono
-                                    placeholder="Telefono:">
+                                    <input matInput
+                                    maxlength="15"
+                                    placeholder="Telefono:"
+                                    formControlName="telefono"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                *ngIf="campoNoValido('telefono')">
+                               Campos Insuficientes
+                               </span>
                             </div>
 
                             <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                     <input matInput 
                                     autocomplete="off" 
-                                    [(ngModel)]="correo"  #txtcorreo
                                     placeholder="Email:"
-                                        type="email">
+                                    type="email"
+                                    formControlName="correo"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                  *ngIf="campoNoValido('correo')">
+                                   Formato Incorrecto del Correo
+                                </span>
                             </div>
                             <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" 
-                                    [(ngModel)]="contrasena" #txtcontrasena
+                                    <input matInput
                                     placeholder="Contraseña:" 
-                                    type="password">
+                                    type="password"
+                                    maxlength="50"
+                                    formControlName="password"
+                                    >
                                 </mat-form-field>
+                                <span class="form-text text-danger"
+                                 *ngIf="campoNoValido('password')">
+                                 Debe Contener al menos 8 caracteres
+                                 minusculas mayúsculas
+                                 Números
+                                 Caracteres especiales.
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput
+                                    placeholder="Confirmar la contraseña:" 
+                                    type="password"
+                                    formControlName="password2"
+                                    >
+                                </mat-form-field>
+                                <span class="form-text text-danger"
+                                *ngIf="campoNoValido('password2')">
+                                 Las contraseñas deben de ser iguales
+                                </span>
+     
+                                
                             </div>
                         </div>
+                    </form>
                      <br>
                         <div class="row">
                             <div class="col-md-4">

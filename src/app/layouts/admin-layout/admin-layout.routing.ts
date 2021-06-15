@@ -41,6 +41,6 @@ export const AdminLayoutRoutes: Routes = [
   //   component:LoginComponent 
   // },
 
-  { path: '**', redirectTo: 'orden' }
+ // { path: '**', redirectTo: 'orden' }
 
 ];

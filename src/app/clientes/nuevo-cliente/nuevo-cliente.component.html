@@ -10,50 +10,55 @@
                     </div>
 
                     <div class="card-body">
+                        
+                        <form autocomplete="off" [formGroup]="miFormulario">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput #txtcedula placeholder="CI/Ruc:" maxlength="10"
+                                            formControlName='nuevoFavorito'>
+                                    </mat-form-field>
+                                    <span class="form-text text-danger" *ngIf="campoNoValido('nuevoFavorito')">
+                                        Cedula Invalida
+                                    </span>
+                                </div>
 
-                        <div class="row">
-                            <div class="col-md-5">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" minlength="10" maxlength="10"
-                                       #txtcedula placeholder="CI/Ruc:">
-                                </mat-form-field>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput maxlength="60" #txtnombres placeholder="Nombre:">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput #txtapellidos maxlength="60" placeholder="Apellido:">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput maxlength="120" #txtdireccion placeholder="Direccion:">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput maxlength="15" #txttelefono placeholder="Telefono:">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput maxlength="120" #txtcorreo placeholder="Email:" type="email"
+                                        formControlName='correo'>
+                                    </mat-form-field>
+                                    <span class="form-text text-danger" *ngIf="campoNoValido('correo')">
+                                        {{ emailErrorMsg }}
+                                    </span>
+                                </div>
+
                             </div>
-
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" maxlength="60" #txtnombres placeholder="Nombre:">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" #txtapellidos maxlength="60"
-                                        placeholder="Apellido:">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" maxlength="120" #txtdireccion
-                                        placeholder="Direccion:">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" maxlength="15" #txttelefono
-                                        placeholder="Telefono:">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput autocomplete="off" maxlength="120" #txtcorreo placeholder="Email:"
-                                        type="email">
-                                </mat-form-field>
-                            </div>
-
-                        </div>
+                        </form>
                         <br>
                         <div class="row">
                             <div class="col-md-4">
@@ -65,10 +70,8 @@
                             <br />
 
                             <div class="col-md-4">
-                                <button mat-raised-button
-                                (click)="cancelar()"
-                                routerLink='/cliente/listar'
-                                class="btn btn-primary pull-right">
+                                <button mat-raised-button (click)="cancelar()"
+                                    class="btn btn-primary pull-right">
                                     Cancelar</button>
                             </div>
 

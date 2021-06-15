@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
-import { ServidorConexion } from 'environments/conexion';
+
 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { ServidorConexion } from '../../../environments/conexion';
 
 @Component({
   selector: 'app-crear-orden',
@@ -113,20 +114,23 @@ export class CrearOrdenComponent {
       };
 
       this.http.post<any>(ServidorConexion.ip + 'orden/guardar',
-        userPrueba, {
+      userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         }
       }).subscribe(
         data => {
+          console.log(data);
           if (data.codigo == 1) {
+            this.limpiarCampos();
             Swal.fire('Creacion Correcta', 'Su Orden fue Ingresada', 'success')
           } else {
-            Swal.fire('Error en la Creacion', 'Su Orden no fue Ingresada', 'warning')
+            Swal.fire('Error en la Creacion', data.mensaje, 'warning')
           }
         });
+
     }
-    this.limpiarCampos();
+   // this.limpiarCampos();
 
   }
 
@@ -287,6 +291,38 @@ export class CrearOrdenComponent {
   }
 
 
-  
+  public validador;
+  validadorDeCedula(cedula: String) {
+    let cedulaCorrecta = false;
+    if (cedula.length == 10) {
+      let tercerDigito = parseInt(cedula.substring(2, 3));
+      if (tercerDigito < 6) {
+        // El ultimo digito se lo considera dígito verificador
+        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        let verificador = parseInt(cedula.substring(9, 10));
+        let suma: number = 0;
+        let digito: number = 0;
+        for (let i = 0; i < (cedula.length - 1); i++) {
+          digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
+        }
+        suma = Math.round(suma);
+        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
+          cedulaCorrecta = true;
+        } else if ((10 - (Math.round(suma % 10))) == verificador) {
+          cedulaCorrecta = true;
+        } else {
+          cedulaCorrecta = false;
+        }
+      } else {
+        cedulaCorrecta = false;
+      }
+    } else {
+      cedulaCorrecta = false;
+    }
+    this.validador = cedulaCorrecta;
+
+  }
+
 }
 

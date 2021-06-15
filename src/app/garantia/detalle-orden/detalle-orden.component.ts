@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
-import { OrdenTrabajo, Detalle, Ordenes, Cliente } from '../model/OrdenTrabajo';
+import { OrdenTrabajo, Detalle, Ordenes, Cliente, ProductoDanado } from '../model/OrdenTrabajo';
 import { ServidorConexion } from '../../../environments/conexion';
 import { Observable } from 'rxjs';
 
@@ -29,7 +29,7 @@ export class DetalleOrdenComponent implements OnInit {
   //public archivos: Detalle[] = [];
 
   constructor(
-    private route: Router,
+    private router: Router,
     private ordeServicio: OrdenTrabajoService,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
@@ -38,11 +38,15 @@ export class DetalleOrdenComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.ordeServicio.orden !== null) {
+
+      //console.log(this.ordeServicio.orden);
+      
       this.id = this.ordeServicio.orden.idOrdenTrabajo;
       this.listarDetalles();
+      this.obtenerOrden();
     }
     else {
-    //  console.log("no vale");
+    this.router.navigateByUrl('/orden/');
     }
 
 
@@ -51,7 +55,7 @@ export class DetalleOrdenComponent implements OnInit {
   listarDetalles() {
     
     this.http.get<any>(ServidorConexion.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
-     // console.log(data);
+      console.log(data);
       this.ordenDetalle = data.orden;
       this.cliente = data.orden.cliente;
       this.detalles = data.detalles;
@@ -101,5 +105,21 @@ export class DetalleOrdenComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+
   }
+
+
+  obtenerOrden() {
+
+    const producto={ 
+      idOrdenTrabajo:this.ordeServicio.orden.idOrdenTrabajo,
+      nombreEquipo:this.ordeServicio.orden.nombreEquipo,
+      numeroSerie:this.ordeServicio.orden.numeroSerie,
+      marca:this.ordeServicio.orden.marca,
+      modelo:this.ordeServicio.orden.modelo
+    }
+    this.ordeServicio.ProductoDanado = producto;
+  }
+
+
 }

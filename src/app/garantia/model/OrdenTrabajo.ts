@@ -9,7 +9,7 @@ export interface Detalle {
     ubicacion?:      string;
     descripcion?: string;
     imagen?:      string;
-    idOrdenTrabajo?: string
+    idOrdenTrabajo?: number
 }
 
 export interface OrdenTrabajo {
@@ -53,3 +53,28 @@ export interface Usuario {
     direccion?:   string;
     correo?:      string;
 }
+
+
+
+export interface ProductoDanado {
+    idOrdenTrabajo? :number,
+    nombreEquipo?:        string;
+    numeroSerie?:         string;
+    marca?:               string;
+    modelo?:              string;
+}
+
+
+export interface CambioProducto{
+    descripcion?: string;
+    ordenTrabajo?:OrdenTrabajo;
+    producto?:Producto
+}
+
+ interface Producto {
+    nombre?:      string;
+    numeroSerie?: string;
+    marca?:       string;
+    modelo?:      string;
+}
+

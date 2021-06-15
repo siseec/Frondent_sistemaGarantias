@@ -9,11 +9,11 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { ValidarTokenGuard } from './auth/guards/validar-token.guard';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'orden',
-  //   pathMatch: 'full',
-  // }, 
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  }, 
   {
     path: 'auth',
     children: [
@@ -34,7 +34,7 @@ const routes: Routes = [
 
   {
     path: '**',
-    redirectTo: 'orden'
+    redirectTo: 'inicio'
   }
 
 ];

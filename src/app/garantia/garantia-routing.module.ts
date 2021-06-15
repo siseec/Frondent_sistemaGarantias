@@ -6,6 +6,7 @@ import { ActualizarOrdenComponent } from './actualizar-orden/actualizar-orden.co
 import { DetalleOrdenComponent } from './detalle-orden/detalle-orden.component';
 import { CrearOrdenComponent } from './crear-orden/crear-orden.component';
 import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
+import { CambioProductoComponent } from './cambio-producto/cambio-producto.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'crear', component: CrearOrdenComponent },
       { path: 'actualizar', component: ActualizarOrdenComponent },
       { path: 'detalle', component: DetalleOrdenComponent },
+      { path: 'cambioProducto', component: CambioProductoComponent },
       { path: '**', redirectTo: 'listar' },
     ],
     canActivate: [ValidarTokenGuard],

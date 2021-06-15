@@ -29,13 +29,15 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
   canLoad(): Observable<boolean> | boolean {
    
     return true;
-    // return this.auth.validarToken()
-    //   .pipe(
-    //     tap(valido => {
-    //       if (!valido) {
-    //         this.router.navigateByUrl('/auth/login');
-    //       }
-    //     })
-    //   );
+  //   return this.auth.validarToken()
+  //     .pipe(
+  //       tap(valido => {
+  //         if (!valido) {
+  //           this.router.navigateByUrl('/auth/login');
+  //         }
+  //       })
+  //     );
   }
+
+
 }

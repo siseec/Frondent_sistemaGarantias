@@ -15,6 +15,8 @@ import { UsuariosModule } from '../../usuarios/usuarios.module';
 import { ProveedoresModule } from '../../proveedores/proveedores.module';
 import { AuthModule } from '../../auth/auth.module';
 import { ClienteModule } from '../../clientes/cliente.module';
+import { InicioModule } from '../../inicio/inicio.module';
+import { ProductoModule } from '../../producto/producto.module';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { ClienteModule } from '../../clientes/cliente.module';
     UsuariosModule,
     ProveedoresModule,
     AuthModule,
-    ClienteModule
+    ClienteModule,
+    InicioModule,
+    ProductoModule
 
   ],
   declarations: [],

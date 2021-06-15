@@ -40,17 +40,39 @@
 </form> -->
 
 
-<form [formGroup]="newPostForm" >
+<form  autocomplete="off" [formGroup]="newPostForm" >
   <mat-form-field>
     <mat-label m-r-195>Descripcion</mat-label>
     <input matInput mat-flat-button autocomplete="off" placeholder="Descripcion" formControlName="Descripcion">
+    <span class="form-text text-danger"
+    *ngIf="ValidarCampos('Descripcion')">
+   Este campo es obligatorio
+   </span>
   </mat-form-field>
-
+<!-- 
   <mat-form-field>
     <mat-label>Ubicacion</mat-label>
-    <input matInput mat-flat-button autocomplete="off" placeholder="Ubicacion" formControlName="Ubicacion">
+    <input matInput mat-flat-button autocomplete="off"  placeholder="Ubicacion" #txtUbicacion formControlName="Ubicacion">
   </mat-form-field>
+   -->
+  <!-- <div class="col-md-7"> -->
+   
+    <mat-form-field >
+      <!-- <mat-label m-r-195>Ubicacion</mat-label> -->
+      <mat-label>-- Seleccione Ubicacion --</mat-label>
+      <mat-select formControlName="Ubicacion">
+        <!-- <mat-option value=""> -- Seleccione Ubicacion -- </mat-option> -->
+        <mat-option *ngFor="let item of ubicaciones" value="{{item}}">{{item}}</mat-option>
+      </mat-select>   
+      
+      <span class="form-text text-danger"
+      *ngIf="ValidarCampos('Ubicacion')">Este campo es obligatorio
+      </span>
+    </mat-form-field>
+
+  <!-- </div> -->
   <hr>
+  <br>
 
   <div class="row" >
     <div class="col">

@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 //import { ServidorConexion } from 'environments/conexion';
 import { Proveedor } from '../model/proveedor-interface';
 import Swal from 'sweetalert2';
-import { ServidorConexion } from '../../../environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { ServidorConexion } from '../../../environments/conexion';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
 
 
 @Component({
@@ -15,47 +18,45 @@ import { ServidorConexion } from '../../../environments/conexion';
 })
 export class NuevoProveedorComponent {
 
-  @ViewChild('txtpcedula') txtpcedula!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpnombres') txtpnombres!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpapellidos') txtpapellidos!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtptelefono') txtptelefono!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpdireccion') txtpdireccion!: ElementRef<HTMLInputElement>;;
-  @ViewChild('txtpcorreo') txtpcorreo!: ElementRef<HTMLInputElement>;
 
-  cedula: string;
-  nombres: string;
-  apellidos: string;
-  telefono: string;
-  direccion: string;
-  correo: string;
+  formularioProveedor: FormGroup = this.fb.group({
+    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
+    nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+    direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    correo: ['', [Validators.required, Validators.pattern(emailPattern)]],
+  });
 
   constructor(private http: HttpClient,
+    private fb: FormBuilder,
     private router: Router) { }
 
 
   guardarProveedor() {
-    const validacion = this.validarCampos();
-    if (validacion) {
-      
+    if (!this.formularioProveedor.invalid) {
+      const { cedula, nombres, apellidos, telefono, direccion, correo } = this.formularioProveedor.value;
+
       const prove: Proveedor = {
-        "cedula": this.cedula,
-        "nombres": this.nombres,
-        "apellidos": this.apellidos,
-        "telefono": this.telefono,
-        "direccion": this.direccion,
-        "correo": this.correo
+        "cedula": cedula,
+        "nombres": nombres,
+        "apellidos": apellidos,
+        "telefono": telefono,
+        "direccion": direccion,
+        "correo": correo
       };
 
       console.log(prove)
 
-      this.http.post<any>(ServidorConexion.ip + 'usuario/guardarProveedor', prove, {
+      this.http.post<any>(environment.ip + 'usuario/guardarProveedor', prove, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         }
       }).subscribe(data => {
         console.log(data);
+         this.formularioProveedor.reset();
         if (data.codigo == 1) {
-          this.limpiarProveedor();
+         
           Swal.fire('Creacion Correcta', data.mensaje, 'success').
             then(result => {
               if (result.value) {
@@ -74,46 +75,67 @@ export class NuevoProveedorComponent {
 
 
 
-  validarCampos() {
-    if (
-      this.txtpcedula.nativeElement.value == '' ||
-      this.txtpcedula.nativeElement.value == undefined
-      ||
-      this.txtpnombres.nativeElement.value == '' ||
-      this.txtpnombres.nativeElement.value == undefined
-      ||
-      this.txtpapellidos.nativeElement.value == '' ||
-      this.txtpapellidos.nativeElement.value == undefined
-      ||
-      this.txtptelefono.nativeElement.value == '' ||
-      this.txtptelefono.nativeElement.value == undefined
-      ||
-      this.txtpdireccion.nativeElement.value == '' ||
-      this.txtpdireccion.nativeElement.value == undefined
-      ||
-      this.txtpcorreo.nativeElement.value == '' ||
-      this.txtpcorreo.nativeElement.value == undefined
-
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-
-  }
+ 
 
   cancelar() {
-    this.limpiarProveedor();
+
+  //  this.formularioProveedor.reset();
     this.router.navigate(['/proveedor/proveedores']);
   }
 
-  limpiarProveedor() {
-    this.txtpcedula.nativeElement.value = '';
-    this.txtpnombres.nativeElement.value = '';
-    this.txtpapellidos.nativeElement.value = '';
-    this.txtptelefono.nativeElement.value = '';
-    this.txtpdireccion.nativeElement.value = '';
-    this.txtpcorreo.nativeElement.value = '';
+ // limpiarProveedor() {
+  //   this.formularioProveedor.reset();
+  // }
+
+
+  campoNoValido(campo: string) {
+    return this.formularioProveedor.get(campo)?.invalid
+      && this.formularioProveedor.get(campo)?.touched;
   }
+
+  validarCedula(campo: string) {
+    return this.formularioProveedor.controls[campo].errors
+      && this.formularioProveedor.controls[campo].touched;
+  }
+
+  verificarCedula(control: FormControl) {
+    const valor: string = control.value?.trim();
+    if (valor) {
+      let tercerDigito = parseInt(valor.substring(2, 3));
+      if (tercerDigito < 6) {
+        // El ultimo digito se lo considera dígito verificador
+        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        let verificador = parseInt(valor.substring(9, 10));
+        let suma: number = 0;
+        let digito: number = 0;
+        for (let i = 0; i < (valor.length - 1); i++) {
+          digito = parseInt(valor.substring(i, i + 1)) * coefValCedula[i];
+          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
+        }
+        suma = Math.round(suma);
+        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
+          return null;
+
+        } else if ((10 - (Math.round(suma % 10))) == verificador) {
+          return null;
+        } else {
+          return {
+            cedula: false
+          }
+        }
+      } else {
+        return {
+          cedula: false
+        }
+      }
+    } else {
+      return {
+        cedula: false
+      }
+    }
+  }
+
+
+
 
 }

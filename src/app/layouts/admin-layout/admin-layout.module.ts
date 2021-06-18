@@ -13,36 +13,45 @@ import {MatSelectModule} from '@angular/material/select';
 import { GarantiaModule } from '../../garantia/garantia.module';
 import { UsuariosModule } from '../../usuarios/usuarios.module';
 import { ProveedoresModule } from '../../proveedores/proveedores.module';
-import { AuthModule } from '../../auth/auth.module';
 import { ClienteModule } from '../../clientes/cliente.module';
 import { InicioModule } from '../../inicio/inicio.module';
 import { ProductoModule } from '../../producto/producto.module';
+import { ComponentsModule } from '../../components/components.module';
+import { AdminLayoutRoutingModule } from './admin-layout.routing.module';
+import { AdminLayoutComponent } from './admin-layout.component';
+import { MaterialModule } from '../../material/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
-  //  RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatRippleModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
+   //RouterModule.forChild(),
+    // FormsModule,
+    // ReactiveFormsModule,
+    // MatButtonModule,
+    // MatRippleModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+    // MatSelectModule,
+    // MatTooltipModule,
     
     RouterModule,
     GarantiaModule,
+    ProductoModule,
     UsuariosModule,
     ProveedoresModule,
-    AuthModule,
     ClienteModule,
     InicioModule,
-    ProductoModule
+    ProductoModule,
+    AdminLayoutRoutingModule,
+    //MaterialModule
 
   ],
-  declarations: [],
+  declarations: [
+   // AdminLayoutComponent
+
+  ],
   exports:[
+    
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,

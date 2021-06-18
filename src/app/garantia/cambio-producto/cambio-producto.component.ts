@@ -15,6 +15,7 @@ export class CambioProductoComponent implements OnInit {
 
   @ViewChild('numeroserie') numeroserie!: ElementRef<HTMLInputElement>;
   idOrdenTrabajo:number;
+  idProductoCambio:number;
 
   formularioProducto:FormGroup = this.fb.group({
     serie: ['', [Validators.required, Validators.minLength(3)]],
@@ -51,16 +52,11 @@ export class CambioProductoComponent implements OnInit {
 
 
 cambioEquipo(){
+
   const { seried}= this.formularioProductoDanado.value;
-  console.log
-  const cambio:CambioProducto={
-    "descripcion":"se cambio por otra computadora",
-    "ordenTrabajo": {
-        "idOrdenTrabajo": this.idOrdenTrabajo
-    },
-    "producto":   {
-        "numeroSerie": seried
-    }
+  const cambio={
+    "productoAcambiar":this.idOrdenTrabajo,
+    "productoNuevo":this.idProductoCambio
   };
   this.ordeServicio.cambioEquipo(cambio).subscribe(data =>{
     console.log(data);
@@ -70,21 +66,21 @@ cambioEquipo(){
 }
 
 
-  buscarProducto(){
-    this.ordeServicio.buscarProducto(this.numeroserie.nativeElement.value).subscribe(
-      data =>{
-        console.log(data);
-        if (data ==null) {
-          return;
-        }
-        this.formularioProductoDanado.reset({
-          seried: data.numeroSerie || '',
-          nombred: data.nombre||'',
-          marcad: data.marca||'',
-          modelod: data.modelo||'',
-        });
-    });
-  }
+  // buscarProducto(){
+  //   this.ordeServicio.buscarProducto(this.numeroserie.nativeElement.value).subscribe(
+  //     data =>{
+  //       console.log(data);
+  //       if (data ==null) {
+  //         return;
+  //       }
+  //       this.formularioProductoDanado.reset({
+  //         seried: data.numeroSerie || '',
+  //         nombred: data.nombre||'',
+  //         marcad: data.marca||'',
+  //         modelod: data.modelo||'',
+  //       });
+  //   });
+  // }
 
 
   openDialog(): void {
@@ -105,6 +101,19 @@ cambioEquipo(){
     //dialogConfig.data = { orderItemIndex, OrderID };
     this.dialog.open(ListarProductoComponent, dialogConfig).afterClosed().subscribe(res => {
     //  this.updateGrandTotal();
+    console.log(res);
+    this.asignarValoresProducto(res);
+    });
+  }
+
+
+  asignarValoresProducto(data:any){
+    this.idProductoCambio=data.idProducto;
+    this.formularioProductoDanado.reset({
+      seried: data.numeroSerie || '',
+      nombred: data.nombre||'',
+      marcad: data.marca||'',
+      modelod: data.modelo||'',
     });
   }
 

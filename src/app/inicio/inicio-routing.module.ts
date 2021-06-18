@@ -4,11 +4,10 @@ import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
   {
-    path:'inicio',
+    path:'',
     children:[
       {path: 'principal', component:PrincipalComponent},
       { path: '', redirectTo: 'principal' },
-      { path: '**', redirectTo: 'principal' },
     ]
   }
 ];

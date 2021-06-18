@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../model/usuarioInterface';
-import { ServidorConexion } from 'environments/conexion';
+//import { ServidorConexion } from 'environments/conexion';
 import { UsuarioService } from '../service/usuario.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-listar',
@@ -25,7 +26,7 @@ export class ListarComponent implements OnInit {
 
 
   listarUsuarios() {
-    this.http.get<Usuario[]>(ServidorConexion.ip + 'usuario/listaUsuario').subscribe(
+    this.http.get<Usuario[]>(environment.ip + 'usuario/listaUsuario').subscribe(
       data => {
         this.UsuarioLista = data;
       }

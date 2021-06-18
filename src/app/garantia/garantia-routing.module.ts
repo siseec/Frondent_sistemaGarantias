@@ -10,7 +10,7 @@ import { CambioProductoComponent } from './cambio-producto/cambio-producto.compo
 
 const routes: Routes = [
   {
-    path: 'orden',
+    path: '',
     children: [
       { path: 'listar', component: ListTrabajoComponent },
       { path: 'crear', component: CrearOrdenComponent },

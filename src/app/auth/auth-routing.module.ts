@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  // {
-  //   path: 'auth',
-  //   //component:LoginComponent,
-  //   children: [
-  //     { path: 'login', component: LoginComponent },
-  //     { path: '**', redirectTo: 'login' },
-  //   ]
-  // }
+  {
+    path: '',
+    //component:LoginComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: '**', redirectTo: 'login' },
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../model/usuarioInterface';
 import { HttpClient } from '@angular/common/http';
-import { ServidorConexion } from '../../../environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { ServidorConexion } from '../../../environments/conexion';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UsuarioService {
   constructor(private http:HttpClient) { }
 
   actualizarUsuario(userActualizar:Usuario){
-  return this.http.put<any>(ServidorConexion.ip+'usuario/actualizarUsuario',userActualizar);
+  return this.http.put<any>(environment.ip+'usuario/actualizarUsuario',userActualizar);
   }
 
 

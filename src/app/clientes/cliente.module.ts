@@ -8,6 +8,7 @@ import { ListaClienteComponent } from './lista-cliente/lista-cliente.component';
 import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-cliente.component';
 import { FiltroClientePipe } from './pipe/filtro-cliente.pipe';
 import { MaterialModule } from '../material/material.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     ClienteRoutingModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ]
 })
 export class ClienteModule { }

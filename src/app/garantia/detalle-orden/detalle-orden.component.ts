@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { OrdenTrabajo, Detalle, Ordenes, Cliente, ProductoDanado } from '../model/OrdenTrabajo';
-import { ServidorConexion } from '../../../environments/conexion';
+//import { ServidorConexion } from '../../../environments/conexion';
 import { Observable } from 'rxjs';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NuevoDetalleComponent } from '../vista/nuevo-detalle/nuevo-detalle.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+//import { ServidorConexion } from '../../../environments/environment';
 
 @Component({
   selector: 'app-detalle-orden',
@@ -54,7 +56,7 @@ export class DetalleOrdenComponent implements OnInit {
 
   listarDetalles() {
     
-    this.http.get<any>(ServidorConexion.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
+    this.http.get<any>(environment.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
       console.log(data);
       this.ordenDetalle = data.orden;
       this.cliente = data.orden.cliente;

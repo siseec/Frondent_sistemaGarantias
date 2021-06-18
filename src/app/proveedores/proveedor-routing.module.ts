@@ -9,7 +9,7 @@ import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
 const routes: Routes = [
 
     {
-        path: 'proveedor',
+        path: '',
         children: [
             { path: 'proveedores', component: ProveedorComponent },
             { path: 'nuevoProveedor', component: NuevoProveedorComponent },

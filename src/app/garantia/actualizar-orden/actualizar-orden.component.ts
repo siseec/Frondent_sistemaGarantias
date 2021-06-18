@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
-import { ServidorConexion } from 'environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { environment } from 'environments/conexion';
 
 @Component({
   selector: 'app-actualizar-orden',
@@ -146,7 +147,7 @@ export class ActualizarOrdenComponent implements OnInit {
       };
 
 
-      this.http.put<any>(ServidorConexion.ip + 'orden/actualizarOrden',
+      this.http.put<any>(environment.ip + 'orden/actualizarOrden',
         userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-//import { ServidorConexion } from 'environments/conexion';
+//import { environment } from 'environments/conexion';
 import { Proveedor } from '../model/proveedor-interface';
 
 import { ProveedorService } from '../service/proveedor.service';
 import { catchError } from 'rxjs/operators';
-import { ServidorConexion } from '../../../environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { environment } from '../../../environments/conexion';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ProveedorComponent implements OnInit {
   }
 
   listarProveedor() {
-    this.http.get<Proveedor[]>(ServidorConexion.ip + 'usuario/listaProveedor').subscribe(data => {
+    this.http.get<Proveedor[]>(environment.ip + 'usuario/listaProveedor').subscribe(data => {
       this.listaProveedores = data;
     }, error => console.log('oops', error)
     );

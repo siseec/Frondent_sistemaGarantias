@@ -8,7 +8,8 @@ import { emailPattern, validarPassword } from '../../validator/Validaciones';
 import { ValidacionesService } from '../../validator/validaciones.service';
 import { Usuario } from '../model/usuarioInterface';
 import { HttpClient } from '@angular/common/http';
-import { ServidorConexion } from '../../../environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { ServidorConexion } from '../../../environments/conexion';
 //import { ServidorConexion } from 'src/environments/conexion';
 
 @Component({
@@ -20,15 +21,16 @@ export class UsuarioComponent {
 
 
   formularioUsuario: FormGroup = this.fb.group({
-    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula] ],
+    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
     nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
     apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
-    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15), Validators.required]],
+    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15) ]],
     direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     correo: ['', [Validators.required, Validators.pattern(emailPattern)]],
     password: ['', [Validators.required, Validators.pattern(validarPassword)]],
-    password2: ['', [Validators.required]],},
-    {validators: [this.validadiionesService.camposIguales('password', 'password2')]});
+    password2: ['', [Validators.required]],
+  },
+    { validators: [this.validadiionesService.camposIguales('password', 'password2')] });
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -41,7 +43,7 @@ export class UsuarioComponent {
     if (this.formularioUsuario.invalid) {
       Swal.fire('Error en la Creacion', "Campos Vacios", 'error');
     } else {
-     // console.log(this.formularioUsuario.value);
+      // console.log(this.formularioUsuario.value);
 
       //   const validacion = this.validarCamposCliente();
       //   if (validacion) {
@@ -57,7 +59,7 @@ export class UsuarioComponent {
         "contrasena": password
       };
 
-      this.http.post<any>(ServidorConexion.ip + 'usuario/guardarUsuario', usuarioEnvio, {
+      this.http.post<any>(environment.ip + 'usuario/guardarUsuario', usuarioEnvio, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         }
@@ -71,7 +73,7 @@ export class UsuarioComponent {
             showConfirmButton: false,
             timer: 1500
           });
-
+          this.formularioUsuario.reset();
           this.router.navigate(['/usuario/listar']);
 
         } else {
@@ -80,10 +82,6 @@ export class UsuarioComponent {
         }
       });
     }
-
-    // } else {
-    //   Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
-    // }
 
   }
 
@@ -100,14 +98,14 @@ export class UsuarioComponent {
 
 
   cancelar() {
-    //this.formularioUsuario.reset();
+    this.formularioUsuario.reset();
     this.router.navigate(['/usuario/listar']);
   }
 
 
   verificarCedula(control: FormControl) {
-    const valor: string = control.value?.trim().toLowerCase();
-    if (valor.length == 10) {
+    const valor: string = control.value?.trim();
+    if (valor) {
       let tercerDigito = parseInt(valor.substring(2, 3));
       if (tercerDigito < 6) {
         // El ultimo digito se lo considera dígito verificador
@@ -140,8 +138,6 @@ export class UsuarioComponent {
         cedula: false
       }
     }
-
-    // return null;
   }
 
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ServidorConexion } from 'environments/conexion';
+//import { environment } from 'environments/conexion';
 import Swal from 'sweetalert2';
 
 import { ProveedorService } from '../service/proveedor.service';
 import { Proveedor } from '../model/proveedor-interface';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -61,7 +62,7 @@ export class ActualizarProveedorComponent implements OnInit {
         "correo": this.correo
       };
 
-      this.http.put<any>(ServidorConexion.ip + 'usuario/actualizarProveedor',
+      this.http.put<any>(environment.ip + 'usuario/actualizarProveedor',
         prove,
         {
           headers: {

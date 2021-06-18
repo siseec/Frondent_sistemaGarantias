@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ServidorConexion } from '../../../../environments/conexion';
+//import { ServidorConexion } from '../../../../environments/conexion';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';

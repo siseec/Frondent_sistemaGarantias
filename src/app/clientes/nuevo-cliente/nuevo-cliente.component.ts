@@ -4,33 +4,101 @@ import { ServicioClienteService } from '../service/servicio-cliente.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { emailPattern } from '../../validator/Validaciones';
+import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
 
 @Component({
   selector: 'app-nuevo-cliente',
   templateUrl: './nuevo-cliente.component.html',
   styleUrls: ['./nuevo-cliente.component.css']
 })
-export class NuevoClienteComponent implements OnInit {
+export class NuevoClienteComponent {
 
-
-  @ViewChild('txtcedula') txtcedula!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtnombres') txtnombres!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtapellidos') txtapellidos!: ElementRef<HTMLInputElement>;
-  @ViewChild('txttelefono') txttelefono!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtdireccion') txtdireccion!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtcorreo') txtcorreo!: ElementRef<HTMLInputElement>;
-
-  
   constructor(private clienteService: ServicioClienteService,
+              private router: Router,
               private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+
+
+
+
+  miFormulario: FormGroup = this.fb.group({
+    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula],],
+    nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+    direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    correo: ['', [Validators.required, Validators.pattern(emailPattern)],],
+  });
+
+  crearCliente() {
+
+    if (this.miFormulario.invalid) {
+      Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
+    } else {
+
+      const { cedula, nombres, apellidos, telefono, direccion, correo,  } = this.miFormulario.value;
+      const client: Cliente = {
+        cedula: cedula,
+        nombres: nombres,
+        apellidos: apellidos,
+        telefono: telefono,
+        direccion: direccion,
+        correo: correo
+      };
+      console.log(client);
+
+      this.clienteService.crearCliente(client).subscribe(
+        data => {
+          if (data.codigo == 1) {
+            this.miFormulario.reset();
+            Swal.fire('Ingreso Correcto', 'Cliente Ingresado Correctamente', 'success')
+          } else {
+            console.log(data);
+            Swal.fire('Error en el Ingreso', data.mensaje, 'warning')
+          }
+        });
+    }
+
   }
 
-  verificarCedula( control: FormControl ) {
-    const valor:string = control.value?.trim().toLowerCase();
-    if (valor.length == 10) {
+
+
+
+  validarCedula(campo: string) {
+    return this.miFormulario.controls[campo].errors
+      && this.miFormulario.controls[campo].touched;
+  }
+
+
+
+  get emailErrorMsg(): string {
+    const errors = this.miFormulario.get('correo')?.errors;
+    if (errors?.required) {
+      return 'Email es obligatorio';
+    } else if (errors?.pattern) {
+      return 'El valor ingresado no tiene formato de correo';
+    } else if (errors?.emailTomado) {
+      return 'El email ya fue tomado';
+    }
+
+    return '';
+  }
+
+  campoNoValido(campo: string) {
+    return this.miFormulario.get(campo)?.invalid
+      && this.miFormulario.get(campo)?.touched;
+  }
+
+
+  cancelar() {
+  //  this.formularioUsuario.reset();
+    this.router.navigate(['/cliente/listar']);
+  }
+
+ 
+  verificarCedula(control: FormControl) {
+    const valor: string = control.value?.trim();
+    if (valor) {
       let tercerDigito = parseInt(valor.substring(2, 3));
       if (tercerDigito < 6) {
         // El ultimo digito se lo considera dígito verificador
@@ -62,115 +130,9 @@ export class NuevoClienteComponent implements OnInit {
       return {
         cedula: false
       }
-    } 
-
-   // return null;
-}
-miFormulario: FormGroup = this.fb.group({
-nuevoFavorito: ['', [Validators.required,Validators.maxLength(10),this.verificarCedula], ],
-correo : ['', [ Validators.required, Validators.pattern( emailPattern ) ], ],
-});
-
-  crearCliente() {
-    const client: Cliente = {
-      cedula: this.txtcedula.nativeElement.value,
-      nombres: this.txtnombres.nativeElement.value,
-      apellidos: this.txtapellidos.nativeElement.value,
-      telefono: this.txttelefono.nativeElement.value,
-      direccion: this.txtdireccion.nativeElement.value,
-      correo: this.txtcorreo.nativeElement.value,
-    };
-
-    const validacion = this.validarCampos();
-
-    console.log(client);
-    if (!validacion) {
-      Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
-    } else {
-
-    this.clienteService.crearCliente(client).subscribe(
-      data => {
-
-        if (data.codigo == 1) {
-          this.limpiarCliente();
-          Swal.fire('Ingreso Correcto', 'Cliente Ingresado Correctamente', 'success')
-        } else {
-          console.log(data);
-          Swal.fire('Error en el Ingreso', data.mensaje, 'warning')
-        }
-      });
     }
-   
   }
 
-
-  validarCampos() {
-    if (
-      this.txtcedula.nativeElement.value == '' ||
-      this.txtcedula.nativeElement.value == undefined
-      ||
-      this.txtcorreo.nativeElement.value == '' ||
-      this.txtcorreo.nativeElement.value == undefined
-      ||
-      this.txtnombres.nativeElement.value == '' ||
-      this.txtnombres.nativeElement.value == undefined
-      ||
-      this.txtapellidos.nativeElement.value == '' ||
-      this.txtapellidos.nativeElement.value == undefined
-      ||
-      this.txtdireccion.nativeElement.value == '' ||
-      this.txtdireccion.nativeElement.value == undefined
-      ||
-      this.txttelefono.nativeElement.value == '' ||
-      this.txttelefono.nativeElement.value == undefined
-      
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-
-  }
-
-  campoNoValido( campo: string ) {
-    // return this.miFormulario.get(campo)?.invalid
-    //         && this.miFormulario.get(campo)?.touched;
-
-            return this.miFormulario.controls[campo].errors
-            && this.miFormulario.controls[campo].touched;
-  }
-
-  limpiarCliente() {
-    this.txtcedula.nativeElement.value = '';
-    this.txtnombres.nativeElement.value = '';
-    this.txtapellidos.nativeElement.value = '';
-    this.txttelefono.nativeElement.value = '';
-    this.txtdireccion.nativeElement.value = '';
-    this.txtcorreo.nativeElement.value = '';
-  }
-
-
-
-  get emailErrorMsg(): string {
-    
-    const errors = this.miFormulario.get('correo')?.errors;
-    if ( errors?.required ) {
-      return 'Email es obligatorio';
-    } else if ( errors?.pattern ) {
-      return 'El valor ingresado no tiene formato de correo';
-    } else if ( errors?.emailTomado ) {
-      return 'El email ya fue tomado';
-    }
-
-    return '';
-  }
-
-
-  cancelar(){
-    this.limpiarCliente();
-  }
-
-  
 
 
 

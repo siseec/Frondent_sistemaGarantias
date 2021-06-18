@@ -6,7 +6,9 @@ import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
 
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { ServidorConexion } from '../../../environments/conexion';
+import { environment } from '../../../environments/environment';
+//import { environment } from '../../../environments/conexion';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-orden',
@@ -68,8 +70,21 @@ export class CrearOrdenComponent {
   pdireccion: string;
   pcorreo: string;
 
+  formularioOrder:FormGroup=this.fb.group({
+    numeroOrden:  [],
+    nombreEquipo: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(20)]],
+    numeroSerie:  ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+    marca:        [],
+    modelo:       [],
+    observaciones:[],
+    numeroFactura:[],
+    montoFactura: []
+
+  });
+
   constructor(private http: HttpClient,
-    private router: Router) { }
+              private router: Router,
+              private fb:FormBuilder) { }
 
 
 
@@ -113,7 +128,7 @@ export class CrearOrdenComponent {
         }
       };
 
-      this.http.post<any>(ServidorConexion.ip + 'orden/guardar',
+      this.http.post<any>(environment.ip + 'orden/guardar',
       userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
@@ -138,7 +153,7 @@ export class CrearOrdenComponent {
 
     const valor = this.txtcedula.nativeElement.value;
     if (valor != null || valor.trim() != '') {
-      this.http.get<Cliente>(ServidorConexion.ip + 'usuario/clienteCedula?cedula=' + valor).subscribe(data => {
+      this.http.get<Cliente>(environment.ip + 'usuario/clienteCedula?cedula=' + valor).subscribe(data => {
         if (data != null) {
           // this.cedula = data.cedula;
           this.nombres = data.nombres;
@@ -161,7 +176,7 @@ export class CrearOrdenComponent {
 
     const valor = this.txtpcedula.nativeElement.value;
     if (valor != null || valor.trim() != '') {
-      this.http.get<Proveedor>(ServidorConexion.ip + 'usuario/proveeedorcedula?cedula=' + valor).subscribe(data => {
+      this.http.get<Proveedor>(environment.ip + 'usuario/proveeedorcedula?cedula=' + valor).subscribe(data => {
         console.log(data);
         if (data != null) {
           // this.pcedula = data.cedula;

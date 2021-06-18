@@ -7,15 +7,15 @@ import { ActualizarClienteComponent } from './actualizar-cliente/actualizar-clie
 
 const routes: Routes = [
   {
-    path: 'cliente',
+    path: '',
     children: [
         { path: 'listar', component: ListaClienteComponent },
         { path: 'nuevo', component: NuevoClienteComponent },
         { path: 'actualizar', component: ActualizarClienteComponent },
-        { path: '**', redirectTo: 'listar' },
+        { path: '**', redirectTo: 'listar' }
     ],
-    canActivate:[ValidarTokenGuard],
-    canLoad:[ValidarTokenGuard]
+    // canActivate:[ValidarTokenGuard],
+    // canLoad:[ValidarTokenGuard]
 },
 ];
 

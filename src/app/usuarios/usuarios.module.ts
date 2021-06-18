@@ -22,7 +22,7 @@ import { MatCardModule } from '@angular/material/card';
     EditarUsuariosComponent,FiltroUsuariosPipe],
   imports: [
   CommonModule,
-  LayoutModule,
+  //LayoutModule,
   RouterModule,
 
   MaterialModule,

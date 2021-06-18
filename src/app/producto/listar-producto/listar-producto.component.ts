@@ -59,9 +59,10 @@ export class ListarProductoComponent implements OnInit {
   }
 
   obtenerOrden(orden: any) {
-    console.log(orden);
-    const { categoria } = this.miFormulario.value;
-    console.log(categoria);
+    this.dialogRef.close(orden);
+    //console.log(orden);
+    // const { categoria } = this.miFormulario.value;
+    // console.log(categoria);
   }
 
 }

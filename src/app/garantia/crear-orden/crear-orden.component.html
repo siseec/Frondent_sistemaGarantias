@@ -142,6 +142,16 @@
               </div>
 
               <div class="col-md-4">
+                <label>Categoria </label>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selecione</mat-label>
+                  <mat-select [(ngModel)]="categoria">
+                    <mat-option *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
                 <mat-label>Añios Garantia</mat-label>
                 <mat-form-field class="example-full-width">
                   <input matInput [(ngModel)]="aniosGarantia" required maxlength="2" type="number">

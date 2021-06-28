@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { CambioProducto } from '../model/OrdenTrabajo';
+import Swal from 'sweetalert2';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ListarProductoComponent } from '../../producto/listar-producto/listar-producto.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cambio-producto',
@@ -14,17 +14,18 @@ import { ListarProductoComponent } from '../../producto/listar-producto/listar-p
 export class CambioProductoComponent implements OnInit {
 
   @ViewChild('numeroserie') numeroserie!: ElementRef<HTMLInputElement>;
-  idOrdenTrabajo:number;
-  idProductoCambio:number;
 
-  formularioProducto:FormGroup = this.fb.group({
+  idOrdenTrabajo: number;
+  idProductoCambio: number;
+
+  formularioProducto: FormGroup = this.fb.group({
     serie: ['', [Validators.required, Validators.minLength(3)]],
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     marca: ['', [Validators.required, Validators.minLength(3)]],
     modelo: ['', [Validators.required, Validators.minLength(3)]],
   });
 
-  formularioProductoDanado:FormGroup = this.fb.group({
+  formularioProductoDanado: FormGroup = this.fb.group({
     seried: ['', [Validators.required, Validators.minLength(3)]],
     nombred: ['', [Validators.required, Validators.minLength(3)]],
     marcad: ['', [Validators.required, Validators.minLength(3)]],
@@ -32,55 +33,49 @@ export class CambioProductoComponent implements OnInit {
   });
 
   constructor(private ordeServicio: OrdenTrabajoService,
-              private fb:FormBuilder,
-              public dialog: MatDialog) { }
+    private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     console.log(this.ordeServicio.ProductoDanado);
 
-   if (this.ordeServicio.ProductoDanado ==null) {
-     return;
-   }
-   this.idOrdenTrabajo=this.ordeServicio.ProductoDanado.idOrdenTrabajo;
-   this.formularioProducto.reset({
-    serie: this.ordeServicio.ProductoDanado.numeroSerie || '',
-    nombre: this.ordeServicio.ProductoDanado.nombreEquipo||'',
-    marca: this.ordeServicio.ProductoDanado.marca||'',
-    modelo: this.ordeServicio.ProductoDanado.modelo||'',
-  });
+    if (this.ordeServicio.ProductoDanado == null) {
+      return;
+    }
+    this.idOrdenTrabajo = this.ordeServicio.ProductoDanado.idOrdenTrabajo;
+
+    this.formularioProducto.reset({
+      serie: this.ordeServicio.ProductoDanado.numeroSerie || '',
+      nombre: this.ordeServicio.ProductoDanado.nombreEquipo || '',
+      marca: this.ordeServicio.ProductoDanado.marca || '',
+      modelo: this.ordeServicio.ProductoDanado.modelo || '',
+    });
   }
 
 
-cambioEquipo(){
+  cambioEquipo() {
 
-  const { seried}= this.formularioProductoDanado.value;
-  const cambio={
-    "productoAcambiar":this.idOrdenTrabajo,
-    "productoNuevo":this.idProductoCambio
-  };
-  this.ordeServicio.cambioEquipo(cambio).subscribe(data =>{
-    console.log(data);
+    const { seried } = this.formularioProductoDanado.value;
+    const cambio = {
+      "idOrdenTrabajo": this.idOrdenTrabajo,
+      "productoNuevo": this.idProductoCambio
+    };
+    this.ordeServicio.cambioEquipo(cambio).subscribe(data => {
+      //console.log(data);
+      if (data.codigo == 1) {
+
+        Swal.fire('Creacion Correcta', data.mesaje, 'success');
+        this.router.navigate(['/orden/listar']);
+      } else {
+        Swal.fire('Error en la Creacion', data.mensaje, 'warning')
+      }
+    }
+    )
+
   }
-  )
-  
-}
 
 
-  // buscarProducto(){
-  //   this.ordeServicio.buscarProducto(this.numeroserie.nativeElement.value).subscribe(
-  //     data =>{
-  //       console.log(data);
-  //       if (data ==null) {
-  //         return;
-  //       }
-  //       this.formularioProductoDanado.reset({
-  //         seried: data.numeroSerie || '',
-  //         nombred: data.nombre||'',
-  //         marcad: data.marca||'',
-  //         modelod: data.modelo||'',
-  //       });
-  //   });
-  // }
 
 
   openDialog(): void {
@@ -92,28 +87,29 @@ cambioEquipo(){
     // dialogRef.afterClosed().subscribe(result => {
     // });
 
-    
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = "800px";
-    dialogConfig.height= "800px"
+    dialogConfig.height = "800px"
     //dialogConfig.data = { orderItemIndex, OrderID };
     this.dialog.open(ListarProductoComponent, dialogConfig).afterClosed().subscribe(res => {
-    //  this.updateGrandTotal();
-    console.log(res);
-    this.asignarValoresProducto(res);
+      //  this.updateGrandTotal();
+      console.log(res);
+      this.asignarValoresProducto(res);
     });
   }
 
 
-  asignarValoresProducto(data:any){
-    this.idProductoCambio=data.idProducto;
+  asignarValoresProducto(data: any) {
+    this.idProductoCambio = data.numeroSerie;
+
     this.formularioProductoDanado.reset({
       seried: data.numeroSerie || '',
-      nombred: data.nombre||'',
-      marcad: data.marca||'',
-      modelod: data.modelo||'',
+      nombred: data.nombre || '',
+      marcad: data.marca || '',
+      modelod: data.modelo || '',
     });
   }
 

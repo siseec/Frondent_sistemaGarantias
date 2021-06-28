@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 //import { Proveedor } from 'src/app/proveedores/model/proveedor-interface';
 //import { Proveedor } from 'src/app/garantia/model/OrdenTrabajo';
+import { CambioProducto } from '../../garantia/model/OrdenTrabajo';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,15 @@ export class ProductoService {
   listarporCategoria(cat:string){
     //http://localhost:8080/sistema_garantias/rest/
     return this.http.get<Producto[]>(environment.ip+'inventario/listaProductoCategoria?categoria='+cat);
+  }
+
+  BuscarProductoSerie(numeroSerie:string){
+    const url=environment.ip+'inventario/productoSerie?numeroSerie='+numeroSerie;   
+    return  this.http.get<Producto>(url);
+  }
+
+  CambioProducto(cambio:any){
+    const url=environment.ip+'inventario/guardarCambioProducto';
+    return this.http.post<any>(url,cambio,{headers: {'Content-Type': 'application/json; charset=UTF-8'}});
   }
 }

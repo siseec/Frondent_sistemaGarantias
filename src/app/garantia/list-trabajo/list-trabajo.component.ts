@@ -27,6 +27,7 @@ export class ListTrabajoComponent implements OnInit {
     this.http.get<OrdenTrabajo[]>(environment.ip + 'orden/listaOrden').subscribe(data => {
       this.OrdenTrabajos = data;
     });
+    console.log('miki');
 
   }
 

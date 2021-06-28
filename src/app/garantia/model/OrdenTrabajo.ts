@@ -15,6 +15,7 @@ export interface Detalle {
 export interface OrdenTrabajo {
     idOrdenTrabajo?:number;
     numeroOrden?:         string;
+    categoria?:            string;
     nombreEquipo?:        string;
     numeroSerie?:         string;
     marca?:               string;

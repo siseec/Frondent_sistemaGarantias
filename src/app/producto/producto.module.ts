@@ -6,12 +6,14 @@ import { CrearProductoComponent } from './crear-producto/crear-producto.componen
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CambioProductoProveedorComponent } from './cambio-producto-proveedor/cambio-producto-proveedor.component';
 
 
 @NgModule({
   declarations: [
     CrearProductoComponent,
-    ListarProductoComponent
+    ListarProductoComponent,
+    CambioProductoProveedorComponent
   ],
   imports: [
     CommonModule,

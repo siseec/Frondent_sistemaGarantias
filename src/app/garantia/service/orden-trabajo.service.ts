@@ -31,7 +31,7 @@ export class OrdenTrabajoService {
   }
 
   cambioEquipo(cambioProducto:any){
-    const urls = environment.ip+'inventario/guardarDetalleCambio';
+    const urls = environment.ip+'inventario/guardarCambioOrden';
 
     return this.http.post<any>(urls,cambioProducto,{headers: 
       {'Content-Type': 'application/json; charset=UTF-8'}}

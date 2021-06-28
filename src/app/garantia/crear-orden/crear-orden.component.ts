@@ -9,14 +9,21 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 //import { environment } from '../../../environments/conexion';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Categoria } from '../../producto/model/producto-Interface';
+import { ProductoService } from '../../producto/service/producto.service';
 
 @Component({
   selector: 'app-crear-orden',
   templateUrl: './crear-orden.component.html',
   styleUrls: ['./crear-orden.component.css']
 })
-export class CrearOrdenComponent {
+export class CrearOrdenComponent implements OnInit {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  
+  
 
+  listaCategorias:Categoria[]=[];
 
   @ViewChild('txtnumeroOrden') txtnumeroOrden!: ElementRef<HTMLInputElement>;
   @ViewChild('txtnombreEquipo') txtnombreEquipo!: ElementRef<HTMLInputElement>;
@@ -70,6 +77,8 @@ export class CrearOrdenComponent {
   pdireccion: string;
   pcorreo: string;
 
+  categoria:string;
+
   formularioOrder:FormGroup=this.fb.group({
     numeroOrden:  [],
     nombreEquipo: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(20)]],
@@ -82,8 +91,15 @@ export class CrearOrdenComponent {
 
   });
 
+  ngOnInit(): void {
+    this.serviceProducto.listaCategoria().subscribe(datos =>{
+      //console.log(datos);
+      this.listaCategorias=datos;
+    });
+  }
   constructor(private http: HttpClient,
               private router: Router,
+              private  serviceProducto:ProductoService,
               private fb:FormBuilder) { }
 
 
@@ -107,6 +123,7 @@ export class CrearOrdenComponent {
         "montoFactura": this.montoFactura,
         "fechaFactura": this.fechaFactura,
         "aniosGarantia": this.aniosGarantia,
+        "categoria":this.categoria,
         "usuario": {
           "idUsuario": 1
         },
@@ -127,6 +144,7 @@ export class CrearOrdenComponent {
           "correo": this.pcorreo
         }
       };
+      console.log(userPrueba);
 
       this.http.post<any>(environment.ip + 'orden/guardar',
       userPrueba, {

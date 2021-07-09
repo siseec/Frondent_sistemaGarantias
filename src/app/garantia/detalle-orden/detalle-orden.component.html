@@ -257,7 +257,7 @@
               <table class="table">
                 <thead class=" text-primary">
                   <th>
-                    ID
+                    Estado
                   </th>
 
                   <th>
@@ -278,7 +278,7 @@
                 <tbody>
                   <tr *ngFor="let item of detalles">
                     <td>
-                      {{item.idEstado}}
+                      {{item.historialEstado.nombre}}
                     </td>
                     <td>
                       {{item?.fecha | date:'shortDate'}}

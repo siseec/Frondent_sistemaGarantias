@@ -1,16 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
-
-
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-//import { environment } from '../../../environments/conexion';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Categoria } from '../../producto/model/producto-Interface';
 import { ProductoService } from '../../producto/service/producto.service';
+import { ProveedorService } from '../../proveedores/service/proveedor.service';
+import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
 
 @Component({
   selector: 'app-crear-orden',
@@ -18,14 +16,7 @@ import { ProductoService } from '../../producto/service/producto.service';
   styleUrls: ['./crear-orden.component.css']
 })
 export class CrearOrdenComponent implements OnInit {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
-  
-  
 
-  listaCategorias:Categoria[]=[];
-
-  @ViewChild('txtnumeroOrden') txtnumeroOrden!: ElementRef<HTMLInputElement>;
   @ViewChild('txtnombreEquipo') txtnombreEquipo!: ElementRef<HTMLInputElement>;
   @ViewChild('txtnumeroSerie') txtnumeroSerie!: ElementRef<HTMLInputElement>;
   @ViewChild('txtmarca') txtmarca!: ElementRef<HTMLInputElement>;
@@ -36,21 +27,6 @@ export class CrearOrdenComponent implements OnInit {
   @ViewChild('txtmontoFactura') txtmontoFactura!: ElementRef<HTMLInputElement>;
   @ViewChild('txtfechaFactura') txtfechaFactura!: ElementRef<HTMLInputElement>;
 
-  @ViewChild('txtcedula') txtcedula!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtnombres') txtnombres!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtapellidos') txtapellidos!: ElementRef<HTMLInputElement>;
-  @ViewChild('txttelefono') txttelefono!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtdireccion') txtdireccion!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtcorreo') txtcorreo!: ElementRef<HTMLInputElement>;
-
-  @ViewChild('txtpcedula') txtpcedula!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpnombres') txtpnombres!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpapellidos') txtpapellidos!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtptelefono') txtptelefono!: ElementRef<HTMLInputElement>;
-  @ViewChild('txtpdireccion') txtpdireccion!: ElementRef<HTMLInputElement>;;
-  @ViewChild('txtpcorreo') txtpcorreo!: ElementRef<HTMLInputElement>;
-
-  numeroOrden: string;
   nombreEquipo: string;
   numeroSerie: string;
   marca: string;
@@ -58,49 +34,57 @@ export class CrearOrdenComponent implements OnInit {
   observacionesEquipo: string;
 
   numeroFactura: string;
-  //fecha: Date;
   montoFactura: number;
   fechaFactura: Date;
   aniosGarantia: number = 1;
 
-  cedula: string;
-  nombres: string;
-  apellidos: string;
-  telefono: string;
-  direccion: string;
-  correo: string;
+  cliente: Cliente;
+  categoria: string;
+  proveedor: Proveedor;
+  listaProveedor: Proveedor[] = [];
+  listaCategorias: Categoria[] = [];
 
-  pcedula: string;
-  pnombres: string;
-  papellidos: string;
-  ptelefono: string;
-  pdireccion: string;
-  pcorreo: string;
-
-  categoria:string;
-
-  formularioOrder:FormGroup=this.fb.group({
-    numeroOrden:  [],
-    nombreEquipo: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(20)]],
-    numeroSerie:  ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
-    marca:        [],
-    modelo:       [],
-    observaciones:[],
-    numeroFactura:[],
-    montoFactura: []
-
+  formularioCliente: FormGroup = this.fb.group({
+    cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
+    nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+    direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    correo: ['', [Validators.required, Validators.pattern(emailPattern)]],
   });
 
+  // formularioOrden: FormGroup = this.fb.group({
+  //   nombreEquipo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+  //   numeroSerie: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+  //   marca: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+  //   modelo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+  //   observaciones: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(120)]],
+  //   numeroFactura: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+  //   montoFactura: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(8)]],
+  //   fechaFactura: ['', [Validators.required,]],
+  //   aniosGarantia: [1, [Validators.required, Validators.maxLength(3)]],
+  // });
+
+  formularioProveedor: FormGroup = this.fb.group({
+    cedulap: ['', Validators.required],
+    nombresp: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidosp: ['', []],
+    telefonop: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
+    direccionp: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    correop: ['', [Validators.required, Validators.pattern(emailPattern)]],
+  });
+
+
   ngOnInit(): void {
-    this.serviceProducto.listaCategoria().subscribe(datos =>{
-      //console.log(datos);
-      this.listaCategorias=datos;
-    });
+    this.listarProveedor_Categoria();
   }
+
+
   constructor(private http: HttpClient,
-              private router: Router,
-              private  serviceProducto:ProductoService,
-              private fb:FormBuilder) { }
+    private router: Router,
+    private serviceProveedor: ProveedorService,
+    private serviceProducto: ProductoService,
+    private fb: FormBuilder) { }
 
 
 
@@ -110,114 +94,167 @@ export class CrearOrdenComponent implements OnInit {
     if (!validacion) {
       Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
     } else {
+
+      const idUsuario = localStorage.getItem('id');
+
+      const { cedula, nombres, apellidos, telefono, direccion, correo } = this.formularioCliente.value;
+      const { cedulap, nombresp, apellidosp, telefonop, direccionp, correop } = this.formularioProveedor.value;
+
       const userPrueba: OrdenTrabajo =
       {
-        "numeroOrden": this.numeroOrden,
         "nombreEquipo": this.nombreEquipo,
         "numeroSerie": this.numeroSerie,
         "marca": this.marca,
         "modelo": this.modelo,
+        "categoria": this.categoria,
         "observacionesEquipo": this.observacionesEquipo,
         "numeroFactura": this.numeroFactura,
         "fecha": this.fechaFactura,
         "montoFactura": this.montoFactura,
         "fechaFactura": this.fechaFactura,
         "aniosGarantia": this.aniosGarantia,
-        "categoria":this.categoria,
         "usuario": {
-          "idUsuario": 1
+          "idUsuario": idUsuario
         },
         "cliente": {
-          "cedula": this.cedula,
-          "nombres": this.nombres,
-          "apellidos": this.apellidos,
-          "telefono": this.telefono,
-          "direccion": this.direccion,
-          "correo": this.correo
+          "cedula": cedula,
+          "nombres": nombres,
+          "apellidos": apellidos,
+          "telefono": telefono,
+          "direccion": direccion,
+          "correo": correo
         },
         "proveedor": {
-          "cedula": this.pcedula,
-          "nombres": this.pnombres,
-          "apellidos": this.papellidos,
-          "telefono": this.ptelefono,
-          "direccion": this.pdireccion,
-          "correo": this.pcorreo
+          "cedula": cedulap,
+          "nombres": nombresp,
+          "apellidos": apellidosp || 'none',
+          "telefono": telefonop,
+          "direccion": direccionp,
+          "correo": correop
         }
       };
-      console.log(userPrueba);
 
       this.http.post<any>(environment.ip + 'orden/guardar',
-      userPrueba, {
+        userPrueba, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         }
       }).subscribe(
         data => {
-          console.log(data);
+        //  console.log(data);
+          
           if (data.codigo == 1) {
             this.limpiarCampos();
-            Swal.fire('Creacion Correcta', 'Su Orden fue Ingresada', 'success')
+            Swal.fire('Creacion Correcta', 'Su Orden fue Ingresada', 'success');
+            this.router.navigate(['/orden/listar']);
           } else {
             Swal.fire('Error en la Creacion', data.mensaje, 'warning')
+          }
+
+          if (data.codigo == 2) {
+            Swal.fire('Su Garantia No se Ingreso', data.mensaje, 'info');
           }
         });
 
     }
-   // this.limpiarCampos();
-
   }
 
   buscarCliente() {
-
-    const valor = this.txtcedula.nativeElement.value;
-    if (valor != null || valor.trim() != '') {
-      this.http.get<Cliente>(environment.ip + 'usuario/clienteCedula?cedula=' + valor).subscribe(data => {
+    const { cedula } = this.formularioCliente.value;
+    if (cedula != null) {
+      this.http.get<Cliente>(environment.ip + 'usuario/clienteCedula?cedula=' + cedula).subscribe(data => {
         if (data != null) {
-          // this.cedula = data.cedula;
-          this.nombres = data.nombres;
-          this.apellidos = data.apellidos;
-          this.telefono = data.telefono;
-          this.direccion = data.direccion;
-          this.correo = data.correo;
+          this.formularioCliente.reset({
+            cedula: data.cedula,
+            nombres: data.nombres,
+            apellidos: data.apellidos,
+            telefono: data.telefono,
+            direccion: data.direccion,
+            correo: data.correo,
+          });
         } else {
+          this.formularioCliente.reset();
           Swal.fire('No existe el Cliente');
-          this.limpiarCliente();
         }
-
       });
-    } else {
-      console.log('no hay valor')
     }
   }
 
-  buscarProveedor() {
+  capturar() {
+    this.formularioProveedor.reset({
+      cedulap: this.proveedor.cedula,
+      nombresp: this.proveedor.nombres,
+      apellidosp: this.proveedor.apellidos || 'none',
+      telefonop: this.proveedor.telefono,
+      direccionp: this.proveedor.direccion,
+      correop: this.proveedor.correo,
+    });
+  }
 
-    const valor = this.txtpcedula.nativeElement.value;
-    if (valor != null || valor.trim() != '') {
-      this.http.get<Proveedor>(environment.ip + 'usuario/proveeedorcedula?cedula=' + valor).subscribe(data => {
-        console.log(data);
-        if (data != null) {
-          // this.pcedula = data.cedula;
-          this.txtpnombres.nativeElement.value = data.nombres;
-          this.txtpapellidos.nativeElement.value = data.apellidos;
-          this.txtptelefono.nativeElement.value = data.telefono;
-          this.txtpdireccion.nativeElement.value = data.direccion;
-          this.txtpcorreo.nativeElement.value = data.correo;
-        } else {
-          Swal.fire('No existe el proveedor');
-          this.limpiarProveedor();
 
+  listarProveedor_Categoria() {
+    this.serviceProveedor.listarProveedor().subscribe(data => {
+      this.listaProveedor = data;
+    }, (err) => {
+      console.log(err);
+    });
+
+    
+    this.serviceProducto.listaCategoria().subscribe(datos => {
+      this.listaCategorias = datos;
+    });
+  }
+
+  campoNoValido(campo: string) {
+    return this.formularioCliente.get(campo)?.invalid
+      && this.formularioCliente.get(campo)?.touched;
+  }
+
+  validarCedula(campo: string) {
+    return this.formularioCliente.controls[campo].errors
+      && this.formularioCliente.controls[campo].touched;
+  }
+
+  verificarCedula(control: FormControl) {
+    const valor: string = control.value?.trim();
+    if (valor) {
+      let tercerDigito = parseInt(valor.substring(2, 3));
+      if (tercerDigito < 6) {
+        // El ultimo digito se lo considera dígito verificador
+        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        let verificador = parseInt(valor.substring(9, 10));
+        let suma: number = 0;
+        let digito: number = 0;
+        for (let i = 0; i < (valor.length - 1); i++) {
+          digito = parseInt(valor.substring(i, i + 1)) * coefValCedula[i];
+          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
         }
-      });
-    } else {
-      console.log('no hay valor')
-    }
+        suma = Math.round(suma);
+        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
+          return null;
 
+        } else if ((10 - (Math.round(suma % 10))) == verificador) {
+          return null;
+        } else {
+          return {
+            cedula: false
+          }
+        }
+      } else {
+        return {
+          cedula: false
+        }
+      }
+    } else {
+      return {
+        cedula: false
+      }
+    }
   }
 
   limpiarCampos() {
-
-    this.txtnumeroOrden.nativeElement.value = '';
+    this.formularioCliente.reset();
+    this.formularioProveedor.reset();
     this.txtnombreEquipo.nativeElement.value = '';
     this.txtnumeroSerie.nativeElement.value = '';
     this.txtmarca.nativeElement.value = '';
@@ -225,34 +262,10 @@ export class CrearOrdenComponent implements OnInit {
     this.txtobservaciones.nativeElement.value = '';
     this.txtnumeroFactura.nativeElement.value = '';
     this.txtmontoFactura.nativeElement.value = '';
-
-    this.limpiarCliente();
-    this.limpiarProveedor();
   }
 
   validarCampos() {
     if (
-      this.txtcedula.nativeElement.value == '' ||
-      this.txtcedula.nativeElement.value == undefined
-      ||
-      this.txtcorreo.nativeElement.value == '' ||
-      this.txtcorreo.nativeElement.value == undefined
-      ||
-      this.txtnombres.nativeElement.value == '' ||
-      this.txtnombres.nativeElement.value == undefined
-      ||
-      this.txtapellidos.nativeElement.value == '' ||
-      this.txtapellidos.nativeElement.value == undefined
-      ||
-      this.txtdireccion.nativeElement.value == '' ||
-      this.txtdireccion.nativeElement.value == undefined
-      ||
-      this.txttelefono.nativeElement.value == '' ||
-      this.txttelefono.nativeElement.value == undefined
-      ||
-      this.txtnumeroOrden.nativeElement.value == '' ||
-      this.txtnumeroOrden.nativeElement.value == undefined
-      ||
       this.txtnombreEquipo.nativeElement.value == '' ||
       this.txtnombreEquipo.nativeElement.value == undefined
       ||
@@ -275,23 +288,9 @@ export class CrearOrdenComponent implements OnInit {
       this.txtmontoFactura.nativeElement.value == '' ||
       this.txtmontoFactura.nativeElement.value == undefined
       ||
-      this.txtpcedula.nativeElement.value == '' ||
-      this.txtpcedula.nativeElement.value == undefined
-      ||
-      this.txtpnombres.nativeElement.value == '' ||
-      this.txtpnombres.nativeElement.value == undefined
-      ||
-      this.txtpapellidos.nativeElement.value == '' ||
-      this.txtpapellidos.nativeElement.value == undefined
-      ||
-      this.txtptelefono.nativeElement.value == '' ||
-      this.txtptelefono.nativeElement.value == undefined
-      ||
-      this.txtpdireccion.nativeElement.value == '' ||
-      this.txtpdireccion.nativeElement.value == undefined
-      ||
-      this.txtpcorreo.nativeElement.value == '' ||
-      this.txtpcorreo.nativeElement.value == undefined
+      this.formularioProveedor.invalid
+      &&
+      this.formularioCliente.invalid
 
     ) {
       return false;
@@ -306,56 +305,6 @@ export class CrearOrdenComponent implements OnInit {
     this.router.navigate(['/orden/listar']);
   }
 
-  limpiarCliente() {
-    this.txtcedula.nativeElement.value = '';
-    this.txtnombres.nativeElement.value = '';
-    this.txtapellidos.nativeElement.value = '';
-    this.txttelefono.nativeElement.value = '';
-    this.txtdireccion.nativeElement.value = '';
-    this.txtcorreo.nativeElement.value = '';
-  }
-  limpiarProveedor() {
-    this.txtpcedula.nativeElement.value = '';
-    this.txtpnombres.nativeElement.value = '';
-    this.txtpapellidos.nativeElement.value = '';
-    this.txtptelefono.nativeElement.value = '';
-    this.txtpdireccion.nativeElement.value = '';
-    this.txtpcorreo.nativeElement.value = '';
-  }
-
-
-  public validador;
-  validadorDeCedula(cedula: String) {
-    let cedulaCorrecta = false;
-    if (cedula.length == 10) {
-      let tercerDigito = parseInt(cedula.substring(2, 3));
-      if (tercerDigito < 6) {
-        // El ultimo digito se lo considera dígito verificador
-        let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
-        let verificador = parseInt(cedula.substring(9, 10));
-        let suma: number = 0;
-        let digito: number = 0;
-        for (let i = 0; i < (cedula.length - 1); i++) {
-          digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
-          suma += ((parseInt((digito % 10) + '') + (parseInt((digito / 10) + ''))));
-        }
-        suma = Math.round(suma);
-        if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10) == verificador)) {
-          cedulaCorrecta = true;
-        } else if ((10 - (Math.round(suma % 10))) == verificador) {
-          cedulaCorrecta = true;
-        } else {
-          cedulaCorrecta = false;
-        }
-      } else {
-        cedulaCorrecta = false;
-      }
-    } else {
-      cedulaCorrecta = false;
-    }
-    this.validador = cedulaCorrecta;
-
-  }
 
 }
 

@@ -8,25 +8,21 @@
 
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Ordenes de trabajo</h4>
-                       
-                    </div>
 
-                   
+                    </div>
                     <br>
-                    
 
                     <div class="card-body">
-
-
-                        <div >
+                        <div>
                             <a class="btn btn-success" routerLink="/orden/crear" style="margin-right:10px">
                                 Añadir
                                 Nueva Orden</a>
-                                <br>
-                            <input type="text" class="form-control mb-2" placeholder="Buscar Orden" 
-                            #txtSearch
-                            (keyup.enter)="ObetnerParametroPipe()" />
+                            <br>
+                            <br>
+                            <input type="text" class="form-control mb-2" placeholder="Buscar Orden" #txtSearch
+                                (keyup.enter)="ObetnerParametroPipe()" />
                         </div>
+                        <br>
 
                         <div class="table-responsive">
                             <table class="table">
@@ -60,9 +56,11 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of OrdenTrabajos | filtroOrden:search">
+                                    <tr *ngFor="let item of OrdenTrabajos | filtroOrden:search"
+                                    >
+                                    
                                         <td>
-                                            {{item?.idOrdenTrabajo}}
+                                            {{item?.numeroOrden}}
 
                                         </td>
 
@@ -85,10 +83,22 @@
                                         <td>
                                             {{item?.estado}}
                                         </td>
+                                        <td *ngIf="item?.estado ==='En proceso' ">
+                                            <button class="btn btn-warning border">
+                                            </button>
+                                        </td>
 
+                                        <td *ngIf="item?.estado ==='Garantia negado' ">
+                                               <button class="btn btn-danger border">
+                                               </button>
+                                        </td>
+
+                                         <td *ngIf="item?.estado ==='Finalizo' ">
+                                               <button class="btn btn-success border">
+                                               </button>                             
+                                         </td>
 
                                         <td>
-
                                             <button routerLink="/orden/detalle" class="btn btn-info"
                                                 (click)="obtenerOrden(item)" color="primary">Detalle</button>
                                         </td>
@@ -105,6 +115,57 @@
                 </div>
             </div>
         </div>
-        
+      
+
+        <!-- <mat-card>
+            <mat-card-content>
+              <h2 class="example-h2">Progress spinner configuration</h2>
+          
+              <section class="example-section">
+                <label class="example-margin">Color:</label>
+                <mat-radio-group [(ngModel)]="color">
+                  <mat-radio-button class="example-margin" value="primary">
+                    Primary
+                  </mat-radio-button>
+                  <mat-radio-button class="example-margin" value="accent">
+                    Accent
+                  </mat-radio-button>
+                  <mat-radio-button class="example-margin" value="warn">
+                    Warn
+                  </mat-radio-button>
+                </mat-radio-group>
+              </section>
+          
+              <section class="example-section">
+                <label class="example-margin">Mode:</label>
+                <mat-radio-group [(ngModel)]="mode">
+                  <mat-radio-button class="example-margin" value="determinate">
+                    Determinate
+                  </mat-radio-button>
+                  <mat-radio-button class="example-margin" value="indeterminate">
+                    Indeterminate
+                  </mat-radio-button>
+                </mat-radio-group>
+              </section>
+          
+              <section class="example-section" *ngIf="mode === 'determinate'">
+                <label class="example-margin">Progress:</label>
+                <mat-slider class="example-margin" [(ngModel)]="value"></mat-slider>
+              </section>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card>
+            <mat-card-content>
+              <h2 class="example-h2">Result</h2>
+          
+              <mat-progress-spinner
+                  class="example-margin"
+                  [color]="color"
+                  [mode]="mode"
+                  [value]="value">
+              </mat-progress-spinner>
+            </mat-card-content>
+          </mat-card> -->
     </div>
 </div>

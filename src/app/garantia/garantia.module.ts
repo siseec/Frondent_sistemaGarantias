@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 import { GarantiaRoutingModule } from './garantia-routing.module';
 import { ListTrabajoComponent } from './list-trabajo/list-trabajo.component';
@@ -22,6 +26,8 @@ import { CambioProductoComponent } from './cambio-producto/cambio-producto.compo
 
 
 //import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
+import { FormsModule } from '@angular/forms';
+import { ListaProductoModule } from '../producto/listar-producto/lista-producto.module';
 
 
 @NgModule({
@@ -37,8 +43,9 @@ import { CambioProductoComponent } from './cambio-producto/cambio-producto.compo
   imports: [
     CommonModule,
     GarantiaRoutingModule,
-    //LayoutModule,
     RouterModule,
+    FormsModule,
+    ListaProductoModule,
     
     //modulos para los formularios reactivos
     MaterialModule,
@@ -47,6 +54,11 @@ import { CambioProductoComponent } from './cambio-producto/cambio-producto.compo
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+// // modulos del spoiner
+//     MatProgressSpinnerModule,
+//     MatRadioModule,
+//     MatProgressBarModule
+    
   ],
   exports: [
 

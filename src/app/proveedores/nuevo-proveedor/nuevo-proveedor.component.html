@@ -14,8 +14,7 @@
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" maxlength="13" minlength="10"
-                                        placeholder="CI/RUC" 
-                                        formControlName="cedula">
+                                        placeholder="CI/RUC" formControlName="cedula">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="validarCedula('cedula')">
                                     Este campo es obligatorio
@@ -26,8 +25,7 @@
                             <div class="form-group">
 
                                 <div class="col-sm-10">
-                                    <input type="text"class="form-control"
-                                        placeholder="Nombre"
+                                    <input type="text" class="form-control" placeholder="Nombre"
                                         formControlName="nombres">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="campoNoValido('nombres')">
@@ -38,8 +36,7 @@
                             <div class="form-group">
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"
-                                        placeholder="Apellido"
+                                    <input type="text" class="form-control" placeholder="Apellido"
                                         formControlName="apellidos">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="campoNoValido('apellidos')">
@@ -50,8 +47,7 @@
                             <div class="form-group">
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"
-                                        placeholder="Direccion" 
+                                    <input type="text" class="form-control" placeholder="Direccion"
                                         formControlName="direccion">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="campoNoValido('direccion')">
@@ -62,9 +58,8 @@
                             <div class="form-group">
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control"
-                                    placeholder="Telefono"
-                                    formControlName="telefono">
+                                    <input type="text" class="form-control" placeholder="Telefono"
+                                        formControlName="telefono">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="campoNoValido('telefono')">
                                     Este campo es obligatorio
@@ -75,7 +70,7 @@
 
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" placeholder="Email"
-                                    formControlName="correo">
+                                        formControlName="correo">
                                 </div>
                                 <span class="form-text text-danger" *ngIf="campoNoValido('correo')">
                                     Este campo es obligatorio

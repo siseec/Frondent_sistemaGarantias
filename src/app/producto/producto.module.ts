@@ -5,24 +5,35 @@ import { ProductoRoutingModule } from './producto-routing.module';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 import { MaterialModule } from '../material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CambioProductoProveedorComponent } from './cambio-producto-proveedor/cambio-producto-proveedor.component';
+import { ListaProductoModule } from './listar-producto/lista-producto.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
   declarations: [
     CrearProductoComponent,
-    ListarProductoComponent,
     CambioProductoProveedorComponent
   ],
   imports: [
     CommonModule,
     ProductoRoutingModule,
+    ReactiveFormsModule,
+    ListaProductoModule,
+    FormsModule,
+
     MaterialModule,
-    ReactiveFormsModule
+    MatCardModule,
+    MatDialogModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  exports:[
-    ListarProductoComponent
-  ]
+  
 })
 export class ProductoModule { }

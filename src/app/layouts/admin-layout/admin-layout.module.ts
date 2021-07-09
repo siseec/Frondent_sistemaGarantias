@@ -20,6 +20,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { AdminLayoutRoutingModule } from './admin-layout.routing.module';
 import { AdminLayoutComponent } from './admin-layout.component';
 import { MaterialModule } from '../../material/material.module';
+import { InventarioModule } from '../../inventario/inventario.module';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { MaterialModule } from '../../material/material.module';
     InicioModule,
     ProductoModule,
     AdminLayoutRoutingModule,
+    InventarioModule
     //MaterialModule
 
   ],

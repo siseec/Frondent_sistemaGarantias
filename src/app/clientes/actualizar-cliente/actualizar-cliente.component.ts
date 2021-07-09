@@ -49,7 +49,7 @@ export class ActualizarClienteComponent implements OnInit {
         apellidos: this.apellidos,
         telefono: this.telefono,
         direccion: this.direccion,
-        correo: this.direccion
+        correo: this.correo
       }
 
       this.clienteService.actualizarCliente(client).subscribe(

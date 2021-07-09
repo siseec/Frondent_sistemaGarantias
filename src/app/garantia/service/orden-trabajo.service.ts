@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrdenTrabajo, Detalle, ProductoDanado, CambioProducto } from '../model/OrdenTrabajo';
+import { OrdenTrabajo, Detalle, ProductoDanado, CambioProducto, HistorialEstado } from '../model/OrdenTrabajo';
 
 //import { Producto } from '../ src/app/producto/model/producto-Interface';
 import { Productos, Producto } from '../../producto/model/producto-Interface';
@@ -36,6 +36,11 @@ export class OrdenTrabajoService {
     return this.http.post<any>(urls,cambioProducto,{headers: 
       {'Content-Type': 'application/json; charset=UTF-8'}}
       );
+  }
+
+  listaEstadosHistoria(){
+    const urls = environment.ip+'orden/listaHistorialEstado';
+    return this.http.get<HistorialEstado[]>(urls);
   }
 
 }

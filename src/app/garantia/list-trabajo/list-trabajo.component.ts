@@ -4,6 +4,8 @@ import { OrdenTrabajo } from '../model/OrdenTrabajo';
 //import { ServidorConexion } from '../../../environments/conexion';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { environment } from '../../../environments/environment';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 
 
@@ -19,6 +21,9 @@ export class ListTrabajoComponent implements OnInit {
 
 
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  value = 100;
 
   constructor(private http: HttpClient, private ordeServicio: OrdenTrabajoService) { }
 
@@ -27,7 +32,7 @@ export class ListTrabajoComponent implements OnInit {
     this.http.get<OrdenTrabajo[]>(environment.ip + 'orden/listaOrden').subscribe(data => {
       this.OrdenTrabajos = data;
     });
-    console.log('miki');
+    
 
   }
 

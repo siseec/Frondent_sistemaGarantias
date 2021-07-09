@@ -45,15 +45,14 @@ export class NuevoClienteComponent {
         direccion: direccion,
         correo: correo
       };
-      console.log(client);
 
       this.clienteService.crearCliente(client).subscribe(
         data => {
           if (data.codigo == 1) {
             this.miFormulario.reset();
-            Swal.fire('Ingreso Correcto', 'Cliente Ingresado Correctamente', 'success')
+            Swal.fire('Ingreso Correcto', 'Cliente Ingresado Correctamente', 'success');
+            this.router.navigate(['/cliente/listar']);
           } else {
-            console.log(data);
             Swal.fire('Error en el Ingreso', data.mensaje, 'warning')
           }
         });
@@ -91,7 +90,7 @@ export class NuevoClienteComponent {
 
 
   cancelar() {
-  //  this.formularioUsuario.reset();
+   this.miFormulario.reset();
     this.router.navigate(['/cliente/listar']);
   }
 

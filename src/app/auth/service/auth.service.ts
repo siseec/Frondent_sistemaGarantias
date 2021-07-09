@@ -11,6 +11,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
 
+  id:number;
   constructor(private http: HttpClient) { }
 
   login(correos: string, pass: string) {
@@ -18,7 +19,10 @@ export class AuthService {
       .pipe(
         tap(resp => {
           if (resp.ok) {
+            
             localStorage.setItem('token', resp.token!);
+            localStorage.setItem('id', resp.idUsuario!);
+            localStorage.setItem('nombreApellido', resp.nombreApellido!);
           }
         }),
         map(resp => resp.ok),

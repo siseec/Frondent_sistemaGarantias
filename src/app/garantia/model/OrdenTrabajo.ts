@@ -9,9 +9,16 @@ export interface Detalle {
     ubicacion?:      string;
     descripcion?: string;
     imagen?:      string;
-    idOrdenTrabajo?: number
+    idOrdenTrabajo?: number;
+    historialEstado?: HistorialEstado;
+    idHistorialEstado?:number
 }
 
+
+export interface HistorialEstado {
+    idHistorial: number;
+    nombre:      string;
+}
 export interface OrdenTrabajo {
     idOrdenTrabajo?:number;
     numeroOrden?:         string;
@@ -42,7 +49,7 @@ export interface OrdenTrabajo {
     correo?:      string;
 }
 export interface Usuario {
-    idUsuario:  number;
+    idUsuario:  string;
    
 }
  export interface Proveedor {

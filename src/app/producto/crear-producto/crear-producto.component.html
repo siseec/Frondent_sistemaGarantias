@@ -77,7 +77,33 @@
                  Este campo es obligatorio
                  </span>
                 </div>
+
+                <!-- <div class="col-md-7">
+                  <mat-form-field class="example-full-width">
+                    <input matInput  
+                    formControlName="origen"
+                    placeholder="Origen" 
+                    type="text">
+                  </mat-form-field>
+                  <span class="form-text text-danger"
+                  *ngIf="ValidarCamposProducto('origen')">
+                 Este campo es obligatorio
+                 </span>
+                </div> -->
   
+                <div class="col-md-7">
+                  <label>Origen </label>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Selecione</mat-label>
+                    <mat-select  formControlName="origen">
+                      <mat-option *ngFor="let item of origen" value={{item}}>{{item}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <span class="form-text text-danger"
+                  *ngIf="ValidarCamposProducto('origen')">
+                 Este campo es obligatorio
+                 </span>
+                </div>
 
   
                 <!-- <div class="col-md-7">
@@ -114,22 +140,95 @@
               <!-- </div> -->
               <br>
               <br>
-          <form autocomplete="off" [formGroup]="formularioProveedor">
+               <!-- Formulario Proveedor -->
+            <div class="row">
+              <div class="col-md-12">
+                <label>Proveedor</label>
+                
+                <div class="row" >
+                  <div class="col-md-4">
+                    <label class="form-label">Seleccione Proveedor</label>
+                    <select [(ngModel)]="proveedor" (change)="capturar()" class="form-control">
+                      <!-- <option>Seleccione Proveedor</option> -->
+                      <option [ngValue]="prov" *ngFor="let prov of listaProveedor">
+                        <p> {{ prov.cedula }} </p>
+                        <p> {{prov.nombres | uppercase }} </p>
+                        <p> {{ prov.direccion | uppercase}}</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <hr>
 
+
+                <!-- <div class="col-md-7">
+                  <label>Proveedor </label>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Selecione Proveedor</mat-label>
+                    <mat-select   [(ngModel)]="proveedor" (change)="capturar()" class="form-control">
+                      <mat-option  [ngValue]="prov" *ngFor="let prov of listaProveedor;let i = index">
+                        <p> {{ prov.cedula }} </p>
+                        <p> - {{prov.nombres | uppercase }} </p>
+                        <p>- {{ prov.direccion | uppercase}}</p>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <span class="form-text text-danger"
+                  *ngIf="ValidarCamposProducto('origen')">
+                 Este campo es obligatorio
+                 </span>
+                </div> -->
+
+
+                <form [formGroup]="formularioProveedor" autocomplete="off">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="C.I/RUC" formControlName="cedulap" disabled type="text">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <input matInput formControlName='nombresp'  placeholder="Nombre" type="text">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field disabled class="example-full-width">
+                        <input matInput formControlName="apellidosp"  placeholder="Apellido" type="text">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <input matInput maxlength="10" formControlName="telefonop" placeholder="Telefono" type="text">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <input matInput formControlName="direccionp" maxlength="20" placeholder="Direccion" type="text">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <input matInput maxlength="60" formControlName="correop" placeholder="Correo" type="text">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- fin Formulario Proveedor -->
+  <!--        <form autocomplete="off" [formGroup]="formularioProveedor">
+ 
               <div class="row">
 
                 <div class="col-md-12">
                   <label>Proveedor</label>
-  
-                  <!-- <div class="row">
-                    <div class="col">
-                      <button mat-raised-button (click)="buscarProveedor()" class="btn btn-danger ">
-                        Buscar</button>
-                    </div>
-                  </div> -->
-  
                   <div class="row">
-  
                     <div class="col-md-4">
                       <mat-form-field class="example-full-width">
                         <input matInput 
@@ -208,7 +307,8 @@
                 </div>
 
             </div>
-          </form>
+          </form> -->
+
               <div class="row">
                 <div class="col-md-4">
                   <button mat-raised-button 

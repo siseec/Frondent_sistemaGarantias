@@ -5,5 +5,5 @@
 
 export const environment = {
  production: true,
-  ip: 'http://192.168.0.103:8080/sistema_garantias/rest/'
+  ip: 'http://localhost:8080/sistema_garantias/rest/'
 };

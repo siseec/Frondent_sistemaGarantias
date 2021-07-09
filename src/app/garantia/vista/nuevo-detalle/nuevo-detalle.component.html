@@ -1,44 +1,3 @@
-<!-- <form [formGroup]="newPostForm" >
-
-  <mat-form-field>
-    <mat-label m-r-195>Descripcion</mat-label>
-    <input matInput mat-flat-button placeholder="Descripcion" formControlName="titlePost">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Ubicacion</mat-label>
-    <input matInput mat-flat-button placeholder="Ubicacion" formControlName="contentPost">
-  </mat-form-field>
-
-  <br>
-
-  <div>
-    <label class="custom-file">
-      <input type="file" formControlName="imagePost" />
-      <br>
-      <mat-icon>cloud_upload</mat-icon><span style="text-align: justify;">CHOOSE IMAGE</span>
-    </label>
-  </div>
-
-  <br>
-  <hr>
-
-  <div class="row">
-    <div class="col">
-      <button mat-button mat-flat-button color="accent" style="display: block; width: 100%;"
-        (click)="addNewPost()">ok</button>
-    </div>
-
-    <div class="col">
-      <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;" 
-      (click)="cancelar()"
-      >No
-        Thanks</button>
-    </div>
-  </div>
-
-</form> -->
-
 
 <form  autocomplete="off" [formGroup]="newPostForm" >
   <mat-form-field>
@@ -63,6 +22,18 @@
       <mat-select formControlName="Ubicacion">
         <!-- <mat-option value=""> -- Seleccione Ubicacion -- </mat-option> -->
         <mat-option *ngFor="let item of ubicaciones" value="{{item}}">{{item}}</mat-option>
+      </mat-select>   
+      <span class="form-text text-danger"
+      *ngIf="ValidarCampos('Ubicacion')">Este campo es obligatorio
+      </span>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label m-r-195>Estado de la Garantia</mat-label>
+      <!-- <mat-label>-- --</mat-label> -->
+      <mat-select formControlName="estado">
+        <!-- <mat-option value=""> -- Seleccione Ubicacion -- </mat-option> -->
+        <mat-option *ngFor="let item of estado" value="{{item.idHistorial}}">{{item.nombre}}</mat-option>
       </mat-select>   
       
       <span class="form-text text-danger"

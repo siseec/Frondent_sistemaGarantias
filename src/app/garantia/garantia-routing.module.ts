@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'cambioProducto', component: CambioProductoComponent },
       { path: '**', redirectTo: 'listar' },
     ],
+    
     canActivate: [ValidarTokenGuard],
     canLoad: [ValidarTokenGuard]
   },

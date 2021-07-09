@@ -15,21 +15,27 @@
                 <form [formGroup]="miFormulario">
 
 
-                    <div class="col-md-7">
-                        <label>Categoria </label>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Selecione</mat-label>
-                            <mat-select formControlName="categoria">
-                                <!-- <mat-option value="todos">Todos</mat-option> -->
-                                <mat-option *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}
-                                </mat-option>
-
-                            </mat-select>
-                        </mat-form-field>
-
+                  
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label>Categoria </label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Selecione una Categoria</mat-label>
+                                <mat-select formControlName="categoria">
+                                    <!-- <mat-option value="todos">Todos</mat-option> -->
+                                    <mat-option *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;"
+                                (click)="agregarProducto()">Agragar Producto</button>
+                        </div>
                     </div>
+                    
+                    <hr>
                     <div class="col-md-7">
-
                         <input type="text" class="form-control mb-2" placeholder="Buscar Producto" #txtSearch />
                     </div>
 
@@ -99,7 +105,7 @@
     </div>
 </div>
 <div class="col">
-    <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;"
+    <button mat-button mat-flat-button color="accent" style="display: block; width: 100%;"
         (click)="cancelar()">Cancelar</button>
 </div>
 

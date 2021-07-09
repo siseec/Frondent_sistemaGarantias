@@ -22,7 +22,7 @@ export class NuevoProveedorComponent {
   formularioProveedor: FormGroup = this.fb.group({
     cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
     nombres: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
-    apellidos: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', []],
     telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
     direccion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     correo: ['', [Validators.required, Validators.pattern(emailPattern)]],
@@ -40,23 +40,21 @@ export class NuevoProveedorComponent {
       const prove: Proveedor = {
         "cedula": cedula,
         "nombres": nombres,
-        "apellidos": apellidos,
+        "apellidos": apellidos || 'none',
         "telefono": telefono,
         "direccion": direccion,
         "correo": correo
       };
 
-      console.log(prove)
 
       this.http.post<any>(environment.ip + 'usuario/guardarProveedor', prove, {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         }
       }).subscribe(data => {
-        console.log(data);
-         this.formularioProveedor.reset();
+        this.formularioProveedor.reset();
         if (data.codigo == 1) {
-         
+
           Swal.fire('Creacion Correcta', data.mensaje, 'success').
             then(result => {
               if (result.value) {
@@ -75,15 +73,15 @@ export class NuevoProveedorComponent {
 
 
 
- 
+
 
   cancelar() {
 
-  //  this.formularioProveedor.reset();
+    //  this.formularioProveedor.reset();
     this.router.navigate(['/proveedor/proveedores']);
   }
 
- // limpiarProveedor() {
+  // limpiarProveedor() {
   //   this.formularioProveedor.reset();
   // }
 

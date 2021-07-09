@@ -16,6 +16,8 @@ export class FiltroOrdenPipe implements PipeTransform {
     const filteredOrdenes = ordenes.filter( orden => orden.nombreEquipo.trim().toLowerCase().includes( search.trim().toLocaleLowerCase())
                                             || orden.numeroSerie.trim().toLowerCase().includes( search.trim().toLocaleLowerCase())
                                             || orden.cliente.nombres.trim().toLowerCase().includes( search.trim().toLocaleLowerCase())
+                                            || orden.cliente.cedula.trim().includes( search.trim().toLocaleLowerCase())
+                                            || orden.numeroOrden.trim().includes( search.trim().toLocaleLowerCase())
                                             );
     return filteredOrdenes;
 

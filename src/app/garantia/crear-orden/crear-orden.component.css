@@ -7,3 +7,8 @@ label{
 .card-body .container{
     border-style: solid;
 } */
+.form-control {
+
+    font-size: 17px;
+}
+.bordermk {border-style: solid;}

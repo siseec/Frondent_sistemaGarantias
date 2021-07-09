@@ -35,6 +35,8 @@ export class ProveedorComponent implements OnInit {
 
   filtroProveedor(search: string) {
     this.search = search;
+    //console.log(search);
+    
   }
 
   getProveedor(proveedorRecuperado: Proveedor) {

@@ -14,8 +14,8 @@ const routes: Routes = [
         { path: 'actualizar', component: ActualizarClienteComponent },
         { path: '**', redirectTo: 'listar' }
     ],
-    // canActivate:[ValidarTokenGuard],
-    // canLoad:[ValidarTokenGuard]
+     canActivate:[ValidarTokenGuard],
+     canLoad:[ValidarTokenGuard]
 },
 ];
 

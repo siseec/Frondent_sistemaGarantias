@@ -4,6 +4,7 @@ import { ProductoService } from '../service/producto.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-producto',
@@ -13,7 +14,11 @@ import { switchMap } from 'rxjs/operators';
 export class ListarProductoComponent implements OnInit {
 
   listaproducto: Producto[] = [];
-  listaCategorias: Categoria[] = [];
+  listaCategorias: Categoria[] = [ {
+
+    "nombre": "TODOS"
+}
+];
 
 
   miFormulario: FormGroup = this.fb.group({
@@ -23,20 +28,23 @@ export class ListarProductoComponent implements OnInit {
 
   constructor(private productoService: ProductoService,
     private fb: FormBuilder,
+    private router:Router,
     public dialogRef: MatDialogRef<ListarProductoComponent>,
-            ) { }
+  ) { }
 
   ngOnInit(): void {
 
     this.productoService.listarProductos().subscribe(data => {
-     // console.log(data)
+      // console.log(data)
       this.listaproducto = data;
     });
 
 
     this.productoService.listaCategoria().subscribe(datos => {
       //console.log(datos);
-      this.listaCategorias = datos;
+      for (let item of datos){
+        this.listaCategorias.push(item);
+      }
     });
 
     this.miFormulario.get('categoria')?.valueChanges
@@ -54,15 +62,21 @@ export class ListarProductoComponent implements OnInit {
 
 
 
+  agregarProducto(): void {
+    this.dialogRef.close();
+    this.router.navigate(['/producto/crear']);
+  }
   cancelar(): void {
     this.dialogRef.close();
   }
 
+  
+
   obtenerOrden(orden: any) {
-    this.dialogRef.close(orden);
-    //console.log(orden);
-    // const { categoria } = this.miFormulario.value;
-    // console.log(categoria);
+   this.dialogRef.close(orden);
+    console.log(orden);
+    const { categoria } = this.miFormulario.value;
+    console.log(categoria);
   }
 
 }

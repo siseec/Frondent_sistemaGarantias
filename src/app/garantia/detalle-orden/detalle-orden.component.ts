@@ -57,7 +57,7 @@ export class DetalleOrdenComponent implements OnInit {
   listarDetalles() {
     
     this.http.get<any>(environment.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.ordenDetalle = data.orden;
       this.cliente = data.orden.cliente;
       this.detalles = data.detalles;

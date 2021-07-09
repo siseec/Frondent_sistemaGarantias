@@ -3,17 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { CambioProductoProveedorComponent } from './cambio-producto-proveedor/cambio-producto-proveedor.component';
+import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
 
 const routes: Routes = [
   {
     path:'',
     children: [
-     // { path: 'listar', component: ListarProductoComponent },
+      { path: 'listar', component: ListarProductoComponent },
       { path: 'crear', component: CrearProductoComponent },
       { path: 'cambioproveedor', component: CambioProductoProveedorComponent },
       
       { path: '**', redirectTo: 'crear' },
     ],
+    canActivate:[ValidarTokenGuard],
+    canLoad:[ValidarTokenGuard]
   }
 ];
 

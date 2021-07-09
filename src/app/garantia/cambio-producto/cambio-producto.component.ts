@@ -79,15 +79,6 @@ export class CambioProductoComponent implements OnInit {
 
 
   openDialog(): void {
-    // const dialogRef = this.dialog.open(ListarProductoComponent, {
-    //   height: '700px',
-    //   width: '700px',
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    // });
-
-
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;

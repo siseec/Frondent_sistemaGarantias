@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import Swal from 'sweetalert2';
-import { Categoria, Producto, Productos } from '../model/producto-Interface';
+import { Categoria, Producto, Productos, NumeroSerieProducto } from '../model/producto-Interface';
 import { ProductoService } from '../service/producto.service';
 import { nombreApellidoPattern, emailPattern } from '../../validator/Validaciones';
 import { ProveedorService } from '../../proveedores/service/proveedor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-producto',
@@ -16,16 +17,15 @@ export class CrearProductoComponent implements OnInit {
 
   proveedor: Proveedor;
   listaProveedor: Proveedor[] = [];
-
+  agregarProducto: Proveedor[] = [];
+  listaSeries: NumeroSerieProducto[] = [];
 
   listaCategorias: Categoria[] = [{ "nombre": "TODOS" }];
   origen: String[] = ["Proveedor", "Bodega"];
-
-
-  @ViewChild('txtpcedula') txtpcedula!: ElementRef<HTMLInputElement>;
+  cantidad: number = this.listaSeries.length;
 
   formularioProducto: FormGroup = this.fb.group({
-    serie: ['', [Validators.required, Validators.minLength(3)]],
+    serie: ['', [Validators.minLength(3)]],
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     marca: ['', [Validators.required, Validators.minLength(3)]],
     modelo: ['', [Validators.required, Validators.minLength(3)]],
@@ -33,17 +33,8 @@ export class CrearProductoComponent implements OnInit {
     categoria: ['', [Validators.required, Validators.minLength(3)]],
   });
 
-  // formularioProveedor: FormGroup = this.fb.group({
-  //   cedulap: ['', Validators.required],
-  //  
-  //   
-  //   
-  //  
-  //  
-  // });
-
   formularioProveedor: FormGroup = this.fb.group({
-    cedulap: ['', [Validators.required, ]],
+    cedulap: ['', [Validators.required,]],
     nombresp: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
     apellidosp: ['', []],
     telefonop: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
@@ -52,6 +43,7 @@ export class CrearProductoComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
+    private router: Router,
     private serviceProducto: ProductoService,
     private serviceProveedor: ProveedorService) { }
 
@@ -60,7 +52,6 @@ export class CrearProductoComponent implements OnInit {
       this.listaCategorias = datos;
     });
     this.listarProveedor();
-
   }
 
   crear() {
@@ -68,13 +59,13 @@ export class CrearProductoComponent implements OnInit {
     if (this.formularioProducto.invalid) {
       Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
     } else {
-      const { serie, nombre, marca, modelo,origen, categoria } = this.formularioProducto.value;
+      const { nombre, marca, modelo, origen, categoria } = this.formularioProducto.value;
       const { cedula, nombres, apellidos, telefono, direccion, correo } = this.formularioProveedor.value;
 
       const prod: Productos = {
+        "cantidad": 2,
         "producto": {
           "nombre": nombre,
-          "numeroSerie": serie,
           "marca": marca,
           "modelo": modelo,
           "origen": origen,
@@ -82,16 +73,17 @@ export class CrearProductoComponent implements OnInit {
             "nombre": categoria
           },
           "proveedor": {
-            "cedula": this.proveedor.cedula||cedula,
-            "nombres": this.proveedor.nombres||nombres,
-            "apellidos": this.proveedor.apellidos||apellidos,
-            "telefono": this.proveedor.telefono||telefono,
-            "direccion": this.proveedor.direccion||direccion,
-            "correo": this.proveedor.correo||correo
+            "cedula": this.proveedor.cedula || cedula,
+            "nombres": this.proveedor.nombres || nombres,
+            "apellidos": this.proveedor.apellidos || apellidos,
+            "telefono": this.proveedor.telefono || telefono,
+            "direccion": this.proveedor.direccion || direccion,
+            "correo": this.proveedor.correo || correo
           }
-        }
+        },
+        "numeroSerieProducto": this.listaSeries
       };
-      
+
       this.serviceProducto.crearProducto(prod).subscribe(
         data => {
 
@@ -99,11 +91,20 @@ export class CrearProductoComponent implements OnInit {
             Swal.fire('Creacion Correcta', data.mensaje, 'success');
             this.formularioProducto.reset();
             this.formularioProveedor.reset();
+            setTimeout(() => {
+              this.router.navigate(['/producto/productos']);
+            }, 300);
           } else {
             Swal.fire('Error en la Creacion', 'El Producto no fue Ingresado', 'warning')
           }
         });
     }
+  }
+
+  cancelar(){
+    this.formularioProducto.reset();
+    this.formularioProveedor.reset();
+    this.router.navigate(['/producto/productos']);
   }
 
 
@@ -126,13 +127,9 @@ export class CrearProductoComponent implements OnInit {
       direccionp: this.proveedor.direccion,
       correop: this.proveedor.correo,
     });
-   // console.log('miki');
-    
-    // console.log(this.formularioProducto.value);
-    
   }
 
- 
+
   listarProveedor() {
     this.serviceProveedor.listarProveedor().subscribe(data => {
       this.listaProveedor = data;
@@ -141,4 +138,33 @@ export class CrearProductoComponent implements OnInit {
     });
   }
 
+  agregarCantidadProducto() {
+    const serie = this.formularioProducto.get('serie').value;
+    if (serie == null || serie == '') {
+      return;
+    } else {
+      const serieNuevo: NumeroSerieProducto = {
+        "numeroSerie": serie
+      };
+      this.cantidad = this.listaSeries.length;
+      this.listaSeries.unshift(serieNuevo);
+      this.formularioProducto.get('serie').reset();
+      this.cantidad++;
+    }
+
+
+  }
+
+  eliminarCantidadProducto(serieNuevo: NumeroSerieProducto) {
+    for (let i = 0; i < this.listaSeries.length; i++) {
+      if (serieNuevo == this.listaSeries[i]) {
+        this.listaSeries.splice(i, 1);
+        this.cantidad--;
+      }
+    }
+
+  }
+
+
 }
+

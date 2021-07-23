@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { Detalle, HistorialEstado } from '../../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../../service/orden-trabajo.service';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -16,24 +16,21 @@ import { Router } from '@angular/router';
 export class NuevoDetalleComponent implements OnInit {
 
   public previsualizacion: string;
-  public nombreEstadoActual:string;
-  public ubicaciones: string[] = ['Oficina', 'Proveedor'];
+  public nombreEstadoActual: string;
+  public ubicaciones: string[] = ['Oficina', 'Proveedor', 'Marca'];
   public estado: HistorialEstado[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<NuevoDetalleComponent>,
     private fb: FormBuilder,
-    private router:Router,
+    private router: Router,
     private ordenService: OrdenTrabajoService,
     private sanitizer: DomSanitizer
   ) { }
 
 
   ngOnInit() {
-    // this.ordenService.listaEstadosHistoria.
-    this.ordenService.listaEstadosHistoria().subscribe(datos => {
-      this.estado = datos;
-    });
+   this.listarEstador();
   }
 
   newPostForm: FormGroup = this.fb.group({
@@ -46,6 +43,11 @@ export class NuevoDetalleComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  listarEstador(){
+    this.ordenService.listaEstadosHistoria().subscribe(datos => {
+      this.estado = datos;
+    });
+  }
 
   capturarFile(event): any {
     const archivoCapturado = event.target.files[0];
@@ -81,8 +83,6 @@ export class NuevoDetalleComponent implements OnInit {
   guardarDetalle() {
     const idOrden = this.ordenService.IDorden;
     const { Descripcion, Ubicacion, estado } = this.newPostForm.value;
-    //console.log(this.newPostForm.value);
-    //  const validacion = this.validarCampos();
     const detalle: Detalle = {
       "ubicacion": Ubicacion,
       "descripcion": Descripcion,
@@ -94,9 +94,9 @@ export class NuevoDetalleComponent implements OnInit {
       Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error');
     } else {
       this.ordenService.guardar(detalle).subscribe(data => {
-        
+
         if (data.codigo == 1) {
-        
+
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -104,7 +104,7 @@ export class NuevoDetalleComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          
+
           this.newPostForm.reset();
           this.dialogRef.close();
           this.router.navigate(['/orden/listar']);
@@ -116,9 +116,6 @@ export class NuevoDetalleComponent implements OnInit {
     }
   }
 
-  cambiarRutaProducto(){
-
-  }
 
   ValidarCampos(campo: string) {
     return this.newPostForm.controls[campo].errors

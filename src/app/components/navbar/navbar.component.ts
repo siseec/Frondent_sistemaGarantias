@@ -11,6 +11,8 @@ import { AuthService } from '../../auth/service/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  nombreUsuario= localStorage.getItem('nombreApellido') || "";
+  fecha=new Date;
 
   constructor(private authService:AuthService,private router:Router) {
   }

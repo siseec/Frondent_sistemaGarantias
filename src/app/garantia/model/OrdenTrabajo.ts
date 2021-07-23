@@ -23,6 +23,7 @@ export interface OrdenTrabajo {
     idOrdenTrabajo?:number;
     numeroOrden?:         string;
     categoria?:            string;
+    tipoGarantia?: string;
     nombreEquipo?:        string;
     numeroSerie?:         string;
     marca?:               string;
@@ -86,3 +87,14 @@ export interface CambioProducto{
     modelo?:      string;
 }
 
+
+export interface EntregaProducto {
+    nombres:           string;
+    apellidos:         string;
+    cedula:            string;
+    telefono:          string;
+    correo:            string;
+    ubicacion:         string;
+    descripcion:       string;
+    idOrdenTrabajo:    number;
+}

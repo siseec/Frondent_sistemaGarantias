@@ -75,5 +75,8 @@ export class EditarUsuariosComponent implements OnInit {
     
   }
 
+  cancelarUsuario(){
+    this.router.navigate(['/usuario/listar']);
+  }
 
 }

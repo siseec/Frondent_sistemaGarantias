@@ -97,57 +97,35 @@
 
             <br>
             <br>
-             <!--  Formulario formularioOrden -->
-             
+            <!--  Formulario formularioOrden -->
+
             <div class="row">
               <div class="col-md-12">
                 <label>Equipo</label>
                 <mat-form-field class="example-full-width">
-                  <input matInput 
-                  [(ngModel)]="nombreEquipo" 
-                  #txtnombreEquipo 
-                  autocomplete="off" 
-                  required 
-                  maxlength="50"
-                  placeholder="Nombre Equipo" 
-                  type="text">
+                  <input matInput [(ngModel)]="nombreEquipo" #txtnombreEquipo autocomplete="off" required maxlength="50"
+                    placeholder="Nombre Equipo" type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                  <input matInput 
-                  [(ngModel)]="numeroSerie" 
-                  #txtnumeroSerie 
-                  autocomplete="off" required maxlength="50"
-                  placeholder="Numero de Serie" 
-                  type="text">
+                  <input matInput [(ngModel)]="numeroSerie" #txtnumeroSerie autocomplete="off" required maxlength="50"
+                    placeholder="Numero de Serie" type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input matInput 
-                  [(ngModel)]="modelo" 
-                  #txtmodelo 
-                  autocomplete="off" 
-                  required 
-                  maxlength="20"
-                  placeholder="Modelo" 
-                  type="text">
+                  <input matInput [(ngModel)]="modelo" #txtmodelo autocomplete="off" required maxlength="20"
+                    placeholder="Modelo" type="text">
                 </mat-form-field>
               </div>
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input matInput 
-                  [(ngModel)]="marca" 
-                  #txtmarca 
-                  autocomplete="off" 
-                  required 
-                  maxlength="30"
-                  placeholder="Marca" 
-                  type="text">
+                  <input matInput [(ngModel)]="marca" #txtmarca autocomplete="off" required maxlength="30"
+                    placeholder="Marca" type="text">
                 </mat-form-field>
               </div>
 
@@ -155,10 +133,8 @@
                 <label>Categoria </label>
                 <mat-form-field appearance="fill">
                   <mat-label>Selecione</mat-label>
-                  <mat-select 
-                  [(ngModel)]="categoria">
-                    <mat-option 
-                    *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}
+                  <mat-select [(ngModel)]="categoria">
+                    <mat-option *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -167,11 +143,7 @@
               <div class="col-md-4">
                 <mat-label>Añios Garantia</mat-label>
                 <mat-form-field class="example-full-width">
-                  <input matInput
-                  [(ngModel)]="aniosGarantia" 
-                  required 
-                  maxlength="3" 
-                  type="number">
+                  <input matInput [(ngModel)]="aniosGarantia" required maxlength="3" type="number">
                 </mat-form-field>
               </div>
 
@@ -179,13 +151,8 @@
               <div class="col-md-12">
                 <label>Observaciones</label>
                 <mat-form-field class="example-full-width">
-                  <textarea 
-                  matInput 
-                  [(ngModel)]="observacionesEquipo" 
-                  #txtobservaciones 
-                  autocomplete="off" 
-                  required
-                  maxlength="120" matInput></textarea>
+                  <textarea matInput [(ngModel)]="observacionesEquipo" #txtobservaciones autocomplete="off" required
+                    maxlength="120" matInput></textarea>
                 </mat-form-field>
 
               </div>
@@ -201,14 +168,8 @@
 
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput 
-                      [(ngModel)]="numeroFactura" 
-                      #txtnumeroFactura 
-                      autocomplete="off" 
-                      required
-                      maxlength="20" 
-                      placeholder="#. Factura" 
-                      type="text">
+                      <input matInput [(ngModel)]="numeroFactura" #txtnumeroFactura autocomplete="off" required
+                        maxlength="20" placeholder="#. Factura" type="text">
                     </mat-form-field>
                   </div>
 
@@ -216,8 +177,7 @@
                   <div class="col-md-4">
                     <mat-form-field appearance="fill">
                       <mat-label>Seleccione una Fecha</mat-label>
-                      <input matInput 
-                      [(ngModel)]="fechaFactura" [matDatepicker]="picker">
+                      <input matInput [(ngModel)]="fechaFactura" [matDatepicker]="picker">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -225,16 +185,22 @@
 
                   <div class="col-md-4">
                     <mat-form-field class="example-full-width">
-                      <input matInput 
-                      [(ngModel)]="montoFactura" 
-                      #txtmontoFactura 
-                      autocomplete="off" 
-                      required
-                      maxlength="10" 
-                      placeholder="Monto Factura $0.0 " 
-                      type="text">
+                      <input matInput [(ngModel)]="montoFactura" #txtmontoFactura autocomplete="off" required
+                        maxlength="10" placeholder="Monto Factura $0.0 " type="text">
                     </mat-form-field>
                   </div>
+
+                  <div class="col-md-4">
+                    <label>Garantia </label>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Selecione</mat-label>
+                      <mat-select [(ngModel)]="lugargarantia">
+                        <mat-option *ngFor="let item of LugarGarantgia" value="{{item}}">{{item}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -244,23 +210,36 @@
 
             <!-- Formulario Proveedor -->
             <div class="row">
-              <div class=" col-md-12">
-                
-                <label>Proveedor</label>
+              <div class=" col-md-12 ">
+
+                <!-- <label>Proveedor</label> -->
                 <div class="row ">
-                  <div class="col-md-4 ">
-                    <label class="form-label">Seleccione Proveedor</label>
-                    <select [(ngModel)]="proveedor" (change)="capturar()" class="form-control bordermk">
-                      <!-- <option>Seleccione Proveedor</option> -->
-                      <option [ngValue]="prov" *ngFor="let prov of listaProveedor;let i = index">
-                        <p> {{ prov.cedula }} </p>
-                        <p> - {{prov.nombres | uppercase }} </p>
-                        <p>- {{ prov.direccion | uppercase}}</p>
-                      </option>
-                    </select>
+                  <div class="col-md-5">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Proveedor</label>
+                      </div>
+                      <!-- <label class="form-label">Seleccione Proveedor</label> -->
+                      <select [(ngModel)]="proveedor" (change)="capturar()" class="custom-select" >
+                        <!-- <option>Seleccione Proveedor</option> -->
+                        <!-- <option selected>Choose...</option> -->
+                        <option [ngValue]="prov" *ngFor="let prov of listaProveedor;let i = index">
+                          <!-- <p> {{ prov.cedula }} </p>
+                          <p> - {{prov.nombres | uppercase }} </p>
+                          <p>- {{ prov.direccion | uppercase}}</p> -->
+                          <ul class="list-group">
+                            <li class="list-group-item active"> {{ prov.cedula }}</li>
+                            <li class="list-group-item"> - {{prov.nombres | uppercase }} </li>
+                            <li class="list-group-item"> - {{ prov.direccion | uppercase}}</li>
+                          </ul>
+                        </option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <hr>
+
+              
 
                 <form [formGroup]="formularioProveedor" autocomplete="off">
                   <div class="row">

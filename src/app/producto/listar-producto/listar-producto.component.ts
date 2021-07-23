@@ -14,11 +14,7 @@ import { Router } from '@angular/router';
 export class ListarProductoComponent implements OnInit {
 
   listaproducto: Producto[] = [];
-  listaCategorias: Categoria[] = [ {
-
-    "nombre": "TODOS"
-}
-];
+  listaCategorias: Categoria[] = [{ "nombre": "TODOS" }];
 
 
   miFormulario: FormGroup = this.fb.group({
@@ -28,21 +24,21 @@ export class ListarProductoComponent implements OnInit {
 
   constructor(private productoService: ProductoService,
     private fb: FormBuilder,
-    private router:Router,
+    private router: Router,
     public dialogRef: MatDialogRef<ListarProductoComponent>,
   ) { }
 
   ngOnInit(): void {
 
     this.productoService.listarProductos().subscribe(data => {
-      // console.log(data)
+      console.log(data)
       this.listaproducto = data;
     });
 
 
     this.productoService.listaCategoria().subscribe(datos => {
       //console.log(datos);
-      for (let item of datos){
+      for (let item of datos) {
         this.listaCategorias.push(item);
       }
     });
@@ -70,10 +66,10 @@ export class ListarProductoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  
+
 
   obtenerOrden(orden: any) {
-   this.dialogRef.close(orden);
+    this.dialogRef.close(orden);
     console.log(orden);
     const { categoria } = this.miFormulario.value;
     console.log(categoria);

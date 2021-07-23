@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MaterialModule } from '../material/material.module';
+// import { ImprimirDetalleComponent } from '../imprimir/imprimir-detalle/imprimir-detalle.component';
 //import { MaterialModule } from 'app/material/material.module';
 
 @NgModule({
@@ -17,12 +18,14 @@ import { MaterialModule } from '../material/material.module';
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    
   ]
 })
 export class ComponentsModule { }

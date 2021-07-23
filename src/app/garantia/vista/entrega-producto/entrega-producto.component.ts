@@ -1,0 +1,97 @@
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { OrdenTrabajoService } from '../../service/orden-trabajo.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { nombreApellidoPattern, emailPattern } from '../../../validator/Validaciones';
+import Swal from 'sweetalert2';
+import { EntregaProducto } from '../../model/OrdenTrabajo';
+// import { EntregaProducto } from '../../../model/Garantia.interface';
+
+@Component({
+  selector: 'app-entrega-producto',
+  templateUrl: './entrega-producto.component.html',
+  styleUrls: ['./entrega-producto.component.css']
+})
+export class EntregaProductoComponent implements OnInit {
+
+  public ubicaciones: string[] = ['Oficina', 'Proveedor', 'Marca'];
+  idOrden: number;
+  constructor(
+    public dialogRef: MatDialogRef<EntregaProductoComponent>,
+    private ordenService: OrdenTrabajoService,
+    private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+
+  }
+
+
+  cancelar(): void {
+    this.dialogRef.close();
+  }
+
+
+  formularioCliente: FormGroup = this.fb.group({
+    cedula: ['', [ Validators.maxLength(10)]],
+    nombres: ['', [  Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    apellidos: ['', [  Validators.maxLength(20), Validators.pattern(nombreApellidoPattern)]],
+    telefono: ['', [  Validators.maxLength(15)]],
+    correo: ['', [ Validators.pattern(emailPattern)]],
+    Descripcion: ['', []],
+    Ubicacion: ['', []],
+  });
+
+  guardarDetalle() {
+
+    const idOrden = this.ordenService.IDorden;
+
+    const { cedula, nombres, apellidos, telefono, correo, Descripcion, Ubicacion } = this.formularioCliente.value;
+    const EntregaProducto: EntregaProducto = {
+      "nombres": nombres,
+      "apellidos": apellidos,
+      "cedula": cedula,
+      "telefono": telefono,
+      "correo": correo,
+      "ubicacion": Ubicacion,
+      "descripcion": Descripcion,
+      "idOrdenTrabajo": idOrden,
+    };
+    // console.log(EntregaProducto);
+
+    this.ordenService.entregarProducto(EntregaProducto).subscribe(
+        data => {
+          if (data.codigo == 1) {
+            this.formularioCliente.reset();
+            Swal.fire('Creacion Correcta', 'Producto fue Entregado ', 'success');
+            this.dialogRef.close();
+          } else {
+            Swal.fire('Error en la Creacion', data.mensaje, 'warning')
+          }
+        
+        });
+  }
+
+
+  buscarCliente() {
+    const { cedula } = this.formularioCliente.value;
+    if (cedula != null) {
+      this.ordenService.buscarCliente(cedula).subscribe(
+        data => {
+          if (data != null) {
+            this.formularioCliente.reset({
+              cedula: data.cedula,
+              nombres: data.nombres,
+              apellidos: data.apellidos,
+              telefono: data.telefono,
+              direccion: data.direccion,
+              correo: data.correo,
+            });
+          } else {
+            this.formularioCliente.reset();
+            Swal.fire('No existe el Cliente');
+          }
+        });
+    }
+  }
+
+}

@@ -28,6 +28,9 @@ import { CambioProductoComponent } from './cambio-producto/cambio-producto.compo
 //import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
 import { FormsModule } from '@angular/forms';
 import { ListaProductoModule } from '../producto/listar-producto/lista-producto.module';
+import { InicioModule } from '../inicio/inicio.module';
+import { PrincipalComponent } from '../inicio/principal/principal.component';
+import { EntregaProductoComponent } from './vista/entrega-producto/entrega-producto.component';
 
 
 @NgModule({
@@ -39,13 +42,15 @@ import { ListaProductoModule } from '../producto/listar-producto/lista-producto.
     ActualizarOrdenComponent,
     FiltroOrdenPipe,
     // CrearDialogoComponent,
-    DetalleOrdenComponent, NuevoDetalleComponent, MenuSISEECComponent, CambioProductoComponent],
+    
+    DetalleOrdenComponent, NuevoDetalleComponent, MenuSISEECComponent, CambioProductoComponent, EntregaProductoComponent],
   imports: [
     CommonModule,
     GarantiaRoutingModule,
     RouterModule,
     FormsModule,
     ListaProductoModule,
+    InicioModule,
     
     //modulos para los formularios reactivos
     MaterialModule,
@@ -54,10 +59,7 @@ import { ListaProductoModule } from '../producto/listar-producto/lista-producto.
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-// // modulos del spoiner
-//     MatProgressSpinnerModule,
-//     MatRadioModule,
-//     MatProgressBarModule
+
     
   ],
   exports: [

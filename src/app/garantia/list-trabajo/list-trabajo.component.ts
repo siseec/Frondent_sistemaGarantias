@@ -1,12 +1,9 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrdenTrabajo } from '../model/OrdenTrabajo';
-//import { ServidorConexion } from '../../../environments/conexion';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
-import { environment } from '../../../environments/environment';
-import { ThemePalette } from '@angular/material/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ImprimirOrdenComponent } from '../../inicio/imprimir-orden/imprimir-orden.component';
 
 
 @Component({
@@ -19,26 +16,26 @@ export class ListTrabajoComponent implements OnInit {
   OrdenTrabajos: OrdenTrabajo[] = [];
   public search: string = '';
 
+  @ViewChild(ImprimirOrdenComponent) hijo: ImprimirOrdenComponent;
+
 
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'determinate';
-  value = 100;
+  LugarGarantgia: string[] = ['TODOS','Garantia negado', 'Cambio Producto', 'En proceso'];
+  tipoGarantgia: string[] = ['TODOS','Cliente', 'Proveedor'];
 
-  constructor(private http: HttpClient, private ordeServicio: OrdenTrabajoService) { }
+  constructor(
+    private ordeServicio: OrdenTrabajoService,
+    private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  estadoBusqueda = new FormControl('', [,]);
+  tipoBusqueda = new FormControl('', [,]);
 
-    this.http.get<OrdenTrabajo[]>(environment.ip + 'orden/listaOrden').subscribe(data => {
-      this.OrdenTrabajos = data;
-    });
-    
-
+  ngOnInit() {
+    this.listaOrden();
   }
 
 
   ObetnerParametroPipe() {
-
     const valor = this.txtSearch.nativeElement.value;
     this.search = valor;
     if (valor.trim().length === 0) {
@@ -49,7 +46,38 @@ export class ListTrabajoComponent implements OnInit {
 
   obtenerOrden(orden: OrdenTrabajo) {
     this.ordeServicio.orden = orden;
-    this.ordeServicio.IDorden=orden.idOrdenTrabajo;
+    this.ordeServicio.IDorden = orden.idOrdenTrabajo;
+  }
+
+  filtrarBusqueda() {
+    const estado = this.estadoBusqueda.value;
+    // if (estado === 'TODOS') {
+    //   // this.listaOrden();
+    //   return this.OrdenTrabajos = lista;
+    // } else {
+      this.search = estado;
+    // }
+  }
+
+
+
+  filtrarBusquedaTipo() {
+    const estado = this.tipoBusqueda.value;
+    this.search = estado;
+  }
+
+
+
+  listaOrden() {
+    this.ordeServicio.listarOrden().
+      subscribe(
+        data => {
+          this.OrdenTrabajos = data;
+        });
+  }
+
+  ImprimirOrden(){
+    this.hijo.imprimirDetalle();
   }
 
 }

@@ -25,7 +25,7 @@
                   Regresar</button>
               </div>
 
-              
+
             </div>
 
 
@@ -238,19 +238,37 @@
           <div class="row">
 
             <div class="col-sm-4 col-md-3" style="align-content: center;">
-              <button (click)="openDialog()" mat-fab color="primary">
+             
+              <button (click)="nuevoDetalle()" mat-fab color="primary" [disabled]="disabled">
                 <mat-icon>note_add</mat-icon>
               </button>
-              <label class="label success"> Agregar nuevo Detalle</label>
+              <label class="label success"> {{mensaje}} &nbsp; <br> <br> Estado : {{estado}}</label>
             </div>
+
             <div class="col-sm-4 col-md-3">
               <button mat-raised-button routerLink='/orden/cambioProducto' class="btn btn-primary pull-right">
                 Cambio Producto</button>
-            </div>   
-      
-           
-           
+            </div>
+            
+            <div class="col-sm-4 col-md-3">
+              <button mat-raised-button  [disabled]="!disabled"
+              (click)="EntregarProducto()"
+              class="btn btn-primary pull-right">
+               Entregar Producto</button>
+            </div>
+
+            <div class="col-sm-4 col-md-3">
+              <button mat-raised-button class="btn btn-primary pull-right"
+              (click)="imprimir()">
+                Imprimir Detalles</button>
+            </div>
+       
           </div>
+          <!--  -->
+         <div class="row">
+          <app-principal [detallesRecibos]="detalles" style="display: none;" ></app-principal>
+         </div>
+
           <br>
           <div class="card-body">
             <div class="table-responsive">
@@ -297,10 +315,10 @@
                       <!-- [src]="item.pictureUrl ? item.pictureUrl : 'assets/img/logo.png'" -->
 
                       <!-- <img [src]="item.imagen" width="200px" height="200px" alt="" /> -->
-                      
 
-                      <img [src]="item.imagen!= null ? item.imagen : '../../assets/img/sinimagen.jpg' "
-                      width="200px" height="200px">
+
+                      <img [src]="item.imagen!= null ? item.imagen : '../../assets/img/sinimagen.jpg' " width="200px"
+                        height="200px">
 
                     </td>
 

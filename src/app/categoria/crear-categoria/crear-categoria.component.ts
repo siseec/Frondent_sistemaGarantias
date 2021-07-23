@@ -55,4 +55,9 @@ export class CrearCategoriaComponent implements OnInit {
     );
   }
 
+  cancelar(){
+    this.formularioCategoria.reset();
+  }
+
+
 }

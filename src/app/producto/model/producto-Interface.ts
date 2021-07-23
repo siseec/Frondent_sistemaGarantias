@@ -1,5 +1,11 @@
 export interface Productos {
     producto: Producto;
+    cantidad:            number;
+    numeroSerieProducto: NumeroSerieProducto[];
+}
+
+export interface NumeroSerieProducto {
+    numeroSerie: string;
 }
 
 
@@ -19,11 +25,9 @@ export interface Inventario {
 export interface Producto {
     idProducto?: number,
     nombre?:      string;
-    numeroSerie?: string;
     marca?:       string;
     modelo?:      string;
     origen?:      string;
-    estado?: number;    
     categoria?:   Categoria;
     proveedor?:   Proveedor;
 }

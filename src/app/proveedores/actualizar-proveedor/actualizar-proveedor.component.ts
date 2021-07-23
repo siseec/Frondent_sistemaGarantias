@@ -26,7 +26,7 @@ export class ActualizarProveedorComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private route: Router,
+    private router: Router,
     private service: ProveedorService) { }
 
   ngOnInit(): void {
@@ -75,7 +75,7 @@ export class ActualizarProveedorComponent implements OnInit {
               Swal.fire('Actualizacion Completa', data.mensaje, 'success')
                 .then(result => {
                   if (result.value) {
-                    this.route.navigate(['/proveedor/proveedores']);
+                    this.router.navigate(['/proveedor/proveedores']);
                   }
                 });
 
@@ -85,6 +85,11 @@ export class ActualizarProveedorComponent implements OnInit {
 
           });
     }
+  }
+
+
+  cancelarProveedor(){
+    this.router.navigate(['/proveedor/proveedores']);
   }
 
 }

@@ -10,6 +10,7 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: '**', redirectTo: 'login' },
+      { path: '', redirectTo: 'login' },
       
     ],
     //canActivate:[ValidarTokenGuard],

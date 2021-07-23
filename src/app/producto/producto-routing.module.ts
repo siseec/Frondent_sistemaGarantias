@@ -4,16 +4,18 @@ import { ListarProductoComponent } from './listar-producto/listar-producto.compo
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { CambioProductoProveedorComponent } from './cambio-producto-proveedor/cambio-producto-proveedor.component';
 import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
+import { ProductosComponent } from './productos/productos.component';
 
 const routes: Routes = [
   {
     path:'',
     children: [
       { path: 'listar', component: ListarProductoComponent },
+      { path: 'productos', component: ProductosComponent },
       { path: 'crear', component: CrearProductoComponent },
       { path: 'cambioproveedor', component: CambioProductoProveedorComponent },
       
-      { path: '**', redirectTo: 'crear' },
+      { path: '**', redirectTo: 'productos' },
     ],
     canActivate:[ValidarTokenGuard],
     canLoad:[ValidarTokenGuard]

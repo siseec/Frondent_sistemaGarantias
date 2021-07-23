@@ -22,8 +22,7 @@
                             <mat-form-field appearance="fill">
                                 <mat-label>Selecione una Categoria</mat-label>
                                 <mat-select formControlName="categoria">
-                                    <!-- <mat-option value="todos">Todos</mat-option> -->
-                                    <mat-option *ngFor="let item of listaCategorias" value="{{item.nombre}}">{{item.nombre}}
+                                    <mat-option *ngFor="let categorias of listaCategorias" value="{{categorias.nombre}}">{{categorias.nombre}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -70,29 +69,29 @@
                         </thead>
                         <!-- filtroOrden:search -->
                         <tbody>
-                            <tr *ngFor="let item of listaproducto">
+                            <tr *ngFor="let productos of listaproducto">
                                 <td>
-                                    {{item.nombre}}
+                                    {{productos.producto.nombre}}
                                 </td>
                                 <td>
-                                    {{item.marca}}
+                                    {{productos.producto.marca}}
                                 </td>
                                 <td>
-                                    {{item.modelo}}
+                                    {{productos.producto.modelo}}
                                 </td>
                                 <td>
-                                    {{item.numeroSerie}}
+                                    {{productos.numeroSerie}}
                                 </td>
                                 <td>
-                                    {{item.proveedor.nombres}}
+                                    {{productos.producto.proveedor.nombres}}
                                 </td>
                                 <td>
-                                    {{item.proveedor.correo}}
+                                    {{productos.producto.proveedor.correo}}
                                 </td>
 
 
                                 <td>
-                                    <button class="btn btn-info" (click)="obtenerOrden(item)"
+                                    <button class="btn btn-info" (click)="obtenerOrden(productos)"
                                         color="primary">Agregar</button>
 
                                 </td>

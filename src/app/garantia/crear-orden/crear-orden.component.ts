@@ -9,6 +9,7 @@ import { Categoria } from '../../producto/model/producto-Interface';
 import { ProductoService } from '../../producto/service/producto.service';
 import { ProveedorService } from '../../proveedores/service/proveedor.service';
 import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
+import { ImprimirOrdenComponent } from '../../inicio/imprimir-orden/imprimir-orden.component';
 
 @Component({
   selector: 'app-crear-orden',
@@ -16,6 +17,8 @@ import { emailPattern, nombreApellidoPattern } from '../../validator/Validacione
   styleUrls: ['./crear-orden.component.css']
 })
 export class CrearOrdenComponent implements OnInit {
+
+  @ViewChild(ImprimirOrdenComponent) hijo: ImprimirOrdenComponent;
 
   @ViewChild('txtnombreEquipo') txtnombreEquipo!: ElementRef<HTMLInputElement>;
   @ViewChild('txtnumeroSerie') txtnumeroSerie!: ElementRef<HTMLInputElement>;
@@ -41,8 +44,11 @@ export class CrearOrdenComponent implements OnInit {
   cliente: Cliente;
   categoria: string;
   proveedor: Proveedor;
+  lugargarantia: string;
+
   listaProveedor: Proveedor[] = [];
   listaCategorias: Categoria[] = [];
+  LugarGarantgia: string[] = ['Cliente', 'Proveedor'];
 
   formularioCliente: FormGroup = this.fb.group({
     cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
@@ -113,6 +119,7 @@ export class CrearOrdenComponent implements OnInit {
         "montoFactura": this.montoFactura,
         "fechaFactura": this.fechaFactura,
         "aniosGarantia": this.aniosGarantia,
+        "tipoGarantia": this.lugargarantia,
         "usuario": {
           "idUsuario": idUsuario
         },
@@ -133,6 +140,8 @@ export class CrearOrdenComponent implements OnInit {
           "correo": correop
         }
       };
+      console.log(userPrueba);
+      
 
       this.http.post<any>(environment.ip + 'orden/guardar',
         userPrueba, {
@@ -141,8 +150,6 @@ export class CrearOrdenComponent implements OnInit {
         }
       }).subscribe(
         data => {
-        //  console.log(data);
-          
           if (data.codigo == 1) {
             this.limpiarCampos();
             Swal.fire('Creacion Correcta', 'Su Orden fue Ingresada', 'success');
@@ -150,7 +157,6 @@ export class CrearOrdenComponent implements OnInit {
           } else {
             Swal.fire('Error en la Creacion', data.mensaje, 'warning')
           }
-
           if (data.codigo == 2) {
             Swal.fire('Su Garantia No se Ingreso', data.mensaje, 'info');
           }
@@ -199,7 +205,7 @@ export class CrearOrdenComponent implements OnInit {
       console.log(err);
     });
 
-    
+
     this.serviceProducto.listaCategoria().subscribe(datos => {
       this.listaCategorias = datos;
     });

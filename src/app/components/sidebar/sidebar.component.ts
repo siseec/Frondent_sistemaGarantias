@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/cliente', title: 'Cliente', icon: 'persons', class: '' },
   { path: '/proveedor', title: 'Proveedores', icon: 'business_center', class: '' },
   { path: '/orden', title: 'Orden Trabajo', icon: 'task', class: '' },
-  { path: '/producto/crear', title: 'Productos', icon: 'inventory_2', class: '' },
+  { path: '/producto/productos', title: 'Productos', icon: 'inventory_2', class: '' },
   { path: '/producto/cambioproveedor', title: 'Cambiar Producto', icon: 'published_with_changes', class: '' },
   { path: '/inventario', title: 'Inventario', icon: 'storage', class: '' },
   { path: '/categoria', title: 'Categorias Producto', icon: 'category', class: '' },

@@ -36,8 +36,12 @@ export class ProductoService {
     return this.http.get<Producto[]>(environment.ip+'inventario/listaProducto');
   }
 
+  listarProductosStock(){
+    return this.http.get<Producto[]>(environment.ip+'inventario/listaProductoStock');
+  }
+
+
   listarporCategoria(cat:string){
-    //http://localhost:8080/sistema_garantias/rest/
     return this.http.get<Producto[]>(environment.ip+'inventario/listaProductoCategoria?categoria='+cat);
   }
 

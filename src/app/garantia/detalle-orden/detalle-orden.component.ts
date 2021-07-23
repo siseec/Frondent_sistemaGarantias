@@ -27,7 +27,8 @@ export class DetalleOrdenComponent implements OnInit {
   cliente: Cliente;
   id: number;
   mensaje:string='Agregar nuevo Detalle';
-  disabled = false;
+  disablednuevoDetalle = false;
+  disabledEntregarProducto = false;
   estado:string;
 
   constructor(
@@ -40,7 +41,10 @@ export class DetalleOrdenComponent implements OnInit {
 
     if (this.ordeServicio.orden !== null) {
       this.id = this.ordeServicio.orden.idOrdenTrabajo;
-      this.deshabilitarDetalle(this.ordeServicio.orden.estado);
+     // console.log(this.ordeServicio.orden);
+      
+      this.deshabilitarEntregarProducto(this.ordeServicio.orden.estado);
+      this.deshabilitarNuevoDetalle(this.ordeServicio.orden.estado);
       this.listarDetalles();
       this.obtenerOrden();
     }
@@ -53,9 +57,12 @@ export class DetalleOrdenComponent implements OnInit {
 
   listarDetalles() {
     this.http.get<any>(environment.ip + 'orden/listEstadoOrden?idordenTrabajo=' + this.id).subscribe(data => {
+    
+      
       this.ordenDetalle = data.orden;
       this.cliente = data.orden.cliente;
       this.detalles = data.detalles;
+      // console.log(this.cliente);
     });
     
     
@@ -85,13 +92,23 @@ export class DetalleOrdenComponent implements OnInit {
   }
 
 
-  deshabilitarDetalle(estado:string){
+  deshabilitarNuevoDetalle(estado:string){
     this.estado=estado;
     if (estado ==='Garantia negado' || estado ==='Finalizo' ) {
       this.mensaje='No se Puede Agregar nuevos Detalles';
-      return this.disabled=true;
+      return this.disablednuevoDetalle=true;
     };
   }
+
+  deshabilitarEntregarProducto(estado:string){
+    this.estado=estado;
+    if (estado ==='Garantia negado' || estado ==='En proceso'  || estado ==='Entregado' ) {
+      this.mensaje='No se Puede Agregar nuevos Detalles';
+      return this.disabledEntregarProducto=true;
+    };
+  }
+
+
 
   obtenerOrden() {
 
@@ -107,7 +124,6 @@ export class DetalleOrdenComponent implements OnInit {
 
 
   imprimir() {
-    console.log('miki');
     this.hijo.imprimirDetalle();
   }
 

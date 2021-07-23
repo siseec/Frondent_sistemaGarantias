@@ -18,7 +18,7 @@ export class PruebaComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
     };
   }
 

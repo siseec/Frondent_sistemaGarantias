@@ -60,9 +60,9 @@ export class CambioProductoProveedorComponent implements OnInit {
 
     this.formularioProducto.reset({
       serie: data.numeroSerie || '',
-      nombre: data.nombre || '',
-      marca: data.marca || '',
-      modelo: data.modelo || '',
+      nombre: data.producto.nombre || '',
+      marca: data.producto.marca || '',
+      modelo: data.producto.modelo || '',
     });
   }
 
@@ -121,9 +121,9 @@ export class CambioProductoProveedorComponent implements OnInit {
  
      this.formularioProductoDanado.reset({
        seried: data.numeroSerie || '',
-       nombred: data.nombre || '',
-       marcad: data.marca || '',
-       modelod: data.modelo || '',
+       nombred: data.producto.nombre || '',
+       marcad: data.producto.marca || '',
+       modelod: data.producto.modelo || '',
      });
    }
 

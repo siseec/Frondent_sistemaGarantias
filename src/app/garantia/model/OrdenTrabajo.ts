@@ -97,4 +97,5 @@ export interface EntregaProducto {
     ubicacion:         string;
     descripcion:       string;
     idOrdenTrabajo:    number;
+    imagen:           string,
 }

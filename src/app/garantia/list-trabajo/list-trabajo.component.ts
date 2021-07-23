@@ -20,7 +20,7 @@ export class ListTrabajoComponent implements OnInit {
 
 
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
-  LugarGarantgia: string[] = ['TODOS','Garantia negado', 'Cambio Producto', 'En proceso'];
+  LugarGarantgia: string[] = ['TODOS','Garantia negado', 'Cambio Producto', 'Finalizo','En proceso'];
   tipoGarantgia: string[] = ['TODOS','Cliente', 'Proveedor'];
 
   constructor(

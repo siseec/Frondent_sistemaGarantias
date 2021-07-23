@@ -21,7 +21,7 @@
                             <label>Categoria </label>
                             <mat-form-field appearance="fill">
                                 <mat-label>Selecione una Categoria</mat-label>
-                                <mat-select formControlName="categoria">
+                                <mat-select (selectionChange)="filtrarBusquedaCategoria()" [formControl]="tipoBusqueda">
                                     <mat-option *ngFor="let categorias of listaCategorias" value="{{categorias.nombre}}">{{categorias.nombre}}
                                     </mat-option>
                                 </mat-select>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-3">
                             <button mat-button mat-flat-button color="primary" style="display: block; width: 100%;"
-                                (click)="agregarProducto()">Agragar Producto</button>
+                                (click)="agregarProducto()">Agregar Producto</button>
                         </div>
                     </div>
                     
@@ -67,9 +67,9 @@
                             </th>
 
                         </thead>
-                        <!-- filtroOrden:search -->
+                        <!--  | filtroProducto:search -->
                         <tbody>
-                            <tr *ngFor="let productos of listaproducto">
+                            <tr *ngFor="let productos of listaproducto ">
                                 <td>
                                     {{productos.producto.nombre}}
                                 </td>

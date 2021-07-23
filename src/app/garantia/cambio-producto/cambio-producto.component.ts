@@ -38,7 +38,7 @@ export class CambioProductoComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.ordeServicio.ProductoDanado);
+    // console.log(this.ordeServicio.ProductoDanado);
 
     if (this.ordeServicio.ProductoDanado == null) {
       return;
@@ -85,9 +85,15 @@ export class CambioProductoComponent implements OnInit {
     dialogConfig.width = "800px";
     dialogConfig.height = "800px"
     //dialogConfig.data = { orderItemIndex, OrderID };
-    this.dialog.open(ListarProductoComponent, dialogConfig).afterClosed().subscribe(res => {
-      //  this.updateGrandTotal();
-      console.log(res);
+    this.dialog.open(ListarProductoComponent, dialogConfig).afterClosed()
+      .subscribe(res => {
+        //  this.updateGrandTotal();
+      if (res === undefined ) {
+       
+      return;
+      };
+
+      // console.log('mouse');
       this.asignarValoresProducto(res);
     });
   }
@@ -98,9 +104,9 @@ export class CambioProductoComponent implements OnInit {
 
     this.formularioProductoDanado.reset({
       seried: data.numeroSerie || '',
-      nombred: data.nombre || '',
-      marcad: data.marca || '',
-      modelod: data.modelo || '',
+      nombred: data.producto.nombre || '',
+      marcad: data.producto.marca || '',
+      modelod: data.producto.modelo || '',
     });
   }
 

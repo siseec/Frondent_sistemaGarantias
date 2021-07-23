@@ -15,7 +15,7 @@ export class ProductosComponent implements OnInit {
     this.productoservice.listarProductosStock().subscribe(
       data => {
         this.listaproducto=data;
-        console.log(data);
+        // console.log(data);
         
       });
   }

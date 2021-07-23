@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as printJS from 'print-js';
-import { Detalle } from '../../garantia/model/OrdenTrabajo';
+import { Detalle, Cliente } from '../../garantia/model/OrdenTrabajo';
 
 @Component({
   selector: 'app-principal',
@@ -10,6 +10,7 @@ import { Detalle } from '../../garantia/model/OrdenTrabajo';
 export class PrincipalComponent implements OnInit {
 
   @Input()detallesRecibos: Detalle[]=[];
+  @Input()Cliente: Cliente;
 
   constructor() { }
   
@@ -20,6 +21,8 @@ export class PrincipalComponent implements OnInit {
   }
 
  public imprimirDetalle() {
+   console.log(this.Cliente);
+   
     printJS({ 
     printable: 'tabla-miki', 
     type: 'html', 

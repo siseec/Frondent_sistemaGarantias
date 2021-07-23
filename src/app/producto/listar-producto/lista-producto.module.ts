@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ListarProductoComponent } from './listar-producto.component';
 import { MaterialModule } from '../../material/material.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FiltroProductoPipe } from '../pipe/filtro-producto.pipe';
 
 
 
 @NgModule({
   declarations: [
-    ListarProductoComponent
+    ListarProductoComponent,
+    // FiltroProductoPipe
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FormsModule,RouterModule
   ],
   exports:[
     ListarProductoComponent

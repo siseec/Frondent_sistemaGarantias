@@ -14,13 +14,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductosComponent } from './productos/productos.component';
+import { FiltroProductoPipe } from './pipe/filtro-producto.pipe';
 
 
 @NgModule({
   declarations: [
     CrearProductoComponent,
     CambioProductoProveedorComponent,
-    ProductosComponent
+    ProductosComponent,
+    FiltroProductoPipe
   ],
   imports: [
     CommonModule,

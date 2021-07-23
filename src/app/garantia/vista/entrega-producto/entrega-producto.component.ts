@@ -16,6 +16,7 @@ export class EntregaProductoComponent implements OnInit {
 
   public ubicaciones: string[] = ['Oficina', 'Proveedor', 'Marca'];
   idOrden: number;
+  previsualizacion:any;
   constructor(
     public dialogRef: MatDialogRef<EntregaProductoComponent>,
     private ordenService: OrdenTrabajoService,
@@ -54,9 +55,10 @@ export class EntregaProductoComponent implements OnInit {
       "correo": correo,
       "ubicacion": Ubicacion,
       "descripcion": Descripcion,
+      "imagen": this.previsualizacion || null,
       "idOrdenTrabajo": idOrden,
     };
-    // console.log(EntregaProducto);
+    console.log(EntregaProducto);
 
     this.ordenService.entregarProducto(EntregaProducto).subscribe(
         data => {
@@ -71,6 +73,16 @@ export class EntregaProductoComponent implements OnInit {
         });
   }
 
+
+  handleUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      // console.log(reader.result);
+      this.previsualizacion=reader.result;
+    };
+  }
 
   buscarCliente() {
     const { cedula } = this.formularioCliente.value;

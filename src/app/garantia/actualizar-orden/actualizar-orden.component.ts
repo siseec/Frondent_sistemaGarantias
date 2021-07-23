@@ -15,6 +15,8 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./actualizar-orden.component.css']
 })
 export class ActualizarOrdenComponent implements OnInit {
+  //LugarGarantgia: string[] = ['Cliente', 'Proveedor'];
+  lugargarantia: string;
 
   ordenDetalle: OrdenTrabajo = null;
   fechas: Date = new Date();
@@ -51,7 +53,7 @@ export class ActualizarOrdenComponent implements OnInit {
   pdireccion?: string;
   pcorreo?: string;
 
-  constructor(private route: Router,
+  constructor(private router: Router,
     private ordeServicio: OrdenTrabajoService,
     private http: HttpClient) { }
 
@@ -72,7 +74,8 @@ export class ActualizarOrdenComponent implements OnInit {
       this.numeroFactura = this.ordenDetalle.numeroFactura;;
       this.fecha = this.ordenDetalle.fecha;
       this.montoFactura = this.ordenDetalle.montoFactura;
-      this.fechaFactura = this.ordenDetalle.fechaFactura;;
+      this.fechaFactura = this.ordenDetalle.fechaFactura;
+      this.lugargarantia=this.ordenDetalle.tipoGarantia;
 
       this.aniosGarantia = this.ordenDetalle.aniosGarantia;
 
@@ -159,7 +162,7 @@ export class ActualizarOrdenComponent implements OnInit {
             Swal.fire('Actualizacion Completa', data.mensaje, 'success')
               .then(result => {
                 if (result.value) {
-                  this.route.navigate(['/orden/listar']);
+                  this.router.navigate(['/orden/listar']);
                 }
               });
 
@@ -173,6 +176,12 @@ export class ActualizarOrdenComponent implements OnInit {
 
     }
   }
+
+
+  cancelar() {
+    this.router.navigate(['/orden/listar']);
+  }
+  
 
 
 }

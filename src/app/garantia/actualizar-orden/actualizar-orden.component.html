@@ -30,17 +30,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <label>Estado </label>
-                <mat-form-field appearance="fill">
-                  <mat-label>Select</mat-label>
-                  <mat-select>
-                    <mat-option  value="one">First option</mat-option>
-                    <mat-option value="two">Second option</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-
+             
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput maxlength="20" [(ngModel)]="correo" placeholder="Correo Electronico" type="email">
@@ -53,7 +43,7 @@
                   <input matInput maxlength="20" [(ngModel)]="nombres" placeholder="Nombre" type="text">
                 </mat-form-field>
               </div>
-              
+
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput maxlength="20" [(ngModel)]="apellidos" placeholder="Apellido" type="text">
@@ -123,7 +113,7 @@
                     maxlength="120"></textarea>
                 </mat-form-field>
               </div>
-              
+
             </div>
 
             <br>
@@ -150,6 +140,16 @@
                     </mat-form-field>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+
+                <mat-form-field class="example-full-width">
+                  <input matInput maxlength="20" [(ngModel)]="lugargarantia" type="text">
+                </mat-form-field>
+
               </div>
             </div>
 
@@ -200,6 +200,10 @@
               <div class="col-md-4">
                 <button mat-raised-button class="btn btn-danger pull-right" (click)="ActualizarOrdenTrabajo()">
                   Actualizar</button>
+              </div>
+              <div class="col-md-4">
+                <button mat-raised-button (click)="cancelar()" class="btn btn-primary pull-right">
+                  Cancelar</button>
               </div>
             </div>
 

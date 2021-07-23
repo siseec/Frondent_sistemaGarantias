@@ -38,9 +38,6 @@ export class ImprimirOrdenComponent implements OnInit {
       }`,
     });
     
-    console.log(printJS);
-    
-    // this.handleUpload();
   }
 
 
@@ -51,7 +48,7 @@ export class ImprimirOrdenComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
     };
   }
 

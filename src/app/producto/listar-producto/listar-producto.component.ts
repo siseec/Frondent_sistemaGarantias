@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria, Producto } from '../model/producto-Interface';
 import { ProductoService } from '../service/producto.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ListarProductoComponent implements OnInit {
 
+  search: string = '';
   listaproducto: Producto[] = [];
   listaCategorias: Categoria[] = [{ "nombre": "TODOS" }];
 
@@ -20,6 +21,8 @@ export class ListarProductoComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
     categoria: ['', Validators.required],
   });
+
+  tipoBusqueda = new FormControl('', [,]);
 
 
   constructor(private productoService: ProductoService,
@@ -29,19 +32,12 @@ export class ListarProductoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.productoService.listarProductos().subscribe(data => {
-      console.log(data)
-      this.listaproducto = data;
-    });
+    this.listarProductos();
+   this.listarCategorias();
 
 
-    this.productoService.listaCategoria().subscribe(datos => {
-      //console.log(datos);
-      for (let item of datos) {
-        this.listaCategorias.push(item);
-      }
-    });
+
+   
 
     this.miFormulario.get('categoria')?.valueChanges
       .pipe(
@@ -49,7 +45,7 @@ export class ListarProductoComponent implements OnInit {
       )
       .subscribe(Categoriasproductos => {
         this.listaproducto = Categoriasproductos;
-        console.log(Categoriasproductos);
+        // console.log(Categoriasproductos);
       });
 
 
@@ -62,17 +58,49 @@ export class ListarProductoComponent implements OnInit {
     this.dialogRef.close();
     this.router.navigate(['/producto/crear']);
   }
+ 
   cancelar(): void {
     this.dialogRef.close();
+    // console.log('canelo');
+    
   }
 
 
 
   obtenerOrden(orden: any) {
     this.dialogRef.close(orden);
-    console.log(orden);
+    // console.log(orden);
     const { categoria } = this.miFormulario.value;
-    console.log(categoria);
+    // console.log(categoria);
+  }
+
+  listarProductos(){
+    this.productoService.listarProductos().subscribe(data => {
+      this.listaproducto = data;
+    });
+  }
+
+
+  listarCategorias(){
+    this.productoService.listaCategoria().subscribe(
+      datos => {
+      //console.log(datos);
+      for (let item of datos) {
+        this.listaCategorias.push(item);
+      }
+    });
+  }
+
+  filtrarBusquedaCategoria() {
+    const estado = this.tipoBusqueda.value;
+    // if (estado === 'TODOS') {
+    //   // this.listaOrden();
+    //   return this.OrdenTrabajos = lista;
+    // } else {
+      console.log(estado);
+      
+      this.search = estado;
+    // }
   }
 
 }

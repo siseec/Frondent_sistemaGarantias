@@ -16,7 +16,7 @@
 
               <div class="col-md-5">
                 <mat-card>
-                  <p>SISEEC</p>
+                  <p>ID ORDEN {{id}}</p>
                 </mat-card>
               </div>
 
@@ -170,6 +170,16 @@
             </div>
 
             <br>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Garantia </label>
+                <mat-card>
+                  <p>{{ordenDetalle?.tipoGarantia}}</p>
+                </mat-card>
+              </div>
+
+            </div>
+            <br>
             <br>
             <div class="row">
               <div class="col-md-12">
@@ -238,8 +248,8 @@
           <div class="row">
 
             <div class="col-sm-4 col-md-3" style="align-content: center;">
-             
-              <button (click)="nuevoDetalle()" mat-fab color="primary" [disabled]="disabled">
+
+              <button (click)="nuevoDetalle()" mat-fab color="primary" [disabled]="disablednuevoDetalle">
                 <mat-icon>note_add</mat-icon>
               </button>
               <label class="label success"> {{mensaje}} &nbsp; <br> <br> Estado : {{estado}}</label>
@@ -249,25 +259,23 @@
               <button mat-raised-button routerLink='/orden/cambioProducto' class="btn btn-primary pull-right">
                 Cambio Producto</button>
             </div>
-            
+
             <div class="col-sm-4 col-md-3">
-              <button mat-raised-button  [disabled]="!disabled"
-              (click)="EntregarProducto()"
-              class="btn btn-primary pull-right">
-               Entregar Producto</button>
+              <button mat-raised-button [disabled]="disabledEntregarProducto" (click)="EntregarProducto()"
+                class="btn btn-primary pull-right">
+                Entregar Producto</button>
             </div>
 
             <div class="col-sm-4 col-md-3">
-              <button mat-raised-button class="btn btn-primary pull-right"
-              (click)="imprimir()">
+              <button mat-raised-button class="btn btn-primary pull-right" (click)="imprimir()">
                 Imprimir Detalles</button>
             </div>
-       
+
           </div>
           <!--  -->
-         <div class="row">
-          <app-principal [detallesRecibos]="detalles" style="display: none;" ></app-principal>
-         </div>
+          <div class="row">
+            <app-principal [detallesRecibos]="detalles" [Cliente]="cliente" style="display: none;"></app-principal>
+          </div>
 
           <br>
           <div class="card-body">

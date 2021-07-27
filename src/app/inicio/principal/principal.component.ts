@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as printJS from 'print-js';
-import { Detalle, Cliente } from '../../garantia/model/OrdenTrabajo';
+import { Cliente, Detalle } from '../../model/TODO';
 
 @Component({
   selector: 'app-principal',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from '../../producto/model/producto-Interface';
 import { CategoriaService } from '../service/categoria.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Categoria } from '../../model/TODO';
 
 @Component({
   selector: 'app-crear-categoria',

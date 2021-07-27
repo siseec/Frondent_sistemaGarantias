@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { environment } from '../../../environments/conexion';
-import { Cliente } from '../../garantia/model/OrdenTrabajo';
 import { environment } from '../../../environments/environment';
+import { Cliente } from '../../model/TODO';
 
 @Injectable({
   providedIn: 'root'

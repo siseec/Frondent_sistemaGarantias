@@ -1,4 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Producto } from '../../model/TODO';
+// import { Producto } from '../model/producto-Interface';
 
 @Pipe({
   name: 'filtroProducto'

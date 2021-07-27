@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Cliente } from '../../garantia/model/OrdenTrabajo';
+import { Component } from '@angular/core';
 import { ServicioClienteService } from '../service/servicio-cliente.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
+import { Cliente } from '../../model/TODO';
 
 @Component({
   selector: 'app-nuevo-cliente',

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
-import { Detalle, HistorialEstado } from '../../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../../service/orden-trabajo.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Detalle, HistorialEstado } from '../../../model/TODO';
 
 
 @Component({

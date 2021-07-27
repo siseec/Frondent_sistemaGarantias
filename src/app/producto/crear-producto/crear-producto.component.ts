@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import Swal from 'sweetalert2';
-import { Categoria, Producto, Productos, NumeroSerieProducto } from '../model/producto-Interface';
+// import { Categoria, Productos, NumeroSerieProducto } from '../model/producto-Interface';
 import { ProductoService } from '../service/producto.service';
 import { nombreApellidoPattern, emailPattern } from '../../validator/Validaciones';
 import { ProveedorService } from '../../proveedores/service/proveedor.service';
 import { Router } from '@angular/router';
+import { Categoria, NumeroSerieProducto, Productos, Proveedor } from '../../model/TODO';
+// import { Proveedor } from '../../garantia/model/OrdenTrabajo';
 
 @Component({
   selector: 'app-crear-producto',
@@ -63,7 +65,7 @@ export class CrearProductoComponent implements OnInit {
       const { cedula, nombres, apellidos, telefono, direccion, correo } = this.formularioProveedor.value;
 
       const prod: Productos = {
-        "cantidad": 2,
+        "cantidad": this.cantidad,
         "producto": {
           "nombre": nombre,
           "marca": marca,
@@ -101,7 +103,7 @@ export class CrearProductoComponent implements OnInit {
     }
   }
 
-  cancelar(){
+  cancelar() {
     this.formularioProducto.reset();
     this.formularioProveedor.reset();
     this.router.navigate(['/producto/productos']);
@@ -139,6 +141,7 @@ export class CrearProductoComponent implements OnInit {
   }
 
   agregarCantidadProducto() {
+    // .trim().toLocaleLowerCase()
     const serie = this.formularioProducto.get('serie').value;
     if (serie == null || serie == '') {
       return;
@@ -151,8 +154,6 @@ export class CrearProductoComponent implements OnInit {
       this.formularioProducto.get('serie').reset();
       this.cantidad++;
     }
-
-
   }
 
   eliminarCantidadProducto(serieNuevo: NumeroSerieProducto) {

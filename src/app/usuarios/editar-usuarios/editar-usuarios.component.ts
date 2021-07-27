@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../model/usuarioInterface';
 import { UsuarioService } from '../service/usuario.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Usuario } from '../../model/TODO';
 
 @Component({
   selector: 'app-editar-usuarios',

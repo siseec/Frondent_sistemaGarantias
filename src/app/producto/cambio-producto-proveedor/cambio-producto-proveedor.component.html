@@ -7,7 +7,7 @@
                 <div class="card">
 
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Cambio de Producto</h4>
+                        <h4 class="card-title">Cambio de Producto al Proveedor</h4>
                         <p class="card-category">Complete la informacion a continuacion</p>
                     </div>
 
@@ -15,18 +15,24 @@
 
 
                         <form autocomplete="off" [formGroup]="formularioProducto">
+
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="row">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput
-                                            placeholder="# Serie" 
-                                            type="text" 
-                                            formControlName="serie">
-                                        </mat-form-field>
-                                        <hr>
-                                        <button mat-raised-button class="btn btn-primary" (click)="buscarProducto()">
-                                            Buscar Producto</button>
+                                        <div class="col">
+
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="# Serie" type="text"
+                                                    formControlName="serie">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col">
+                                            <button mat-raised-button class="btn btn-primary"
+                                                (click)="buscarProducto()">
+                                                Buscar Producto</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -54,23 +60,21 @@
                             </div>
                         </form>
 
+                        <hr>
 
                         <form autocomplete="off" [formGroup]="formularioProductoDanado">
 
-                            <div class="row">
+                            <div class="row mt-8">
                                 <div class="col-md-6">
                                     <h4><span>Producto</span></h4>
-                                    <hr>
                                     <div class="row">
-                                        
                                         <div class="col">
-                                            
                                             <mat-form-field class="example-full-width">
                                                 <input matInput placeholder="# Serie" type="text" #numeroserie
                                                     formControlName="seried">
                                             </mat-form-field>
                                         </div>
-                                        
+
                                         <div class="col">
                                             <button mat-raised-button class="btn btn-primary"
                                                 (click)="buscarProductoDanado()">

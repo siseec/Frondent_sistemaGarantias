@@ -4,8 +4,7 @@ import { OrdenTrabajoService } from '../../service/orden-trabajo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { nombreApellidoPattern, emailPattern } from '../../../validator/Validaciones';
 import Swal from 'sweetalert2';
-import { EntregaProducto } from '../../model/OrdenTrabajo';
-// import { EntregaProducto } from '../../../model/Garantia.interface';
+import { EntregaProducto } from '../../../model/TODO';
 
 @Component({
   selector: 'app-entrega-producto',

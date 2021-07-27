@@ -11,7 +11,7 @@ import { FiltroProductoPipe } from '../pipe/filtro-producto.pipe';
 @NgModule({
   declarations: [
     ListarProductoComponent,
-    // FiltroProductoPipe
+     FiltroProductoPipe
   ],
   imports: [
     CommonModule,

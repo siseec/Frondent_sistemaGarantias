@@ -4,10 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 import Swal from 'sweetalert2';
 
-import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { environment } from '../../../environments/environment';
-//import { environment } from 'environments/conexion';
+import { OrdenTrabajo } from '../../model/TODO';
 
 @Component({
   selector: 'app-actualizar-orden',

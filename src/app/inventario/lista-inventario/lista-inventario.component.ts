@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Inventario } from '../../producto/model/producto-Interface';
+import { Inventario } from '../../model/TODO';
 import { InventarioService } from '../service/inventario.service';
 
 @Component({
@@ -21,6 +21,8 @@ export class ListaInventarioComponent implements OnInit {
     this.serviceInventario.listarInventario().subscribe(
       data => {
         this.listainventario = data;
+        console.log(data);
+        
       }
     );
   }

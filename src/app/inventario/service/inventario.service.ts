@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Inventario } from '../../producto/model/producto-Interface';
+import { Inventario } from '../../model/TODO';
 
 @Injectable({
   providedIn: 'root'

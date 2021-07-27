@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria, Producto } from '../model/producto-Interface';
+// import { Categoria, Producto } from '../model/producto-Interface';
 import { ProductoService } from '../service/producto.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Categoria, Producto } from '../../model/TODO';
 
 @Component({
   selector: 'app-listar-producto',

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Cliente } from '../../garantia/model/OrdenTrabajo';
-//import { Cliente } from 'app/garantia/model/OrdenTrabajo';
+import { Cliente } from '../../model/TODO';
 import { ServicioClienteService } from '../service/servicio-cliente.service';
 
 @Component({

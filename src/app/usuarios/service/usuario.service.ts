@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../model/usuarioInterface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Usuario } from '../../model/TODO';
+// import { Usuario } from '../../garantia/model/OrdenTrabajo';
 //import { ServidorConexion } from '../../../environments/conexion';
 
 

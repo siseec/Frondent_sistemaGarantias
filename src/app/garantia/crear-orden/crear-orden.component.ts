@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrdenTrabajo, Cliente, Proveedor } from '../model/OrdenTrabajo';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Categoria } from '../../producto/model/producto-Interface';
 import { ProductoService } from '../../producto/service/producto.service';
 import { ProveedorService } from '../../proveedores/service/proveedor.service';
 import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
 import { ImprimirOrdenComponent } from '../../inicio/imprimir-orden/imprimir-orden.component';
+import { Categoria, Cliente, OrdenTrabajo, Proveedor } from '../../model/TODO';
 
 @Component({
   selector: 'app-crear-orden',
@@ -49,6 +48,7 @@ export class CrearOrdenComponent implements OnInit {
   listaProveedor: Proveedor[] = [];
   listaCategorias: Categoria[] = [];
   LugarGarantgia: string[] = ['Cliente', 'Proveedor'];
+  
 
   formularioCliente: FormGroup = this.fb.group({
     cedula: ['', [Validators.required, Validators.maxLength(10), this.verificarCedula]],
@@ -101,7 +101,7 @@ export class CrearOrdenComponent implements OnInit {
       Swal.fire('Error, Campos Vacios', 'Por favor, Llene los Campos', 'error')
     } else {
 
-      const idUsuario = localStorage.getItem('id');
+      const idUsuario = Number(localStorage.getItem('id'));
 
       const { cedula, nombres, apellidos, telefono, direccion, correo } = this.formularioCliente.value;
       const { cedulap, nombresp, apellidosp, telefonop, direccionp, correop } = this.formularioProveedor.value;

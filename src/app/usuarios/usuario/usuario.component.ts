@@ -6,11 +6,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { nombreApellidoPattern } from '../../../app/validator/Validaciones';
 import { emailPattern, validarPassword } from '../../validator/Validaciones';
 import { ValidacionesService } from '../../validator/validaciones.service';
-import { Usuario } from '../model/usuarioInterface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-//import { ServidorConexion } from '../../../environments/conexion';
-//import { ServidorConexion } from 'src/environments/conexion';
+import { Usuario } from '../../model/TODO';
 
 @Component({
   selector: 'app-usuario',
@@ -43,10 +41,6 @@ export class UsuarioComponent {
     if (this.formularioUsuario.invalid) {
       Swal.fire('Error en la Creacion', "Campos Vacios", 'error');
     } else {
-      // console.log(this.formularioUsuario.value);
-
-      //   const validacion = this.validarCamposCliente();
-      //   if (validacion) {
       const { cedula, nombres, apellidos, telefono, direccion, correo, password } = this.formularioUsuario.value;
 
       const usuarioEnvio: Usuario = {

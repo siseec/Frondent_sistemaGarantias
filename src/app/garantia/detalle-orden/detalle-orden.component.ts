@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
-import { OrdenTrabajo, Detalle, Ordenes, Cliente, ProductoDanado } from '../model/OrdenTrabajo';
-import * as printJS from 'print-js';
 import { MatDialog } from '@angular/material/dialog';
 import { NuevoDetalleComponent } from '../vista/nuevo-detalle/nuevo-detalle.component';
 import { environment } from '../../../environments/environment';
 import { PrincipalComponent } from '../../inicio/principal/principal.component';
 import { EntregaProductoComponent } from '../vista/entrega-producto/entrega-producto.component';
+import { Cliente, Detalle, OrdenTrabajo } from '../../model/TODO';
 
 
 @Component({

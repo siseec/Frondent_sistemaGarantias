@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from '../service/producto.service';
 import { HttpClient } from '@angular/common/http';
-import { Producto } from '../model/producto-Interface';
+// import { Producto } from '../model/producto-Interface';
 import Swal from 'sweetalert2';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ListarProductoComponent } from '../listar-producto/listar-producto.component';

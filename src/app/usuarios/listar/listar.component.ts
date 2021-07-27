@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../model/usuarioInterface';
 //import { ServidorConexion } from 'environments/conexion';
 import { UsuarioService } from '../service/usuario.service';
 import { environment } from '../../../environments/environment';
+import { Usuario } from '../../model/TODO';
 
 @Component({
   selector: 'app-listar',

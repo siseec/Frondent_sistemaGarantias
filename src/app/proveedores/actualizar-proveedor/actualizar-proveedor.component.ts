@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-//import { environment } from 'environments/conexion';
 import Swal from 'sweetalert2';
 
 import { ProveedorService } from '../service/proveedor.service';
-import { Proveedor } from '../model/proveedor-interface';
 import { environment } from '../../../environments/environment';
+import { Proveedor } from '../../model/TODO';
 
 
 @Component({

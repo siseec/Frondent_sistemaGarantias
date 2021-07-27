@@ -20,16 +20,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NuevoDetalleComponent } from './vista/nuevo-detalle/nuevo-detalle.component';
-import { MenuSISEECComponent } from './menu-siseec/menu-siseec.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CambioProductoComponent } from './cambio-producto/cambio-producto.component';
 
-
-//import { CrearDialogoComponent } from './vista/crear-dialogo/crear-dialogo.component';
 import { FormsModule } from '@angular/forms';
 import { ListaProductoModule } from '../producto/listar-producto/lista-producto.module';
 import { InicioModule } from '../inicio/inicio.module';
-import { PrincipalComponent } from '../inicio/principal/principal.component';
 import { EntregaProductoComponent } from './vista/entrega-producto/entrega-producto.component';
 
 
@@ -43,7 +39,7 @@ import { EntregaProductoComponent } from './vista/entrega-producto/entrega-produ
     FiltroOrdenPipe,
     // CrearDialogoComponent,
     
-    DetalleOrdenComponent, NuevoDetalleComponent, MenuSISEECComponent, CambioProductoComponent, EntregaProductoComponent],
+    DetalleOrdenComponent, NuevoDetalleComponent,  CambioProductoComponent, EntregaProductoComponent],
   imports: [
     CommonModule,
     GarantiaRoutingModule,

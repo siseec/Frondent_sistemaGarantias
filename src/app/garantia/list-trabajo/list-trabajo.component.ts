@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { OrdenTrabajo } from '../model/OrdenTrabajo';
 import { OrdenTrabajoService } from '../service/orden-trabajo.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ImprimirOrdenComponent } from '../../inicio/imprimir-orden/imprimir-orden.component';
+import { OrdenTrabajo } from '../../model/TODO';
 
 
 @Component({

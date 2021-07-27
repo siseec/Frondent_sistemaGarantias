@@ -1,12 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-//import { environment } from 'environments/conexion';
-import { Proveedor } from '../model/proveedor-interface';
-
 import { ProveedorService } from '../service/proveedor.service';
-import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-//import { environment } from '../../../environments/conexion';
+import { Proveedor } from '../../model/TODO';
 
 
 @Component({

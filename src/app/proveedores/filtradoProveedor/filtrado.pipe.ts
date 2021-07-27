@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Proveedor } from '../model/proveedor-interface';
+import { Proveedor } from '../../model/TODO';
 
 @Pipe({
   name: 'filtrado'

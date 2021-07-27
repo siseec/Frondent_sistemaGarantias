@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrdenTrabajo, Detalle, ProductoDanado, CambioProducto, HistorialEstado, EntregaProducto } from '../model/OrdenTrabajo';
-
-//import { Producto } from '../ src/app/producto/model/producto-Interface';
-import { Productos, Producto } from '../../producto/model/producto-Interface';
 import { environment } from '../../../environments/environment';
-//import { Producto } from 'src/app/producto/model/producto-Interface';
-
+import { Cliente, Detalle, EntregaProducto, HistorialEstado, OrdenTrabajo, ProductoDanado } from '../../model/TODO';
 
 @Injectable({
   providedIn: 'root'

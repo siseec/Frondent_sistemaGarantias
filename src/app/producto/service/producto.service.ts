@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { environment } from '../../../environments/conexion';
-import { Categoria, Producto, Productos, Proveedor } from '../model/producto-Interface';
-import { Observable } from 'rxjs';
+// import { Categoria, Producto, Productos, Proveedor } from '../model/producto-Interface';
 import { environment } from '../../../environments/environment';
-//import { Proveedor } from 'src/app/proveedores/model/proveedor-interface';
-//import { Proveedor } from 'src/app/garantia/model/OrdenTrabajo';
-import { CambioProducto } from '../../garantia/model/OrdenTrabajo';
+import { Categoria, Producto, Productos, Proveedor } from '../../model/TODO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
+
+  obtenerProducto:Producto;
 
   constructor(private http:HttpClient) { }
 
@@ -53,5 +51,16 @@ export class ProductoService {
   CambioProducto(cambio:any){
     const url=environment.ip+'inventario/guardarCambioProducto';
     return this.http.post<any>(url,cambio,{headers: {'Content-Type': 'application/json; charset=UTF-8'}});
+  }
+
+  agregarNuevaSerieProducto(nuevaserie:Productos){
+    const url=environment.ip+'inventario/agregarProducto';
+    return this.http.post<any>(url,nuevaserie,{headers: {'Content-Type': 'application/json; charset=UTF-8'}});
+  }
+
+  listaNumerosSeries(idProducto:number){
+    const url=environment.ip+'inventario/buscarNserieProductoId?idProducto=';
+    return this.http.get<Productos>(url+idProducto);
+
   }
 }

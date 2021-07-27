@@ -15,6 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductosComponent } from './productos/productos.component';
 import { FiltroProductoPipe } from './pipe/filtro-producto.pipe';
+import { AgregarNuevaSerieComponent } from './agregar-nueva-serie/agregar-nueva-serie.component';
+import { DetalleSerieComponent } from './detalle-serie/detalle-serie.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { FiltroProductoPipe } from './pipe/filtro-producto.pipe';
     CrearProductoComponent,
     CambioProductoProveedorComponent,
     ProductosComponent,
-    FiltroProductoPipe
+    AgregarNuevaSerieComponent,
+    DetalleSerieComponent,
+    // FiltroProductoPipe
   ],
   imports: [
     CommonModule,

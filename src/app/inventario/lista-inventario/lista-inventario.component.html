@@ -75,10 +75,10 @@
                                             {{inventario.cantidad}}
                                         </td>
                                         <td>
-                                            {{inventario.stok}}
+                                            {{inventario.producto.stock}}
                                         </td>
                                         <td>
-                                            {{inventario.producto.numeroSerie}}
+                                            {{inventario.producto.numeroSerie || null}} 
                                         </td>
                                         <td>
                                             {{inventario.producto.nombre}}
@@ -86,19 +86,19 @@
                                         <td>
                                             {{inventario.producto.origen}}
                                         </td>
-                                        <!-- <td>
-                                            {{inventario.proveedor.cedula}}
+                                        <td>
+                                            {{inventario.producto.proveedor.cedula}}
                                         </td>
                                         <td>
-                                            {{inventario.proveedor.nombres}}
-                                        </td> -->
+                                            {{inventario.producto.proveedor.nombres}}
+                                        </td>
                                         <td>
                                             <!-- <button type="button" class="btn btn-info" (click)="getinventario(inventario)"
                                                 routerLink="/inventario/actualizar">Actualizar</button> -->
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <button type="button" class="btn btn-info">Eliminar</button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>

@@ -2,13 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Router } from '@angular/router';
-//import { ServidorConexion } from 'environments/conexion';
-import { Proveedor } from '../model/proveedor-interface';
 import Swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
-//import { ServidorConexion } from '../../../environments/conexion';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { emailPattern, nombreApellidoPattern } from '../../validator/Validaciones';
+import { Proveedor } from '../../model/TODO';
 
 
 @Component({

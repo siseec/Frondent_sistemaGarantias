@@ -67,9 +67,9 @@
                             </th>
 
                         </thead>
-                        <!--  | filtroProducto:search -->
+                        <!--   -->
                         <tbody>
-                            <tr *ngFor="let productos of listaproducto ">
+                            <tr *ngFor="let productos of listaproducto | filtroProducto:search">
                                 <td>
                                     {{productos.producto.nombre}}
                                 </td>

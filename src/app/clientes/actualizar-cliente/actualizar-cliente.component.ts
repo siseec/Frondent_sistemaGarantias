@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioClienteService } from '../service/servicio-cliente.service';
-import { Cliente } from '../../garantia/model/OrdenTrabajo';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Cliente } from '../../model/TODO';
 
 @Component({
   selector: 'app-actualizar-cliente',

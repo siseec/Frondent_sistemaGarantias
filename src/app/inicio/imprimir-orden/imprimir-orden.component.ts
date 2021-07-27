@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as printJS from 'print-js';
+import { OrdenTrabajo } from '../../model/TODO';
 
 @Component({
   selector: 'app-imprimir-orden',
